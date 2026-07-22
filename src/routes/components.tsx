@@ -3,6 +3,7 @@ import { Route as rootRoute } from "./__root"
 import { useState } from "react"
 import Button from "../components/Button"
 import Dropdown from "../components/Dropdown"
+import TextInput from "../components/TextInput"
 
 export const componentsRoute = new Route({
   getParentRoute: () => rootRoute,
@@ -228,6 +229,43 @@ function ComponentsPage() {
           >
             Button
           </Dropdown>
+        </div>
+      </section>
+
+      {/* TextInput Section */}
+      <section className="mb-16">
+        <h2 className="text-3xl font-semibold text-black! mb-4">Text Input</h2>
+        <p className="text-gray-600 text-lg mb-10">A text input component with multiple states and sizes.</p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {/* Default State */}
+          <div className="flex flex-col gap-6">
+            <h3 className="text-xl font-medium text-gray-700 mb-4">Default State</h3>
+            
+            <div className="flex flex-col gap-4">
+              <TextInput placeholder="Place Holder" inputSize="md" />
+              <TextInput defaultValue="Aryan Sh" inputSize="md" />
+            </div>
+          </div>
+
+          {/* Disabled State */}
+          <div className="flex flex-col gap-6">
+            <h3 className="text-xl font-medium text-gray-700 mb-4">Disabled State</h3>
+            
+            <div className="flex flex-col gap-4">
+              <TextInput placeholder="Place Holder" inputSize="md" disabled />
+              <TextInput defaultValue="Aryan Sh" inputSize="md" disabled />
+            </div>
+          </div>
+
+          {/* Read Only State */}
+          <div className="flex flex-col gap-6">
+            <h3 className="text-xl font-medium text-gray-700 mb-4">Read Only State</h3>
+            
+            <div className="flex flex-col gap-4">
+              <TextInput defaultValue="Sth.aryan@gmail.com" inputSize="md" readOnly />
+            </div>
+          </div>
         </div>
       </section>
     </div>

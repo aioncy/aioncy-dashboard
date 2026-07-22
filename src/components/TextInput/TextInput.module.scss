@@ -1,0 +1,95 @@
+.inputWrapper {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #E4E4E7;
+  background: white;
+  color: #1C1C1C;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.2s ease;
+  padding-inline: 12px;
+  height: 40px;
+
+  &::placeholder {
+    color: #9CA3AF;
+  }
+
+  &:focus {
+    border-color: #A153FF;
+  }
+
+  &:disabled {
+    background: #F3F4F6;
+    border-color: #E4E4E7;
+    color: #9CA3AF;
+    cursor: not-allowed;
+  }
+
+  &:read-only {
+    background: white;
+    border-color: #E4E4E7;
+    color: #1C1C1C;
+    cursor: default;
+  }
+}
+
+.leftIcon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 8px;
+  color: #9CA3AF;
+}
+
+.rightIcon {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  color: #9CA3AF;
+}
+
+.withLeftIcon {
+  .input {
+    padding-left: 0;
+  }
+  
+  &.sm .input {
+    padding-left: 0;
+  }
+}
+
+.withRightIcon {
+  .input {
+    padding-right: 0;
+  }
+  
+  &.sm .input {
+    padding-right: 0;
+  }
+}
+
+// Variants
+.default {
+  background: white;
+}
+
+.disabled {
+  background: #F3F4F6;
+  border-color: #E4E4E7;
+  color: #9CA3AF;
+  cursor: not-allowed;
+}
+
+.readOnly {
+  background: white;
+  border-color: #E4E4E7;
+  color: #1C1C1C;
+  cursor: default;
+}
+
