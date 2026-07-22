@@ -61,6 +61,17 @@
   }
 }
 
+.text {
+  background: transparent;
+  color: #A153FF;
+  border: none;
+  padding: 0;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
 // Sizes
 .sm {
   padding-inline: 12px;
@@ -71,14 +82,14 @@
 
 .md {
   padding-inline: 16px;
-  font-size: 16px;
+  font-size: 14px;
   min-height: 36px;
   font-weight: 500;
 }
 
 .lg {
   padding-inline: 12px;
-  font-size: 18px;
+  font-size: 14px;
   min-height: 38px;
   font-weight: 600;
 }
