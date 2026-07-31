@@ -15,8 +15,9 @@
   font-size: 16px;
    border: 2px solid #E4E4E7;
 
-   &:active, &:focus {
+   &:active, &:focus, &.open {
     border-color: #A153FF;
+    box-shadow: 0px 0px 0px 2px #8A38F51F;
    }
 }
 

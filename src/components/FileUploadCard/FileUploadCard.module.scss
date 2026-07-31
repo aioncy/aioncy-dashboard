@@ -1,0 +1,118 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 316px;
+  height: 60px;
+  padding: 10px 12px 10px 10px;
+  border-radius: 8px;
+  border: 1px solid #E4E4E7;
+}
+
+.iconBox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 12px;
+  border-radius: 4px;
+  background: #F5F5F5;
+  color: #484848;
+  flex-shrink: 0;
+}
+
+.textColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.title {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #1C1C1C;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid #A153FF;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.uploading {
+  &.card {
+    border-color: #E4E4E7;
+  }
+
+  &.iconBox {
+    background: #F5F5F5;
+  }
+
+  &.title {
+    color: #757575;
+  }
+}
+
+.error {
+  &.card {
+    border-color: #D43A20;
+  }
+
+  &.iconBox {
+    background: #D43A201A;
+    color: #D43A20;
+  }
+
+  &.meta {
+    color: #D43A20;
+  }
+}

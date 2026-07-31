@@ -1,0 +1,115 @@
+.textarea {
+  width: 100%;
+  height: 115px;
+  min-height: 36px;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #E4E4E7;
+  background: #FFFFFF;
+  color: #18181B;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.14px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &::placeholder {
+    color: #A1A1AA;
+  }
+
+  &:focus-visible {
+    border-color: #A153FF;
+    box-shadow: 0px 0px 0px 2px rgba(138, 56, 245, 0.12);
+  }
+
+  &:disabled {
+    background: #F4F4F5;
+    border-color: #E4E4E7;
+    color: #9CA3AF;
+    cursor: not-allowed;
+    box-shadow: none;
+    resize: none;
+
+    &::placeholder {
+      color: #9CA3AF;
+    }
+  }
+}
+
+.copyContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  height: 115px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #E4E4E7;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:focus-within {
+    border-color: #A153FF;
+    box-shadow: 0px 0px 0px 2px rgba(138, 56, 245, 0.12);
+  }
+}
+
+.copyTextarea {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #18181B;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.14px;
+  resize: none;
+
+  &::placeholder {
+    color: #A1A1AA;
+  }
+}
+
+.copyButton {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 77px;
+  height: 34px;
+  padding: 0 12px 0 10px;
+  border-radius: 8px;
+  border: 1px solid #E4E4E7;
+  background: #FFFFFF;
+  color: #18181B;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #F4F4F5;
+  }
+
+  &:active {
+    background: #EDEDEF;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #A153FF;
+    outline-offset: 2px;
+  }
+}

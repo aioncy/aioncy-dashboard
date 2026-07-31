@@ -1,0 +1,142 @@
+.wrapper {
+  position: relative;
+  display: inline-flex;
+
+  .remove {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.5);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  &:hover {
+    .remove {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    .chip {
+      background: #F5F5F5;
+    }
+  }
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #E4E4E7;
+  background: #FFFFFF;
+  color: #18181B;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  transition: background 0.15s ease;
+}
+
+.prefix {
+  color: #A1A1AA;
+}
+
+.label {
+  font-weight: 400;
+}
+
+.labelStrong {
+  font-weight: 600;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonAnchor {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  z-index: 2;
+
+  .tooltip {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) scale(0.95);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  &:hover,
+  &:focus-within {
+    .tooltip {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) scale(1);
+    }
+  }
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 8px;
+  background: #1C1C1C;
+  color: #FFFFFF;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  white-space: nowrap;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #1C1C1C;
+    border-bottom: none;
+  }
+}
+
+.remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #1C1C1C;
+  color: #FFFFFF;
+  box-shadow: 1px 0px 3px 0px rgba(0, 0, 0, 0.21);
+  cursor: pointer;
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #A153FF;
+    outline-offset: 2px;
+  }
+}

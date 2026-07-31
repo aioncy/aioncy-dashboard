@@ -1,36 +1,50 @@
-import React from 'react'
+import React, { useId } from 'react'
 import styles from './TextInput.module.scss'
 
-export interface TextInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
-  variant?: 'default' | 'disabled' | 'readOnly'
-  inputSize?: 'sm' | 'md' | 'lg'
-  leftIcon?: React.ReactNode
-  rightIcon?: React.ReactNode
+export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string
+  helperText?: string
+  errorMessage?: string
+  className?: string
+  trailingIcon?: React.ReactNode
 }
 
-const TextInput = ({ 
-  variant = 'default', 
-  inputSize = 'md', 
-  leftIcon, 
-  rightIcon, 
-  className = '', 
-  disabled,
-  readOnly,
-  ...props 
+const TextInput = ({
+  label,
+  helperText,
+  errorMessage,
+  className = '',
+  trailingIcon,
+  ...props
 }: TextInputProps) => {
-  const isDisabled = disabled || variant === 'disabled'
-  const isReadOnly = readOnly || variant === 'readOnly'
+  const id = useId()
+  const messageId = `${id}-message`
+  const hasError = Boolean(errorMessage)
+  const showMessage = hasError || Boolean(helperText)
 
   return (
-    <div className={`${styles.inputWrapper} ${styles[inputSize]} ${leftIcon ? styles.withLeftIcon : ''} ${rightIcon ? styles.withRightIcon : ''}`}>
-      {leftIcon && <span className={styles.leftIcon}>{leftIcon}</span>}
-      <input
-        className={`${styles.input} ${styles[variant]} ${isDisabled ? styles.disabled : ''} ${isReadOnly ? styles.readOnly : ''} ${className}`}
-        disabled={isDisabled}
-        readOnly={isReadOnly}
-        {...props}
-      />
-      {rightIcon && <span className={styles.rightIcon}>{rightIcon}</span>}
+    <div className={`flex w-full max-w-[360px] flex-col gap-1 text-left ${className}`}>
+      <label htmlFor={id} className={label ? styles.label : styles.srOnly}>
+        {label ?? props.placeholder ?? 'Text input'}
+      </label>
+      <div className={`${styles.inputBox} ${trailingIcon ? styles.withTrailingIcon : ''}`}>
+        <input
+          id={id}
+          className={`${styles.input} ${hasError ? styles.error : ''}`}
+          aria-invalid={hasError || undefined}
+          aria-describedby={showMessage ? messageId : undefined}
+          {...props}
+        />
+        {trailingIcon && <span className={styles.trailingIcon}>{trailingIcon}</span>}
+      </div>
+      {showMessage && (
+        <p
+          id={messageId}
+          className={`text-sm leading-[140%] ${hasError ? 'text-[#D43A20]' : 'text-[#8C8C8C]'}`}
+        >
+          {errorMessage ?? helperText}
+        </p>
+      )}
     </div>
   )
 }
