@@ -1,0 +1,95 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: #ffffff;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 48px;
+  padding: 0 12px;
+  border-bottom: 1px solid #e4e4e7;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+.menuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #1c1c1c;
+  cursor: pointer;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    background: #f7f7f7;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a153ff;
+    outline-offset: 1px;
+  }
+}
+
+.sidebarWrap {
+  flex-shrink: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 60;
+  transform: translateX(-100%);
+  transition: transform 0.2s ease;
+
+  @media (min-width: 1024px) {
+    position: static;
+    transform: none;
+    transition: none;
+  }
+}
+
+.open {
+  transform: translateX(0);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  @media (min-width: 1024px) {
+    box-shadow: none;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.4);
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+}

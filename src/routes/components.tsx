@@ -17,6 +17,9 @@ import SearchInput from "../components/SearchInput"
 import Pagination from "../components/Pagination"
 import PriorityBadge from "../components/PriorityBadge"
 import PermissionMenu, { type PermissionMenuItem } from "../components/PermissionMenu"
+import Sidebar from "../components/Sidebar"
+import Logo from "../components/Logo"
+import PageHeader from "../components/PageHeader"
 
 export const componentsRoute = new Route({
   getParentRoute: () => rootRoute,
@@ -712,6 +715,92 @@ function ComponentsPage() {
         </p>
 
         <PermissionMenuDemo />
+      </section>
+
+      {/* Sidebar Section */}
+      <section className="mb-16">
+        <h2 className="text-3xl font-semibold text-black! mb-4">Sidebar</h2>
+        <p className="text-gray-600 text-lg mb-10">
+          Navigation sidebar with a logo header, main/secondary nav lists, flexible spacer, and a pinned workspace switcher.
+        </p>
+
+        <div className="flex flex-col gap-8">
+          <div>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">Logo (reusable)</h3>
+            <Logo />
+          </div>
+
+          <div className="flex flex-wrap gap-8">
+            <div>
+              <h3 className="text-xl font-medium text-gray-700 mb-4">Sidebar</h3>
+              <div className="rounded-lg border border-gray-200 overflow-hidden" style={{ height: 600 }}>
+                <Sidebar
+                  workspace={{ name: "Acme", planTier: "Essential" }}
+                />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-medium text-gray-700 mb-4">Sidebar (alt route + custom logo)</h3>
+              <div className="rounded-lg border border-gray-200 overflow-hidden" style={{ height: 900 }}>
+                <Sidebar
+                  workspace={{ name: "Nimbus", planTier: "Pro", logoSrc: avatar("#2563EB", "N") }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PageHeader Section */}
+      <section className="mb-16">
+        <h2 className="text-3xl font-semibold text-black! mb-4">PageHeader</h2>
+        <p className="text-gray-600 text-lg mb-10">
+          Page header with either a plain title or a breadcrumb trail on the left, and a collaborator avatar stack
+          plus a Share button on the right.
+        </p>
+
+        <div className="flex flex-col gap-8">
+          <div>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">Variant A - Plain title</h3>
+            <div className="rounded-lg border border-gray-200 overflow-hidden">
+              <PageHeader
+                title="Leads"
+                collaborators={[
+                  { name: "Aryan Shrestha", avatarSrc: avatar("#3B82F6", "A") },
+                  { name: "Sam Doe", avatarSrc: avatar("#D43A20", "S") },
+                  { name: "Kiran Rai" },
+                ]}
+                onShare={() => {}}
+              />
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">Variant B - Breadcrumb</h3>
+            <div className="rounded-lg border border-gray-200 overflow-hidden">
+              <PageHeader
+                breadcrumbItems={[{ label: "Leads", href: "#" }, { label: "Aryan Shrestha" }]}
+                collaborators={[
+                  { name: "Sam Doe", avatarSrc: avatar("#D43A20", "S") },
+                  { name: "Kiran Rai" },
+                ]}
+                onShare={() => {}}
+              />
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">Variant C - All fallback avatars</h3>
+            <div className="rounded-lg border border-gray-200 overflow-hidden">
+              <PageHeader
+                title="Analytics"
+                collaborators={[{ name: "Aryan Shrestha" }, { name: "Sam Doe" }, { name: "Kiran Rai" }]}
+                onShare={() => {}}
+              />
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   )
