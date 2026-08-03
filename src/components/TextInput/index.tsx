@@ -40,7 +40,7 @@ const TextInput = ({
       {showMessage && (
         <p
           id={messageId}
-          className={`text-sm leading-[140%] ${hasError ? 'text-[#D43A20]' : 'text-[#8C8C8C]'}`}
+          className={`text-[14px] leading-[140%] ${hasError ? 'text-[#D43A20]' : 'text-[#8C8C8C]'}`}
         >
           {errorMessage ?? helperText}
         </p>

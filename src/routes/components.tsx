@@ -141,10 +141,6 @@ function ComponentsPage() {
             <div className="flex flex-col items-center gap-4">
               <Button variant="primary" size="lg" disabled>Button</Button>
             </div>
-
-            <div className="flex flex-col items-center gap-4">
-              <Button variant="text" size="lg">Text Button</Button>
-            </div>
           </div>
 
           {/* Medium Column */}
@@ -170,7 +166,7 @@ function ComponentsPage() {
             </div>
 
             <div className="flex flex-col items-center gap-4">
-              <Button variant="text" size="md">Text Button</Button>
+              <Button variant="text">Text Button</Button>
             </div>
           </div>
 
@@ -208,10 +204,6 @@ function ComponentsPage() {
 
             <div className="flex flex-col items-center gap-4">
               <Button variant="primary" size="sm" disabled>Button</Button>
-            </div>
-
-            <div className="flex flex-col items-center gap-4">
-              <Button variant="text" size="sm">Text Button</Button>
             </div>
           </div>
         </div>

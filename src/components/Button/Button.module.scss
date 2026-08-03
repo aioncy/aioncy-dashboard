@@ -26,9 +26,17 @@
 
 .withIcon {
   padding-left: 12px;
-  
+
   &.sm {
     padding-left: 8px;
+  }
+
+  &.md {
+    padding-left: 12px;
+  }
+
+  &.lg {
+    padding-left: 12px;
   }
 }
 
@@ -45,14 +53,23 @@
   border: 2px solid #E4E4E7;
 }
 
-.text {
+.button.text {
   background: transparent;
   color: #A153FF;
   border: none;
-  padding: 0;
+  padding: 2px 8px;
+  gap: 12px;
+  border-radius: 4px;
+  height: 24px;
+  min-height: 24px;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
 
   &:hover {
-    opacity: 0.8;
+    background: #A153FF0A;
   }
 }
 
@@ -72,7 +89,7 @@
 }
 
 .lg {
-  padding-inline: 12px;
+  padding-inline: 16px;
   font-size: 14px;
   min-height: 38px;
   font-weight: 600;
