@@ -84,8 +84,12 @@
   flex-shrink: 0;
 }
 
+.withSubtitle .title {
+  height: 20px;
+}
+
 .withSubtitle .check {
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .divider {

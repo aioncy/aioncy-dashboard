@@ -2,7 +2,7 @@ import { Route } from "@tanstack/react-router"
 import { Route as rootRoute } from "./__root"
 import { useState } from "react"
 import Button from "../components/Button"
-import Dropdown from "../components/Dropdown"
+import DropdownButton from "../components/DropdownButton"
 import TextInput from "../components/TextInput"
 import PasswordInput from "../components/PasswordInput"
 import URLInput from "../components/URLInput"
@@ -99,7 +99,6 @@ const variant8: DropdownListItemProps[] = [
 ]
 
 function ComponentsPage() {
-  const [dropdownOpen, setDropdownOpen] = useState(false)
   const [url, setUrl] = useState("")
   const [urlFilled, setUrlFilled] = useState("www.prakash")
   const [textarea, setTextarea] = useState("")
@@ -215,104 +214,42 @@ function ComponentsPage() {
         <p className="text-gray-600 text-lg mb-10">A dropdown component with multiple variants and icon support.</p>
 
         <div className="flex flex-col items-center gap-4">
-          <Dropdown 
-            isOpen={dropdownOpen}
-            onToggle={() => setDropdownOpen(!dropdownOpen)}
-            rightIcon={
-              dropdownOpen ? (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M4 6L8 10L12 6" stroke="#1C1C1C" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4 6L8 10L12 6" stroke="black" stroke-opacity="0.2" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4 6L8 10L12 6" stroke="black" stroke-opacity="0.2" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4 6L8 10L12 6" stroke="black" stroke-opacity="0.2" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+          <DropdownButton label="Button" trailingIcon="chevron" />
 
-              ) : (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_2158_1032)">
-<path d="M12 10L8 6L4 10" stroke="#1C1C1C" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12 10L8 6L4 10" stroke="black" stroke-opacity="0.2" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12 10L8 6L4 10" stroke="black" stroke-opacity="0.2" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12 10L8 6L4 10" stroke="black" stroke-opacity="0.2" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-<defs>
-<clipPath id="clip0_2158_1032">
-<rect width="16" height="16" fill="white"/>
-</clipPath>
-</defs>
-</svg>
+          <DropdownButton label="Button" trailingIcon="chevron" expanded />
 
-              )
-            }
-          >
-            Button
-          </Dropdown>
-
-
-           <Dropdown 
-            isOpen={dropdownOpen}
-            onToggle={() => setDropdownOpen(!dropdownOpen)}
-            leftIcon={
+          <DropdownButton
+            label="Button"
+            trailingIcon="chevron"
+            icon={
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
               </svg>
             }
-            rightIcon={
-              dropdownOpen ? (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M4 6L8 10L12 6" stroke="#1C1C1C" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4 6L8 10L12 6" stroke="black" stroke-opacity="0.2" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4 6L8 10L12 6" stroke="black" stroke-opacity="0.2" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4 6L8 10L12 6" stroke="black" stroke-opacity="0.2" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+          />
 
-              ) : (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_2158_1032)">
-<path d="M12 10L8 6L4 10" stroke="#1C1C1C" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12 10L8 6L4 10" stroke="black" stroke-opacity="0.2" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12 10L8 6L4 10" stroke="black" stroke-opacity="0.2" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12 10L8 6L4 10" stroke="black" stroke-opacity="0.2" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-<defs>
-<clipPath id="clip0_2158_1032">
-<rect width="16" height="16" fill="white"/>
-</clipPath>
-</defs>
-</svg>
-
-              )
-            }
-          >
-            Button
-          </Dropdown>
-
-          <Dropdown 
-            variant="withClose"
-            rightIcon={
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 6L6 18M6 6l12 12"/>
-              </svg>
-            }
-          >
-            Active
-          </Dropdown>
-
-          <Dropdown 
-            variant="withClose"
-            leftIcon={
+          <DropdownButton
+            label="Button"
+            trailingIcon="chevron"
+            expanded
+            icon={
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
               </svg>
             }
-            rightIcon={
+          />
+
+          <DropdownButton label="Active" trailingIcon="close" />
+
+          <DropdownButton
+            label="Button"
+            trailingIcon="close"
+            icon={
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 6L6 18M6 6l12 12"/>
+                <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
               </svg>
             }
-          >
-            Button
-          </Dropdown>
+          />
         </div>
       </section>
 
@@ -587,7 +524,6 @@ function ComponentsPage() {
 
         <div className="flex flex-col gap-8">
           <FileDropzone accept="application/pdf" maxSizeMB={50} onFileSelect={() => {}} />
-          <FileDropzone accept="image/png,image/jpeg" maxSizeMB={10} onFileSelect={() => {}} />
         </div>
       </section>
 
@@ -803,18 +739,28 @@ const PermissionMenuDemo = () => {
   const [removed, setRemoved] = useState<string[]>([])
 
   const items: PermissionMenuItem[] = [
-    { title: 'Can view', selected: selected === 'Can view', onClick: () => setSelected('Can view') },
+    {
+      title: 'Full access',
+      subtitle: 'Edit, share, chat',
+      selected: selected === 'Full access',
+      onClick: () => setSelected('Full access'),
+    },
     {
       title: 'Can edit',
-      subtitle: 'Can create, edit and delete',
+      subtitle: 'Edit, chat and tickets',
       selected: selected === 'Can edit',
       onClick: () => setSelected('Can edit'),
     },
     {
-      title: 'Can comment',
-      subtitle: 'Can leave feedback',
-      selected: selected === 'Can comment',
-      onClick: () => setSelected('Can comment'),
+      title: 'Can edit chat',
+      subtitle: 'Can edit chat only',
+      selected: selected === 'Can edit chat',
+      onClick: () => setSelected('Can edit chat'),
+    },
+    {
+      title: 'Can view',
+      selected: selected === 'Can view',
+      onClick: () => setSelected('Can view'),
     },
     {
       title: 'Remove',

@@ -37,7 +37,7 @@ const PermissionMenu = ({ items, className = '' }: PermissionMenuProps) => (
             </span>
             {item.subtitle && <span className={styles.subtitle}>{item.subtitle}</span>}
           </span>
-          {item.selected && <CheckIcon size={20} className={styles.check} />}
+          {item.selected && <CheckIcon size={16} className={styles.check} />}
         </button>
       </Fragment>
     ))}

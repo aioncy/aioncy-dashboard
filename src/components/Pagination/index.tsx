@@ -1,3 +1,4 @@
+import { Ellipsis } from 'lucide-react'
 import styles from './Pagination.module.scss'
 
 export interface PaginationProps {
@@ -53,8 +54,8 @@ const Pagination = ({
       <div className={styles.pages}>
         {pages.map((item, i) =>
           item === 'ellipsis' ? (
-            <span key={`ellipsis-${i}`} className={styles.ellipsis}>
-              …
+            <span key={`ellipsis-${i}`} className={styles.ellipsis} aria-hidden="true">
+              <Ellipsis size={20} />
             </span>
           ) : (
             <button

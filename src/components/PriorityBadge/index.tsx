@@ -10,7 +10,7 @@ export interface PriorityBadgeProps {
 
 const COLORS: Record<PriorityLevel, { background: string; color: string }> = {
   medium: { background: '#FFF3D6', color: '#EF7800' },
-  high: { background: '#FEE0E1', color: '#D43A20' },
+  high: { background: '#fce7f3', color: '#9d17ad' },
   low: { background: '#DBF3FF', color: '#0075AD' },
 }
 
