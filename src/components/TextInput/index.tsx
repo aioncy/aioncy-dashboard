@@ -23,7 +23,7 @@ const TextInput = ({
   const showMessage = hasError || Boolean(helperText)
 
   return (
-    <div className={`flex w-full max-w-[360px] flex-col gap-1 text-left ${className}`}>
+    <div className={`flex w-full  flex-col gap-1 text-left ${className}`}>
       <label htmlFor={id} className={label ? styles.label : styles.srOnly}>
         {label ?? props.placeholder ?? 'Text input'}
       </label>

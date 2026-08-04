@@ -35,7 +35,7 @@ const URLInput = ({
   const hasValue = Boolean(value)
 
   return (
-    <div className={`flex w-full max-w-[360px] flex-col gap-1 text-left ${className}`}>
+    <div className={`flex w-full  flex-col gap-1 text-left ${className}`}>
       <label htmlFor={id} className={label ? textInputStyles.label : textInputStyles.srOnly}>
         {label ?? placeholder ?? 'URL'}
       </label>

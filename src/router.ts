@@ -11,10 +11,18 @@ import { leadsRoute } from "./routes/leads";
 import { analyticsRoute } from "./routes/analytics";
 import { settingsRoute } from "./routes/settings";
 import { helpSupportRoute } from "./routes/help-support";
+import { loginRoute } from "./routes/login";
+import { signupRoute } from "./routes/signup";
+import { resetPasswordRoute } from "./routes/reset-password";
+import { changePasswordRoute } from "./routes/change-password";
 
 // Create the route tree
 const routeTree = rootRoute.addChildren([
   indexRoute,
+  loginRoute,
+  signupRoute,
+  resetPasswordRoute,
+  changePasswordRoute,
   componentsRoute,
   dashboardLayoutRoute.addChildren([
     dashboardRoute,

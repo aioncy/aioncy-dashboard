@@ -4,7 +4,9 @@ import textInputStyles from '../TextInput/TextInput.module.scss'
 import styles from './PasswordInput.module.scss'
 
 export interface PasswordInputProps {
+  id?: string
   label?: string
+  hideLabel?: boolean
   placeholder?: string
   value?: string
   defaultValue?: string
@@ -16,7 +18,9 @@ export interface PasswordInputProps {
 }
 
 const PasswordInput = ({
+  id: idProp,
   label,
+  hideLabel,
   placeholder = 'Place Holder',
   value,
   defaultValue,
@@ -29,13 +33,14 @@ const PasswordInput = ({
   const [internalValue, setInternalValue] = useState(defaultValue ?? value ?? '')
   const [showPassword, setShowPassword] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  const id = useId()
+  const generatedId = useId()
+  const id = idProp ?? generatedId
+
   const messageId = `${id}-message`
   const hasError = Boolean(errorMessage)
   const showMessage = hasError || Boolean(helperText)
   const isControlled = value !== undefined
   const displayValue = isControlled ? value : internalValue
-  const maskLength = showPassword ? 0 : displayValue.length
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isControlled) setInternalValue(e.target.value)
@@ -43,25 +48,18 @@ const PasswordInput = ({
   }
 
   return (
-    <div className={`flex w-full max-w-[360px] flex-col gap-1 text-left ${className}`}>
-      <label htmlFor={id} className={label ? textInputStyles.label : textInputStyles.srOnly}>
+    <div className={`flex w-full  flex-col gap-1 text-left ${className}`}>
+      <label htmlFor={id} className={label && !hideLabel ? textInputStyles.label : textInputStyles.srOnly}>
         {label ?? placeholder ?? 'Password'}
       </label>
       <div
         className={`${styles.field} ${hasError ? styles.error : ''} ${disabled ? styles.disabled : ''}`}
         onClick={() => inputRef.current?.focus()}
       >
-        {!showPassword && maskLength > 0 && (
-          <div className={styles.mask} aria-hidden>
-            {Array.from({ length: maskLength }).map((_, index) => (
-              <span key={index} className={styles.maskDot} />
-            ))}
-          </div>
-        )}
         <input
           id={id}
           ref={inputRef}
-          type="text"
+          type={showPassword ? 'text' : 'password'}
           value={displayValue}
           onChange={handleChange}
           placeholder={placeholder}
@@ -70,7 +68,7 @@ const PasswordInput = ({
           autoCapitalize="none"
           autoCorrect="off"
           spellCheck={false}
-          className={`${styles.input} ${showPassword ? styles.inputVisible : ''}`}
+          className={`${styles.input} ${showPassword ? '' : styles.masked}`}
           aria-invalid={hasError || undefined}
           aria-describedby={showMessage ? messageId : undefined}
         />
