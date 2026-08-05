@@ -9,6 +9,9 @@ function App() {
       <Link to="/components">
         <Button variant="primary" size="lg">View Components</Button>
       </Link>
+      <Link to="/onboarding">
+        <Button variant="outline" size="lg">Onboarding Flow</Button>
+      </Link>
     </div>
   )
 }

@@ -14,6 +14,9 @@ export function DashboardPage() {
         <Button variant="outline" onClick={() => navigate({ to: '/components' })} className="mb-4">
           View Components
         </Button>
+        <Button variant="outline" onClick={() => navigate({ to: '/onboarding' })} className="mb-4">
+          Onboarding
+        </Button>
 
         <div className="mt-8">
           <p className="text-sm font-medium text-gray-700 mb-3">Auth Pages</p>

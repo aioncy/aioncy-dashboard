@@ -1,0 +1,162 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 380px;
+  min-height: calc(100vh - 240px);
+}
+
+.progress {
+  display: flex;
+  gap: 8px;
+}
+
+.segment {
+  width: 39px;
+  height: 3px;
+  border-radius: 5px;
+  background: #e4e4e7;
+  transition: background 0.2s ease;
+}
+
+.segmentActive {
+  background: #a153ff;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24px 0 16px;
+}
+
+.logo {
+  svg {
+    display: block;
+  }
+}
+
+.body {
+  flex: 1;
+}
+
+.title {
+  margin: 0 0 24px;
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 120%;
+  letter-spacing: -0.05px;
+  color: #1c1c1c;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.chip {
+  height: 32px;
+  padding: 6px 12px;
+  border: 1px solid #e4e4e7;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #1c1c1c;
+  font-family: 'Geist', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+
+  &:hover:not(.chipSelected) {
+    background: #fafafa;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a153ff;
+    outline-offset: 2px;
+  }
+}
+
+.chipSelected {
+  border: 1.2px solid #a153ff;
+  background: #a153ff0a;
+}
+
+.otherField {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-top: 0;
+  transition: max-height 0.25s ease, opacity 0.25s ease, margin-top 0.25s ease;
+}
+
+.otherFieldVisible {
+  max-height: 120px;
+  opacity: 1;
+  margin-top: 16px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.back {
+  width: 80px;
+  height: 40px;
+  min-height: 40px;
+  flex: 0 0 auto;
+}
+
+.continue {
+  flex: 1 1 auto;
+}
+
+.column {
+  .continue {
+    &:disabled {
+      background: #e4e4e7 !important;
+      color: #a1a1aa !important;
+    }
+
+    &.continueLoading:disabled {
+      background: #a153ff !important;
+      color: #ffffff !important;
+      cursor: wait;
+    }
+  }
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spinnerSpin 0.7s linear infinite;
+}
+
+@keyframes spinnerSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 900px) {
+  .column {
+    min-height: calc(100vh - 64px);
+  }
+}

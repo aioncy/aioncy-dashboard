@@ -1,0 +1,54 @@
+.page {
+  display: flex;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.formSection {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex: 0 0 48.611%;
+  width: 48.611%;
+  padding: 120px 140px;
+}
+
+.formColumn {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.heroSection {
+  position: relative;
+  flex: 1 1 51.389%;
+  min-width: 0;
+  overflow: hidden;
+  background: #f4f0ff;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .formSection {
+    padding: 120px 48px;
+  }
+}
+
+@media (max-width: 900px) {
+  .heroSection {
+    display: none;
+  }
+
+  .formSection {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 32px 24px;
+  }
+}
