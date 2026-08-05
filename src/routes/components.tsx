@@ -631,7 +631,7 @@ function ComponentsPage() {
           <PriorityBadge level="low" />
           <PriorityBadge level="medium" />
           <PriorityBadge level="high" />
-          <PriorityBadge level="high" label="Urgent" />
+          <PriorityBadge level="urgent" label="Urgent" />
         </div>
       </section>
 
