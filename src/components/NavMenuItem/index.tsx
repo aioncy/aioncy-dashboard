@@ -7,17 +7,18 @@ export interface NavMenuItemProps {
   icon: React.ReactNode
   label: string
   expandable?: boolean
+  expanded?: boolean
   href?: string
   onClick?: () => void
 }
 
-const NavMenuItem = ({ icon, label, expandable = false, href, onClick }: NavMenuItemProps) => {
+const NavMenuItem = ({ icon, label, expandable = false, expanded = false, href, onClick }: NavMenuItemProps) => {
   const content = (
     <>
       <span className={styles.icon}>{icon}</span>
       <span className={styles.label}>{label}</span>
       {expandable && (
-        <span className={styles.chevron} aria-hidden="true">
+        <span className={`${styles.chevron} ${expanded ? styles.chevronOpen : ''}`} aria-hidden="true">
           <ChevronDown />
         </span>
       )}

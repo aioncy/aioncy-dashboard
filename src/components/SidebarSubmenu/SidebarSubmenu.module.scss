@@ -1,0 +1,74 @@
+.submenu {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 200ms ease-out;
+}
+
+.submenu.open {
+  grid-template-rows: 1fr;
+}
+
+.inner {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.connector {
+  position: absolute;
+  left: 18px;
+  top: 0;
+  width: 1px;
+  background: #e4e4e7;
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+.submenu.open .connector {
+  opacity: 1;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 31px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 197px;
+  height: 36px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #1c1c1c;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #f7f7f7;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a153ff;
+    outline-offset: 1px;
+  }
+}
+
+.active {
+  background: #f7f7f7;
+  color: #1c1c1c;
+}

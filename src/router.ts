@@ -7,6 +7,8 @@ import { dashboardRoute } from "./routes/dashboard";
 import { conversationsRoute } from "./routes/conversations";
 import { ticketsRoute } from "./routes/tickets";
 import { wingmanAiRoute } from "./routes/wingman-ai";
+import { wingmanAiControlRoute } from "./routes/wingman-ai/control";
+import { wingmanAiTrainRoute } from "./routes/wingman-ai/train";
 import { leadsRoute } from "./routes/leads";
 import { analyticsRoute } from "./routes/analytics";
 import { settingsRoute } from "./routes/settings";
@@ -31,6 +33,8 @@ const routeTree = rootRoute.addChildren([
     conversationsRoute,
     ticketsRoute,
     wingmanAiRoute,
+    wingmanAiControlRoute,
+    wingmanAiTrainRoute,
     leadsRoute,
     analyticsRoute,
     settingsRoute,
