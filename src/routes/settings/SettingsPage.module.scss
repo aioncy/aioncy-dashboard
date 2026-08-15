@@ -1,0 +1,401 @@
+.page {
+  max-width: 792px;
+  margin: 0 auto;
+  padding: 16px 24px 40px;
+}
+
+.content {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.headingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+}
+
+.subtitle {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+.divider {
+  height: 1px;
+  background: #E4E4E7;
+  border: none;
+  margin: 0;
+}
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 160px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E4E4E7;
+}
+
+.logoLabel {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #18181B;
+  flex-shrink: 0;
+}
+
+.logoContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #F4F4F5;
+  color: #A1A1AA;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.logoActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.removeButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  padding: 0 8px;
+  height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #D43A20;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #D43A200A;
+  }
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dangerZone {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dangerLabel {
+  align-self: center;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #D43A20;
+}
+
+.macroList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.macroCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #E4E4E7;
+  border-radius: 8px;
+  background: #FFFFFF;
+}
+
+.macroCardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.macroTitle {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+}
+
+.macroMeta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+.macroAvatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  color: #FFFFFF;
+  font-size: 9px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.dot {
+  display: inline-flex;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #D9D9D9;
+  flex-shrink: 0;
+}
+
+.macroActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.deleteLink,
+.editLink {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.deleteLink {
+  color: #D43A20;
+}
+
+.editLink {
+  color: #A153FF;
+}
+
+.macroBody {
+  padding: 12px;
+  border-radius: 8px;
+  background: #F7F7F7;
+}
+
+.macroBodyGreeting {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+  margin: 0 0 8px;
+}
+
+.macroPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid #E4E4E7;
+  background: #FFFFFF;
+  font-weight: 500;
+  color: #1C1C1C;
+}
+
+.macroBodyText {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+  margin: 0;
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+}
+
+.macroFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.availableFor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.macroMetaLabel {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+.availableAvatars {
+  display: flex;
+  align-items: center;
+}
+
+.availableAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  font-size: 9px;
+  font-weight: 500;
+  flex-shrink: 0;
+
+  + .availableAvatar {
+    margin-left: -6px;
+  }
+}
+
+.macroToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #757575;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid #A153FF;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+.securityRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.securityFields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.confirmRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dangerTitle {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+}
+
+.dangerCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 88px;
+  gap: 160px;
+  padding: 24px 20px 20px 20px;
+  border: 1px solid #DC2626;
+  border-radius: 9px;
+  background: #FFFFFF;
+  box-sizing: border-box;
+}

@@ -89,6 +89,26 @@
   }
 }
 
+.button.danger {
+  background: transparent;
+  color: #D43A20;
+  border: none;
+  padding: 2px 8px;
+  gap: 12px;
+  border-radius: 4px;
+  height: 24px;
+  min-height: 24px;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+
+  &:hover {
+    background: #D43A200A;
+  }
+}
+
 // Sizes
 .sm {
   padding-inline: 12px;

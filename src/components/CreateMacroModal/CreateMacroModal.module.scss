@@ -1,0 +1,222 @@
+.editor {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #E4E4E7;
+  border-radius: 8px;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+.editorBody {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 8px;
+}
+
+.greeting {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+  margin: 0;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid #E4E4E7;
+  background: #FFFFFF;
+  font-weight: 500;
+  color: #1C1C1C;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 140px;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 0;
+  background: transparent;
+  color: #1C1C1C;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+
+  &::placeholder {
+    color: #A1A1AA;
+  }
+}
+
+.actionMenuAnchor {
+  position: relative;
+  align-self: flex-start;
+}
+
+.addAction {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #A153FF;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.actionMenuPopover {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 10;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-top: 1px solid #E4E4E7;
+}
+
+.toolbarButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  color: #757575;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #F4F4F5;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #A153FF;
+    outline-offset: 2px;
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.availability {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.availabilityLabel {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+  white-space: nowrap;
+}
+
+.availabilityMenu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 240px;
+  padding: 6px;
+  border: 1px solid #E4E4E7;
+  border-radius: 8px;
+  background: #FFFFFF;
+  box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.availabilityOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background: #F4F4F5;
+  }
+
+  input {
+    margin-left: auto;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    accent-color: #A153FF;
+    cursor: pointer;
+    pointer-events: none;
+  }
+}
+
+.availabilityIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.neutralIcon {
+  background: #E4E4E7;
+  color: #71717A;
+}
+
+.availabilityName {
+  flex: 1;
+  min-width: 0;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
