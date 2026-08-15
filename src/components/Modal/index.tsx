@@ -7,11 +7,12 @@ export interface ModalProps {
   onClose: () => void
   title?: string
   width?: number
+  height?: number
   children: React.ReactNode
   className?: string
 }
 
-const Modal = ({ isOpen, onClose, title, width, children, className = '' }: ModalProps) => {
+const Modal = ({ isOpen, onClose, title, width, height, children, className = '' }: ModalProps) => {
   useEffect(() => {
     if (!isOpen) return
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -27,7 +28,10 @@ const Modal = ({ isOpen, onClose, title, width, children, className = '' }: Moda
     <div className={styles.overlay} onMouseDown={onClose}>
       <div
         className={`${styles.panel} ${className}`}
-        style={width ? { width } : undefined}
+        style={{
+          ...(width ? { width } : {}),
+          ...(height ? { height, overflow: 'hidden' } : {}),
+        }}
         role="dialog"
         aria-modal="true"
         aria-label={title}

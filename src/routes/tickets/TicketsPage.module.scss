@@ -1,0 +1,44 @@
+.page {
+  padding: 16px 24px 40px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+
+  > :first-child {
+    flex: 1;
+    max-width: 320px;
+  }
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border: 1px solid #E4E4E7;
+  background: #FFFFFF;
+  border-radius: 8px;
+  color: #757575;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    background: #FAFAFA;
+    border-color: #D4D4D8;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #A153FF;
+    outline-offset: 2px;
+  }
+}
+
+.viewToggle {
+  margin-left: auto;
+}

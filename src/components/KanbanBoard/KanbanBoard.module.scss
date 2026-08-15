@@ -1,0 +1,63 @@
+.board {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 277px;
+  flex-shrink: 0;
+}
+
+.columnHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #F4F4F5;
+}
+
+.columnTitle {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+}
+
+.addButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  color: #1C1C1C;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #E4E4E7;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #A153FF;
+    outline-offset: 2px;
+  }
+}
+
+.columnBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 60px;
+}

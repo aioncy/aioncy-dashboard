@@ -8,7 +8,7 @@ export interface PriorityBadgeProps {
   className?: string
 }
 
-const COLORS: Record<PriorityLevel, { background: string; color: string }> = {
+export const PRIORITY_COLORS: Record<PriorityLevel, { background: string; color: string }> = {
   medium: { background: '#FFF3D6', color: '#EF7800' },
   high: { background: '#FEE0E1', color: '#D43A20' },
   low: { background: '#DBF3FF', color: '#0075AD' },
@@ -16,7 +16,7 @@ const COLORS: Record<PriorityLevel, { background: string; color: string }> = {
 }
 
 const PriorityBadge = ({ level, label, className = '' }: PriorityBadgeProps) => {
-  const { background, color } = COLORS[level]
+  const { background, color } = PRIORITY_COLORS[level]
 
   return (
     <span

@@ -1,131 +1,152 @@
-import { useRef, useState } from 'react'
-import { ChevronDown, ChevronUp, Image, RefreshCw, X } from 'lucide-react'
-import PageHeader from '../../components/PageHeader'
-import Tabs from '../../components/Tabs'
-import TextInput from '../../components/TextInput'
-import PasswordInput from '../../components/PasswordInput'
-import Select from '../../components/Select'
-import Button from '../../components/Button'
-import SearchInput from '../../components/SearchInput'
-import CreateMacroModal, { type CreateMacroPayload } from '../../components/CreateMacroModal'
-import { COLLABORATORS, handleShare } from '../../lib/dashboard'
-import styles from './SettingsPage.module.scss'
+import { useRef, useState } from "react";
+import { ChevronDown, ChevronUp, Image, RefreshCw, X } from "lucide-react";
+import PageHeader from "../../components/PageHeader";
+import Tabs from "../../components/Tabs";
+import TextInput from "../../components/TextInput";
+import PasswordInput from "../../components/PasswordInput";
+import Select from "../../components/Select";
+import Button from "../../components/Button";
+import SearchInput from "../../components/SearchInput";
+import CreateMacroModal, {
+  type CreateMacroPayload,
+} from "../../components/CreateMacroModal";
+import { COLLABORATORS, handleShare } from "../../lib/dashboard";
+import styles from "./SettingsPage.module.scss";
 
 const TABS = [
-  { label: 'General', value: 'general' },
-  { label: 'Security', value: 'security' },
-  { label: 'Integration', value: 'integration' },
-  { label: 'Macros', value: 'macros' },
-  { label: 'Plan and Billing', value: 'billing' },
-]
+  { label: "General", value: "general" },
+  { label: "Security", value: "security" },
+  { label: "Integration", value: "integration" },
+  { label: "Macros", value: "macros" },
+  { label: "Plan and Billing", value: "billing" },
+];
 
 interface Macro {
-  id: string
-  title: string
-  createdBy: string
-  usedTimes?: number
-  body?: string
-  availableFor: string[]
+  id: string;
+  title: string;
+  createdBy: string;
+  usedTimes?: number;
+  body?: string;
+  availableFor: string[];
 }
 
 const MACROS: Macro[] = [
   {
-    id: 'close-conversation',
-    title: 'Close conversation',
-    createdBy: 'Aryan Shrestha',
+    id: "close-conversation",
+    title: "Close conversation",
+    createdBy: "Prakash Shrestha",
     usedTimes: 2,
     availableFor: COLLABORATORS.map((c) => c.name),
   },
   {
-    id: 'open-conversation',
-    title: 'Open conversation',
-    createdBy: 'Aryan Shrestha',
+    id: "open-conversation",
+    title: "Open conversation",
+    createdBy: "Prakash Shrestha",
     body: "Thank you for reaching out to us. We've received your message and are happy to help. Our team is currently reviewing your request and will get back to you as soon as possible.\n\nBest regards,\nAcme",
     availableFor: COLLABORATORS.map((c) => c.name),
   },
-]
+];
 
-const FALLBACK_AVATAR_COLORS = ['#1e293b', '#a153ff', '#3b82f6', '#d43a20', '#71717a']
+const FALLBACK_AVATAR_COLORS = [
+  "#1e293b",
+  "#a153ff",
+  "#3b82f6",
+  "#d43a20",
+  "#71717a",
+];
 
 const avatarColor = (name: string) => {
-  let hash = 0
-  for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) % 997
-  return FALLBACK_AVATAR_COLORS[hash % FALLBACK_AVATAR_COLORS.length]
-}
+  let hash = 0;
+  for (let i = 0; i < name.length; i++)
+    hash = (hash * 31 + name.charCodeAt(i)) % 997;
+  return FALLBACK_AVATAR_COLORS[hash % FALLBACK_AVATAR_COLORS.length];
+};
 
 const LANGUAGE_OPTIONS = [
-  { label: 'English (UK)', value: 'en-GB' },
-  { label: 'English (US)', value: 'en-US' },
-]
+  { label: "English (UK)", value: "en-GB" },
+  { label: "English (US)", value: "en-US" },
+];
 
 const TIMEZONE_OPTIONS = [
-  { label: '(GMT+5:45) Kathmandu', value: 'Asia/Kathmandu' },
-  { label: '(GMT+0:00) London', value: 'Europe/London' },
-  { label: '(GMT-5:00) New York', value: 'America/New_York' },
-]
+  { label: "(GMT+5:45) Kathmandu", value: "Asia/Kathmandu" },
+  { label: "(GMT+0:00) London", value: "Europe/London" },
+  { label: "(GMT-5:00) New York", value: "America/New_York" },
+];
 
 export function SettingsPage() {
-  const [activeTab, setActiveTab] = useState('general')
-  const [workspaceName, setWorkspaceName] = useState('Acme')
-  const [language, setLanguage] = useState('en-GB')
-  const [timezone, setTimezone] = useState('Asia/Kathmandu')
-  const [logoSrc, setLogoSrc] = useState<string | null>(null)
-  const logoInputRef = useRef<HTMLInputElement>(null)
-  const [currentPassword, setCurrentPassword] = useState('')
-  const [newPassword, setNewPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const canConfirmPassword = Boolean(currentPassword && newPassword && confirmPassword)
-  const [macros, setMacros] = useState<Macro[]>(MACROS)
-  const [macroSearch, setMacroSearch] = useState('')
-  const [expandedMacros, setExpandedMacros] = useState<string[]>(['open-conversation'])
-  const [isCreateMacroOpen, setIsCreateMacroOpen] = useState(false)
+  const [activeTab, setActiveTab] = useState("general");
+  const [workspaceName, setWorkspaceName] = useState("Acme");
+  const [language, setLanguage] = useState("en-GB");
+  const [timezone, setTimezone] = useState("Asia/Kathmandu");
+  const [logoSrc, setLogoSrc] = useState<string | null>(null);
+  const logoInputRef = useRef<HTMLInputElement>(null);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const canConfirmPassword = Boolean(
+    currentPassword && newPassword && confirmPassword,
+  );
+  const [macros, setMacros] = useState<Macro[]>(MACROS);
+  const [macroSearch, setMacroSearch] = useState("");
+  const [expandedMacros, setExpandedMacros] = useState<string[]>([
+    "open-conversation",
+  ]);
+  const [isCreateMacroOpen, setIsCreateMacroOpen] = useState(false);
 
   const toggleMacro = (id: string) => {
-    setExpandedMacros((prev) => (prev.includes(id) ? prev.filter((m) => m !== id) : [...prev, id]))
-  }
+    setExpandedMacros((prev) =>
+      prev.includes(id) ? prev.filter((m) => m !== id) : [...prev, id],
+    );
+  };
 
   const handleCreateMacro = (macro: CreateMacroPayload) => {
     setMacros((prev) => [
       {
-        id: `${macro.title.toLowerCase().replace(/\s+/g, '-')}-${prev.length}`,
+        id: `${macro.title.toLowerCase().replace(/\s+/g, "-")}-${prev.length}`,
         title: macro.title,
-        createdBy: 'Aryan Shrestha',
+        createdBy: "Prakash Shrestha",
         body: macro.body,
         availableFor: macro.availableFor,
       },
       ...prev,
-    ])
-  }
+    ]);
+  };
 
   const visibleMacros = macros.filter((macro) =>
     macro.title.toLowerCase().includes(macroSearch.toLowerCase()),
-  )
+  );
 
   const handleLogoSelect = (file: File) => {
-    const reader = new FileReader()
-    reader.onload = () => setLogoSrc(reader.result as string)
-    reader.readAsDataURL(file)
-  }
+    const reader = new FileReader();
+    reader.onload = () => setLogoSrc(reader.result as string);
+    reader.readAsDataURL(file);
+  };
 
   const handleLogoRemove = () => {
-    setLogoSrc(null)
-    if (logoInputRef.current) logoInputRef.current.value = ''
-  }
+    setLogoSrc(null);
+    if (logoInputRef.current) logoInputRef.current.value = "";
+  };
 
   return (
     <div>
-      <PageHeader title="Settings" collaborators={COLLABORATORS} onShare={handleShare} />
+      <PageHeader
+        title="Settings"
+        collaborators={COLLABORATORS}
+        onShare={handleShare}
+      />
 
       <div className={styles.page}>
         <Tabs tabs={TABS} value={activeTab} onChange={setActiveTab} />
 
-        {activeTab === 'general' && (
+        {activeTab === "general" && (
           <div className={styles.content}>
             <section className={styles.section}>
               <div className={styles.sectionHeader}>
                 <div className={styles.headingGroup}>
                   <h2 className={styles.title}>Workspace profile</h2>
-                  <p className={styles.subtitle}>This identifies your workspace within Aioncy.</p>
+                  <p className={styles.subtitle}>
+                    This identifies your workspace within Aioncy.
+                  </p>
                 </div>
                 <Button variant="primary">Save changes</Button>
               </div>
@@ -142,7 +163,11 @@ export function SettingsPage() {
                 <span className={styles.logoLabel}>Logo</span>
                 <div className={styles.logoContent}>
                   <span className={styles.avatar}>
-                    {logoSrc ? <img src={logoSrc} alt="Workspace logo" /> : <Image size={20} aria-hidden="true" />}
+                    {logoSrc ? (
+                      <img src={logoSrc} alt="Workspace logo" />
+                    ) : (
+                      <Image size={20} aria-hidden="true" />
+                    )}
                   </span>
                   <div className={styles.logoActions}>
                     <input
@@ -151,8 +176,8 @@ export function SettingsPage() {
                       accept="image/*"
                       className={styles.hiddenInput}
                       onChange={(e) => {
-                        const file = e.target.files?.[0]
-                        if (file) handleLogoSelect(file)
+                        const file = e.target.files?.[0];
+                        if (file) handleLogoSelect(file);
                       }}
                     />
                     <Button
@@ -163,7 +188,11 @@ export function SettingsPage() {
                     >
                       Change
                     </Button>
-                    <button type="button" className={styles.removeButton} onClick={handleLogoRemove}>
+                    <button
+                      type="button"
+                      className={styles.removeButton}
+                      onClick={handleLogoRemove}
+                    >
                       <X size={16} />
                       Remove
                     </button>
@@ -182,7 +211,9 @@ export function SettingsPage() {
             <section className={styles.section}>
               <div className={styles.headingGroup}>
                 <h2 className={styles.title}>Timezone and Language</h2>
-                <p className={styles.subtitle}>Configure your interface language and operational time zone.</p>
+                <p className={styles.subtitle}>
+                  Configure your interface language and operational time zone.
+                </p>
               </div>
 
               <hr className={styles.divider} />
@@ -209,7 +240,10 @@ export function SettingsPage() {
               <div className={styles.dangerCard}>
                 <div className={styles.headingGroup}>
                   <h2 className={styles.dangerTitle}>Delete workspace</h2>
-                  <p className={styles.subtitle}>Permanently delete this workspace and all its data. This cannot be undone.</p>
+                  <p className={styles.subtitle}>
+                    Permanently delete this workspace and all its data. This
+                    cannot be undone.
+                  </p>
                 </div>
                 <Button variant="danger">Delete workspace</Button>
               </div>
@@ -217,12 +251,14 @@ export function SettingsPage() {
           </div>
         )}
 
-        {activeTab === 'security' && (
+        {activeTab === "security" && (
           <div className={styles.content}>
             <section className={styles.section}>
               <div className={styles.headingGroup}>
                 <h2 className={styles.title}>Account Security</h2>
-                <p className={styles.subtitle}>Manage your password and account security settings.</p>
+                <p className={styles.subtitle}>
+                  Manage your password and account security settings.
+                </p>
               </div>
 
               <hr className={styles.divider} />
@@ -231,7 +267,8 @@ export function SettingsPage() {
                 <div className={styles.headingGroup}>
                   <h3 className={styles.dangerTitle}>Change password</h3>
                   <p className={styles.subtitle}>
-                    Must be at least 8 characters, include one uppercase letter and one number.
+                    Must be at least 8 characters, include one uppercase letter
+                    and one number.
                   </p>
                 </div>
 
@@ -255,7 +292,11 @@ export function SettingsPage() {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                   <div className={styles.confirmRow}>
-                    <Button variant="primary" size="sm" disabled={!canConfirmPassword}>
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      disabled={!canConfirmPassword}
+                    >
                       Confirm
                     </Button>
                   </div>
@@ -265,15 +306,21 @@ export function SettingsPage() {
           </div>
         )}
 
-        {activeTab === 'macros' && (
+        {activeTab === "macros" && (
           <div className={styles.content}>
             <section className={styles.section}>
               <div className={styles.sectionHeader}>
                 <div className={styles.headingGroup}>
                   <h2 className={styles.title}>Create a Macro</h2>
-                  <p className={styles.subtitle}>Save time with reusable customer response templates.</p>
+                  <p className={styles.subtitle}>
+                    Save time with reusable customer response templates.
+                  </p>
                 </div>
-                <Button variant="primary" size="sm" onClick={() => setIsCreateMacroOpen(true)}>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() => setIsCreateMacroOpen(true)}
+                >
                   Add new
                 </Button>
               </div>
@@ -286,7 +333,7 @@ export function SettingsPage() {
 
               <div className={styles.macroList}>
                 {visibleMacros.map((macro) => {
-                  const isExpanded = expandedMacros.includes(macro.id)
+                  const isExpanded = expandedMacros.includes(macro.id);
                   return (
                     <div key={macro.id} className={styles.macroCard}>
                       <div className={styles.macroCardHeader}>
@@ -294,13 +341,21 @@ export function SettingsPage() {
                           <h3 className={styles.macroTitle}>{macro.title}</h3>
                           <div className={styles.macroMeta}>
                             <span>Created by</span>
-                            <span className={styles.macroAvatar} style={{ background: avatarColor(macro.createdBy) }}>
+                            <span
+                              className={styles.macroAvatar}
+                              style={{
+                                background: avatarColor(macro.createdBy),
+                              }}
+                            >
                               {macro.createdBy.charAt(0).toUpperCase()}
                             </span>
                             <span>{macro.createdBy}</span>
-                            {typeof macro.usedTimes === 'number' && (
+                            {typeof macro.usedTimes === "number" && (
                               <>
-                                <span className={styles.dot} aria-hidden="true" />
+                                <span
+                                  className={styles.dot}
+                                  aria-hidden="true"
+                                />
                                 <span>Used {macro.usedTimes} times</span>
                               </>
                             )}
@@ -319,17 +374,23 @@ export function SettingsPage() {
                       {isExpanded && macro.body && (
                         <div className={styles.macroBody}>
                           <p className={styles.macroBodyGreeting}>
-                            👋 Hi <span className={styles.macroPill}>First name</span>,
+                            👋 Hi{" "}
+                            <span className={styles.macroPill}>First name</span>
+                            ,
                           </p>
-                          {macro.body.split('\n').map((line, i) => (
-                            <p key={i} className={styles.macroBodyText}>{line || ' '}</p>
+                          {macro.body.split("\n").map((line, i) => (
+                            <p key={i} className={styles.macroBodyText}>
+                              {line || " "}
+                            </p>
                           ))}
                         </div>
                       )}
 
                       <div className={styles.macroFooter}>
                         <div className={styles.availableFor}>
-                          <span className={styles.macroMetaLabel}>Available for:</span>
+                          <span className={styles.macroMetaLabel}>
+                            Available for:
+                          </span>
                           <div className={styles.availableAvatars}>
                             {macro.availableFor.map((name) => (
                               <span
@@ -346,23 +407,31 @@ export function SettingsPage() {
                         <button
                           type="button"
                           className={styles.macroToggle}
-                          aria-label={isExpanded ? 'Collapse macro' : 'Expand macro'}
+                          aria-label={
+                            isExpanded ? "Collapse macro" : "Expand macro"
+                          }
                           onClick={() => toggleMacro(macro.id)}
                         >
-                          {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                          {isExpanded ? (
+                            <ChevronUp size={16} />
+                          ) : (
+                            <ChevronDown size={16} />
+                          )}
                         </button>
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
             </section>
           </div>
         )}
 
-        {(activeTab === 'integration' || activeTab === 'billing') && (
+        {(activeTab === "integration" || activeTab === "billing") && (
           <div className={styles.content}>
-            <p className="text-gray-600 text-lg">This section is coming soon.</p>
+            <p className="text-gray-600 text-lg">
+              This section is coming soon.
+            </p>
           </div>
         )}
       </div>
@@ -373,5 +442,5 @@ export function SettingsPage() {
         onSave={handleCreateMacro}
       />
     </div>
-  )
+  );
 }

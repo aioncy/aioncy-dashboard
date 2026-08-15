@@ -1,0 +1,157 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 999px;
+  background: #F4F4F5;
+  cursor: pointer;
+  width: fit-content;
+
+  &:focus-visible {
+    outline: 2px solid #A153FF;
+    outline-offset: 2px;
+  }
+}
+
+.statusIcon {
+  color: #757575;
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #52525B;
+}
+
+.sectionCount {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #FAFAFA;
+  }
+}
+
+.rowTitle {
+  flex: 1;
+  min-width: 0;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.priorityCell {
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.assigneeCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 160px;
+  flex-shrink: 0;
+}
+
+.assigneeAvatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #E4E4E7;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.unassigned {
+  background: #FFFFFF;
+  color: #A1A1AA;
+}
+
+.assigneeName {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.unassignedText {
+  color: #A1A1AA;
+}
+
+.moreButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  color: #757575;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #F4F4F5;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #A153FF;
+    outline-offset: 2px;
+  }
+}

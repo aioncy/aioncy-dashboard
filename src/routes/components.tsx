@@ -1,36 +1,41 @@
-import { Route } from "@tanstack/react-router"
-import { Route as rootRoute } from "./__root"
-import { useState } from "react"
-import Button from "../components/Button"
-import DropdownButton from "../components/DropdownButton"
-import TextInput from "../components/TextInput"
-import PasswordInput from "../components/PasswordInput"
-import URLInput from "../components/URLInput"
-import Textarea, { CopyTextarea } from "../components/Textarea"
-import FilterChip from "../components/FilterChip"
-import { DropdownList, type DropdownListItemProps } from "../components/DropdownList"
-import FileDropzone from "../components/FileDropzone"
-import FileUploadCard from "../components/FileUploadCard"
-import Breadcrumb from "../components/Breadcrumb"
-import AlertBar from "../components/AlertBar"
-import SearchInput from "../components/SearchInput"
-import Pagination from "../components/Pagination"
-import PriorityBadge from "../components/PriorityBadge"
-import PermissionMenu, { type PermissionMenuItem } from "../components/PermissionMenu"
-import Sidebar from "../components/Sidebar"
-import Logo from "../components/Logo"
-import PageHeader from "../components/PageHeader"
+import { Route } from "@tanstack/react-router";
+import { Route as rootRoute } from "./__root";
+import { useState } from "react";
+import Button from "../components/Button";
+import DropdownButton from "../components/DropdownButton";
+import TextInput from "../components/TextInput";
+import PasswordInput from "../components/PasswordInput";
+import URLInput from "../components/URLInput";
+import Textarea, { CopyTextarea } from "../components/Textarea";
+import FilterChip from "../components/FilterChip";
+import {
+  DropdownList,
+  type DropdownListItemProps,
+} from "../components/DropdownList";
+import FileDropzone from "../components/FileDropzone";
+import FileUploadCard from "../components/FileUploadCard";
+import Breadcrumb from "../components/Breadcrumb";
+import AlertBar from "../components/AlertBar";
+import SearchInput from "../components/SearchInput";
+import Pagination from "../components/Pagination";
+import PriorityBadge from "../components/PriorityBadge";
+import PermissionMenu, {
+  type PermissionMenuItem,
+} from "../components/PermissionMenu";
+import Sidebar from "../components/Sidebar";
+import Logo from "../components/Logo";
+import PageHeader from "../components/PageHeader";
 
 export const componentsRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/components",
   component: ComponentsPage,
-})
+});
 
 const avatar = (bg: string, letter: string) =>
   `data:image/svg+xml;utf8,${encodeURIComponent(
     `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><circle cx="12" cy="12" r="12" fill="${bg}"/><text x="12" y="16.5" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle">${letter}</text></svg>`,
-  )}`
+  )}`;
 
 const variant1: DropdownListItemProps[] = [
   { label: "Text" },
@@ -38,7 +43,7 @@ const variant1: DropdownListItemProps[] = [
   { label: "Text" },
   { label: "Text" },
   { label: "Text", destructive: true },
-]
+];
 
 const variant2: DropdownListItemProps[] = [
   { label: "Text" },
@@ -50,7 +55,7 @@ const variant2: DropdownListItemProps[] = [
   { label: "Text" },
   { label: "Text" },
   { label: "Text" },
-]
+];
 
 const variant3: DropdownListItemProps[] = [
   { label: "Text" },
@@ -59,51 +64,79 @@ const variant3: DropdownListItemProps[] = [
   { label: "Text" },
   { label: "Text" },
   { label: "Text" },
-]
+];
 
 const variant4: DropdownListItemProps[] = [
   { label: "Text", leading: "dot" },
   { label: "Text", leading: "dot", selected: true, trailing: "check" },
   { label: "Text", leading: "dot" },
   { label: "Text", leading: "dot" },
-]
+];
 
 const variant5: DropdownListItemProps[] = [
   { label: "Text", leading: "avatar", avatarSrc: avatar("#A153FF", "A") },
-  { label: "Text", leading: "avatar", avatarSrc: avatar("#71717A", "S"), selected: true, trailing: "check" },
+  {
+    label: "Text",
+    leading: "avatar",
+    avatarSrc: avatar("#71717A", "S"),
+    selected: true,
+    trailing: "check",
+  },
   { label: "Text", leading: "avatar", avatarSrc: avatar("#D43A20", "R") },
   { label: "Text", leading: "avatar", avatarSrc: avatar("#3B82F6", "K") },
   { label: "Text", leading: "avatar" },
-]
+];
 
 const variant6: DropdownListItemProps[] = [
   { label: "Text", trailing: "text", trailingText: "Text" },
   { label: "Text", trailing: "text", trailingText: "Text" },
   { label: "Text", trailing: "text", trailingText: "Text" },
   { label: "Text", trailing: "text", trailingText: "Text" },
-]
+];
 
 const variant7: DropdownListItemProps[] = [
   { label: "Text", leading: "dashedIcon" },
   { label: "Text", leading: "dashedIcon", selected: true },
   { label: "Text", leading: "dashedIcon", trailing: "chevron" },
   { label: "Text", leading: "dashedIcon" },
-]
+];
 
 const variant8: DropdownListItemProps[] = [
-  { label: "Text", leading: "avatar", avatarSrc: avatar("#A153FF", "A"), trailing: "checkbox" },
-  { label: "Text", leading: "avatar", avatarSrc: avatar("#71717A", "S"), trailing: "checkbox" },
-  { label: "Text", leading: "avatar", avatarSrc: avatar("#D43A20", "R"), trailing: "checkbox" },
-  { label: "Text", leading: "avatar", avatarSrc: avatar("#3B82F6", "K"), trailing: "checkbox" },
+  {
+    label: "Text",
+    leading: "avatar",
+    avatarSrc: avatar("#A153FF", "A"),
+    trailing: "checkbox",
+  },
+  {
+    label: "Text",
+    leading: "avatar",
+    avatarSrc: avatar("#71717A", "S"),
+    trailing: "checkbox",
+  },
+  {
+    label: "Text",
+    leading: "avatar",
+    avatarSrc: avatar("#D43A20", "R"),
+    trailing: "checkbox",
+  },
+  {
+    label: "Text",
+    leading: "avatar",
+    avatarSrc: avatar("#3B82F6", "K"),
+    trailing: "checkbox",
+  },
   { label: "Text", leading: "avatar", trailing: "checkbox" },
-]
+];
 
 function ComponentsPage() {
-  const [url, setUrl] = useState("")
-  const [urlFilled, setUrlFilled] = useState("www.prakash")
-  const [textarea, setTextarea] = useState("")
-  const [textareaFilled, setTextareaFilled] = useState("Paste your content here...")
-  const [chips, setChips] = useState(["Type", "Status", "Priority"])
+  const [url, setUrl] = useState("");
+  const [urlFilled, setUrlFilled] = useState("www.prakash");
+  const [textarea, setTextarea] = useState("");
+  const [textareaFilled, setTextareaFilled] = useState(
+    "Paste your content here...",
+  );
+  const [chips, setChips] = useState(["Type", "Status", "Priority"]);
 
   return (
     <div className="min-h-screen bg-white p-12">
@@ -112,56 +145,98 @@ function ComponentsPage() {
       {/* Button Section */}
       <section className="mb-16">
         <h2 className="text-3xl font-semibold text-black! mb-4">Button</h2>
-        <p className="text-gray-600 text-lg mb-10">A versatile button component with multiple variants and sizes.</p>
+        <p className="text-gray-600 text-lg mb-10">
+          A versatile button component with multiple variants and sizes.
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Large Column */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Button Large</h3>
-            
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Button Large
+            </h3>
+
             <div className="flex flex-col items-center gap-4">
-              <Button variant="primary" size="lg" icon={
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
-                </svg>
-              }>
+              <Button
+                variant="primary"
+                size="lg"
+                icon={
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
+                  </svg>
+                }
+              >
                 Button
               </Button>
             </div>
 
             <div className="flex flex-col items-center gap-4">
-              <Button variant="primary" size="lg">Button</Button>
+              <Button variant="primary" size="lg">
+                Button
+              </Button>
             </div>
 
             <div className="flex flex-col items-center gap-4">
-              <Button variant="outline" size="lg">Button</Button>
+              <Button variant="outline" size="lg">
+                Button
+              </Button>
             </div>
 
             <div className="flex flex-col items-center gap-4">
-              <Button variant="primary" size="lg" disabled>Button</Button>
+              <Button variant="primary" size="lg" disabled>
+                Button
+              </Button>
             </div>
           </div>
 
           {/* Medium Column */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Button Medium</h3>
-            
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Button Medium
+            </h3>
+
             <div className="flex flex-col items-center gap-4">
-              <Button variant="primary" size="md" icon={
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
-                </svg>
-              }>
+              <Button
+                variant="primary"
+                size="md"
+                icon={
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
+                  </svg>
+                }
+              >
                 Button
               </Button>
             </div>
 
             <div className="flex flex-col items-center gap-4">
-              <Button variant="primary" size="md">Button</Button>
+              <Button variant="primary" size="md">
+                Button
+              </Button>
             </div>
 
             <div className="flex flex-col items-center gap-4">
-              <Button variant="outline" size="md">Button</Button>
+              <Button variant="outline" size="md">
+                Button
+              </Button>
             </div>
 
             <div className="flex flex-col items-center gap-4">
@@ -171,38 +246,72 @@ function ComponentsPage() {
 
           {/* Small Column */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Button Small</h3>
-            
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Button Small
+            </h3>
+
             <div className="flex flex-col items-center gap-4">
-              <Button variant="primary" size="sm" icon={
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
-                </svg>
-              }>
+              <Button
+                variant="primary"
+                size="sm"
+                icon={
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
+                  </svg>
+                }
+              >
                 Button
               </Button>
             </div>
 
             <div className="flex flex-col items-center gap-4">
-              <Button variant="primary" size="sm">Button</Button>
-            </div>
-
-            <div className="flex flex-col items-center gap-4">
-              <Button variant="outline" size="sm">Button</Button>
-            </div>
-
-            <div className="flex flex-col items-center gap-4">
-              <Button variant="outline" size="sm" icon={
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
-                </svg>
-              }>
+              <Button variant="primary" size="sm">
                 Button
               </Button>
             </div>
 
             <div className="flex flex-col items-center gap-4">
-              <Button variant="primary" size="sm" disabled>Button</Button>
+              <Button variant="outline" size="sm">
+                Button
+              </Button>
+            </div>
+
+            <div className="flex flex-col items-center gap-4">
+              <Button
+                variant="outline"
+                size="sm"
+                icon={
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
+                  </svg>
+                }
+              >
+                Button
+              </Button>
+            </div>
+
+            <div className="flex flex-col items-center gap-4">
+              <Button variant="primary" size="sm" disabled>
+                Button
+              </Button>
             </div>
           </div>
         </div>
@@ -211,7 +320,9 @@ function ComponentsPage() {
       {/* Dropdown Section */}
       <section className="mb-16">
         <h2 className="text-3xl font-semibold text-black! mb-4">Dropdown</h2>
-        <p className="text-gray-600 text-lg mb-10">A dropdown component with multiple variants and icon support.</p>
+        <p className="text-gray-600 text-lg mb-10">
+          A dropdown component with multiple variants and icon support.
+        </p>
 
         <div className="flex flex-col items-center gap-4">
           <DropdownButton label="Button" trailingIcon="chevron" />
@@ -222,7 +333,16 @@ function ComponentsPage() {
             label="Button"
             trailingIcon="chevron"
             icon={
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
               </svg>
             }
@@ -233,7 +353,16 @@ function ComponentsPage() {
             trailingIcon="chevron"
             expanded
             icon={
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
               </svg>
             }
@@ -245,7 +374,16 @@ function ComponentsPage() {
             label="Button"
             trailingIcon="close"
             icon={
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <circle cx="12" cy="12" r="10" strokeDasharray="4 4" />
               </svg>
             }
@@ -256,26 +394,39 @@ function ComponentsPage() {
       {/* TextInput Section */}
       <section className="mb-16">
         <h2 className="text-3xl font-semibold text-black! mb-4">Text Input</h2>
-        <p className="text-gray-600 text-lg mb-10">A text input component with multiple states and feedback.</p>
+        <p className="text-gray-600 text-lg mb-10">
+          A text input component with multiple states and feedback.
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Default State */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Default State</h3>
-            
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Default State
+            </h3>
+
             <div className="flex flex-col gap-4">
               <TextInput placeholder="Placeholder" />
               <TextInput label="Full name" defaultValue="Prakash Sh" />
-              <TextInput placeholder="With helper text" helperText="Helper text goes here" />
+              <TextInput
+                placeholder="With helper text"
+                helperText="Helper text goes here"
+              />
             </div>
           </div>
 
           {/* Error State */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Error State</h3>
-            
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Error State
+            </h3>
+
             <div className="flex flex-col gap-4">
-              <TextInput label="Email" defaultValue="Prakash" errorMessage="Invalid email address" />
+              <TextInput
+                label="Email"
+                defaultValue="Prakash"
+                errorMessage="Invalid email address"
+              />
               <TextInput
                 label="Password"
                 placeholder="••••••••"
@@ -286,8 +437,10 @@ function ComponentsPage() {
 
           {/* Disabled State */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Disabled State</h3>
-            
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Disabled State
+            </h3>
+
             <div className="flex flex-col gap-4">
               <TextInput placeholder="Placeholder" disabled />
               <TextInput label="Full name" defaultValue="Prakash Sh" disabled />
@@ -298,13 +451,19 @@ function ComponentsPage() {
 
       {/* PasswordInput Section */}
       <section className="mb-16">
-        <h2 className="text-3xl font-semibold text-black! mb-4">Password Input</h2>
-        <p className="text-gray-600 text-lg mb-10">A password input with show/hide toggle.</p>
+        <h2 className="text-3xl font-semibold text-black! mb-4">
+          Password Input
+        </h2>
+        <p className="text-gray-600 text-lg mb-10">
+          A password input with show/hide toggle.
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Default State */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Default State</h3>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Default State
+            </h3>
 
             <div className="flex flex-col gap-4">
               <PasswordInput />
@@ -314,10 +473,16 @@ function ComponentsPage() {
 
           {/* Error State */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Error State</h3>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Error State
+            </h3>
 
             <div className="flex flex-col gap-4">
-              <PasswordInput label="Password" defaultValue="secret" errorMessage="Password is too short" />
+              <PasswordInput
+                label="Password"
+                defaultValue="secret"
+                errorMessage="Password is too short"
+              />
               <PasswordInput
                 label="Confirm password"
                 placeholder="Re-enter password"
@@ -328,7 +493,9 @@ function ComponentsPage() {
 
           {/* Disabled State */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Disabled State</h3>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Disabled State
+            </h3>
 
             <div className="flex flex-col gap-4">
               <PasswordInput label="Password" defaultValue="secret" disabled />
@@ -340,12 +507,17 @@ function ComponentsPage() {
       {/* URLInput Section */}
       <section className="mb-16">
         <h2 className="text-3xl font-semibold text-black! mb-4">URL Input</h2>
-        <p className="text-gray-600 text-lg mb-10">A URL input with a static prefix and suffix flanking the editable field.</p>
+        <p className="text-gray-600 text-lg mb-10">
+          A URL input with a static prefix and suffix flanking the editable
+          field.
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Default State */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Default State</h3>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Default State
+            </h3>
 
             <div className="flex flex-col gap-4">
               <URLInput value={url} onChange={(e) => setUrl(e.target.value)} />
@@ -359,7 +531,9 @@ function ComponentsPage() {
 
           {/* Error State */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Error State</h3>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Error State
+            </h3>
 
             <div className="flex flex-col gap-4">
               <URLInput
@@ -379,7 +553,9 @@ function ComponentsPage() {
 
           {/* Disabled State */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Disabled State</h3>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Disabled State
+            </h3>
 
             <div className="flex flex-col gap-4">
               <URLInput label="Website" value="www.prakash" disabled />
@@ -392,15 +568,23 @@ function ComponentsPage() {
       {/* Textarea Section */}
       <section className="mb-16">
         <h2 className="text-3xl font-semibold text-black! mb-4">Textarea</h2>
-        <p className="text-gray-600 text-lg mb-10">A multiline text area and a read-only copy-to-clipboard variant.</p>
+        <p className="text-gray-600 text-lg mb-10">
+          A multiline text area and a read-only copy-to-clipboard variant.
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Default State */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Default State</h3>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Default State
+            </h3>
 
             <div className="flex flex-col gap-4">
-              <Textarea placeholder="Type your message here..." value={textarea} onChange={(e) => setTextarea(e.target.value)} />
+              <Textarea
+                placeholder="Type your message here..."
+                value={textarea}
+                onChange={(e) => setTextarea(e.target.value)}
+              />
               <Textarea
                 label="Description"
                 value={textareaFilled}
@@ -411,7 +595,9 @@ function ComponentsPage() {
 
           {/* Copy Variant */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Copy Variant</h3>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Copy Variant
+            </h3>
 
             <div className="flex flex-col gap-4">
               <CopyTextarea value="Copy element here" />
@@ -421,7 +607,9 @@ function ComponentsPage() {
 
           {/* Disabled State */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Disabled State</h3>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Disabled State
+            </h3>
 
             <div className="flex flex-col gap-4">
               <Textarea placeholder="Type your message here..." disabled />
@@ -434,7 +622,9 @@ function ComponentsPage() {
       {/* FilterChip Section */}
       <section className="mb-16">
         <h2 className="text-3xl font-semibold text-black! mb-4">Filter Chip</h2>
-        <p className="text-gray-600 text-lg mb-10">Active filter chips with a hover tooltip and remove button.</p>
+        <p className="text-gray-600 text-lg mb-10">
+          Active filter chips with a hover tooltip and remove button.
+        </p>
 
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-4">
@@ -456,8 +646,21 @@ function ComponentsPage() {
             <div className="flex flex-wrap gap-6 pt-10">
               <FilterChip
                 icon={
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="8" cy="8" r="6" stroke="#71717A" strokeWidth="1.5" strokeDasharray="3 2" />
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="8"
+                      cy="8"
+                      r="6"
+                      stroke="#71717A"
+                      strokeWidth="1.5"
+                      strokeDasharray="3 2"
+                    />
                   </svg>
                 }
                 label="Type"
@@ -465,8 +668,21 @@ function ComponentsPage() {
               />
               <FilterChip
                 icon={
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="8" cy="8" r="6" stroke="#71717A" strokeWidth="1.5" strokeDasharray="3 2" />
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="8"
+                      cy="8"
+                      r="6"
+                      stroke="#71717A"
+                      strokeWidth="1.5"
+                      strokeDasharray="3 2"
+                    />
                   </svg>
                 }
                 label="Assignee"
@@ -478,8 +694,12 @@ function ComponentsPage() {
       </section>
       {/* DropdownList Section */}
       <section className="mb-16">
-        <h2 className="text-3xl font-semibold text-black! mb-4">Dropdown List</h2>
-        <p className="text-gray-600 text-lg mb-10">A dropdown menu with 8 variants.</p>
+        <h2 className="text-3xl font-semibold text-black! mb-4">
+          Dropdown List
+        </h2>
+        <p className="text-gray-600 text-lg mb-10">
+          A dropdown menu with 8 variants.
+        </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           <div className="flex flex-col gap-3">
@@ -519,22 +739,45 @@ function ComponentsPage() {
 
       {/* FileDropzone Section */}
       <section className="mb-16">
-        <h2 className="text-3xl font-semibold text-black! mb-4">File Dropzone</h2>
-        <p className="text-gray-600 text-lg mb-10">A drag-and-drop file upload area.</p>
+        <h2 className="text-3xl font-semibold text-black! mb-4">
+          File Dropzone
+        </h2>
+        <p className="text-gray-600 text-lg mb-10">
+          A drag-and-drop file upload area.
+        </p>
 
         <div className="flex flex-col gap-8">
-          <FileDropzone accept="application/pdf" maxSizeMB={50} onFileSelect={() => {}} />
+          <FileDropzone
+            accept="application/pdf"
+            maxSizeMB={50}
+            onFileSelect={() => {}}
+          />
         </div>
       </section>
 
       {/* FileUploadCard Section */}
       <section className="mb-16">
-        <h2 className="text-3xl font-semibold text-black! mb-4">File Upload Card</h2>
-        <p className="text-gray-600 text-lg mb-10">A single file row with default, uploading, and error states.</p>
+        <h2 className="text-3xl font-semibold text-black! mb-4">
+          File Upload Card
+        </h2>
+        <p className="text-gray-600 text-lg mb-10">
+          A single file row with default, uploading, and error states.
+        </p>
 
         <div className="flex flex-col gap-6">
-          <FileUploadCard fileName="about_us_doc.pdf" fileSize="12 KB" status="default" onRemove={() => {}} />
-          <FileUploadCard fileName="presentation_deck.pdf" fileSize="2.4 MB" status="uploading" progress={64} onRemove={() => {}} />
+          <FileUploadCard
+            fileName="about_us_doc.pdf"
+            fileSize="12 KB"
+            status="default"
+            onRemove={() => {}}
+          />
+          <FileUploadCard
+            fileName="presentation_deck.pdf"
+            fileSize="2.4 MB"
+            status="uploading"
+            progress={64}
+            onRemove={() => {}}
+          />
           <FileUploadCard
             fileName="invoice_2026.pdf"
             fileSize="8 MB"
@@ -548,10 +791,14 @@ function ComponentsPage() {
       {/* Breadcrumb Section */}
       <section className="mb-16">
         <h2 className="text-3xl font-semibold text-black! mb-4">Breadcrumb</h2>
-        <p className="text-gray-600 text-lg mb-10">A navigation trail with a chevron separator and active page.</p>
+        <p className="text-gray-600 text-lg mb-10">
+          A navigation trail with a chevron separator and active page.
+        </p>
 
         <div className="flex flex-col gap-8">
-          <Breadcrumb items={[{ label: "Page", href: "#" }, { label: "Active page" }]} />
+          <Breadcrumb
+            items={[{ label: "Page", href: "#" }, { label: "Active page" }]}
+          />
           <Breadcrumb
             items={[
               { label: "Page", href: "#" },
@@ -566,7 +813,8 @@ function ComponentsPage() {
       <section className="mb-16">
         <h2 className="text-3xl font-semibold text-black! mb-4">AlertBar</h2>
         <p className="text-gray-600 text-lg mb-10">
-          Full-width inline notification bar with an icon, message (supports inline bold), optional action link and dismiss button.
+          Full-width inline notification bar with an icon, message (supports
+          inline bold), optional action link and dismiss button.
         </p>
 
         <div className="flex flex-col gap-8">
@@ -594,7 +842,8 @@ function ComponentsPage() {
       <section className="mb-16">
         <h2 className="text-3xl font-semibold text-black! mb-4">SearchInput</h2>
         <p className="text-gray-600 text-lg mb-10">
-          Input with a leading search icon and an optional trailing results count.
+          Input with a leading search icon and an optional trailing results
+          count.
         </p>
 
         <div className="flex flex-col gap-8">
@@ -609,22 +858,30 @@ function ComponentsPage() {
       <section className="mb-16">
         <h2 className="text-3xl font-semibold text-black! mb-4">Pagination</h2>
         <p className="text-gray-600 text-lg mb-10">
-          Previous/Next text buttons with numbered pages and ellipsis truncation.
+          Previous/Next text buttons with numbered pages and ellipsis
+          truncation.
         </p>
 
         <div className="flex flex-col gap-12">
           <PaginationDemo />
           <Pagination currentPage={1} totalPages={10} onPageChange={() => {}} />
-          <Pagination currentPage={10} totalPages={10} onPageChange={() => {}} />
+          <Pagination
+            currentPage={10}
+            totalPages={10}
+            onPageChange={() => {}}
+          />
           <Pagination currentPage={3} totalPages={5} onPageChange={() => {}} />
         </div>
       </section>
 
       {/* PriorityBadge Section */}
       <section className="mb-16">
-        <h2 className="text-3xl font-semibold text-black! mb-4">PriorityBadge</h2>
+        <h2 className="text-3xl font-semibold text-black! mb-4">
+          PriorityBadge
+        </h2>
         <p className="text-gray-600 text-lg mb-10">
-          Small color-coded pill showing a priority level, each with its own color pairing.
+          Small color-coded pill showing a priority level, each with its own
+          color pairing.
         </p>
 
         <div className="flex items-center gap-8">
@@ -637,9 +894,12 @@ function ComponentsPage() {
 
       {/* PermissionMenu Section */}
       <section className="mb-16">
-        <h2 className="text-3xl font-semibold text-black! mb-4">PermissionMenu</h2>
+        <h2 className="text-3xl font-semibold text-black! mb-4">
+          PermissionMenu
+        </h2>
         <p className="text-gray-600 text-lg mb-10">
-          Dropdown menu with title + subtitle rows, a selected state, a divider, and a destructive action.
+          Dropdown menu with title + subtitle rows, a selected state, a divider,
+          and a destructive action.
         </p>
 
         <PermissionMenuDemo />
@@ -649,30 +909,45 @@ function ComponentsPage() {
       <section className="mb-16">
         <h2 className="text-3xl font-semibold text-black! mb-4">Sidebar</h2>
         <p className="text-gray-600 text-lg mb-10">
-          Navigation sidebar with a logo header, main/secondary nav lists, flexible spacer, and a pinned workspace switcher.
+          Navigation sidebar with a logo header, main/secondary nav lists,
+          flexible spacer, and a pinned workspace switcher.
         </p>
 
         <div className="flex flex-col gap-8">
           <div>
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Logo (reusable)</h3>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Logo (reusable)
+            </h3>
             <Logo />
           </div>
 
           <div className="flex flex-wrap gap-8">
             <div>
-              <h3 className="text-xl font-medium text-gray-700 mb-4">Sidebar</h3>
-              <div className="rounded-lg border border-gray-200 overflow-hidden" style={{ height: 600 }}>
-                <Sidebar
-                  workspace={{ name: "Acme", planTier: "Essential" }}
-                />
+              <h3 className="text-xl font-medium text-gray-700 mb-4">
+                Sidebar
+              </h3>
+              <div
+                className="rounded-lg border border-gray-200 overflow-hidden"
+                style={{ height: 600 }}
+              >
+                <Sidebar workspace={{ name: "Acme", planTier: "Essential" }} />
               </div>
             </div>
 
             <div>
-              <h3 className="text-xl font-medium text-gray-700 mb-4">Sidebar (alt route + custom logo)</h3>
-              <div className="rounded-lg border border-gray-200 overflow-hidden" style={{ height: 900 }}>
+              <h3 className="text-xl font-medium text-gray-700 mb-4">
+                Sidebar (alt route + custom logo)
+              </h3>
+              <div
+                className="rounded-lg border border-gray-200 overflow-hidden"
+                style={{ height: 900 }}
+              >
                 <Sidebar
-                  workspace={{ name: "Nimbus", planTier: "Pro", logoSrc: avatar("#2563EB", "N") }}
+                  workspace={{
+                    name: "Nimbus",
+                    planTier: "Pro",
+                    logoSrc: avatar("#2563EB", "N"),
+                  }}
                 />
               </div>
             </div>
@@ -684,18 +959,24 @@ function ComponentsPage() {
       <section className="mb-16">
         <h2 className="text-3xl font-semibold text-black! mb-4">PageHeader</h2>
         <p className="text-gray-600 text-lg mb-10">
-          Page header with either a plain title or a breadcrumb trail on the left, and a collaborator avatar stack
-          plus a Share button on the right.
+          Page header with either a plain title or a breadcrumb trail on the
+          left, and a collaborator avatar stack plus a Share button on the
+          right.
         </p>
 
         <div className="flex flex-col gap-8">
           <div>
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Variant A - Plain title</h3>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Variant A - Plain title
+            </h3>
             <div className="rounded-lg border border-gray-200 overflow-hidden">
               <PageHeader
                 title="Leads"
                 collaborators={[
-                  { name: "Aryan Shrestha", avatarSrc: avatar("#3B82F6", "A") },
+                  {
+                    name: "Prakash Shrestha",
+                    avatarSrc: avatar("#3B82F6", "A"),
+                  },
                   { name: "Sam Doe", avatarSrc: avatar("#D43A20", "S") },
                   { name: "Kiran Rai" },
                 ]}
@@ -705,10 +986,15 @@ function ComponentsPage() {
           </div>
 
           <div>
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Variant B - Breadcrumb</h3>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Variant B - Breadcrumb
+            </h3>
             <div className="rounded-lg border border-gray-200 overflow-hidden">
               <PageHeader
-                breadcrumbItems={[{ label: "Leads", href: "#" }, { label: "Aryan Shrestha" }]}
+                breadcrumbItems={[
+                  { label: "Leads", href: "#" },
+                  { label: "Prakash Shrestha" },
+                ]}
                 collaborators={[
                   { name: "Sam Doe", avatarSrc: avatar("#D43A20", "S") },
                   { name: "Kiran Rai" },
@@ -719,11 +1005,17 @@ function ComponentsPage() {
           </div>
 
           <div>
-            <h3 className="text-xl font-medium text-gray-700 mb-4">Variant C - All fallback avatars</h3>
+            <h3 className="text-xl font-medium text-gray-700 mb-4">
+              Variant C - All fallback avatars
+            </h3>
             <div className="rounded-lg border border-gray-200 overflow-hidden">
               <PageHeader
                 title="Analytics"
-                collaborators={[{ name: "Aryan Shrestha" }, { name: "Sam Doe" }, { name: "Kiran Rai" }]}
+                collaborators={[
+                  { name: "Prakash Shrestha" },
+                  { name: "Sam Doe" },
+                  { name: "Kiran Rai" },
+                ]}
                 onShare={() => {}}
               />
             </div>
@@ -731,56 +1023,61 @@ function ComponentsPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
 const PermissionMenuDemo = () => {
-  const [selected, setSelected] = useState<string>('Can edit')
-  const [removed, setRemoved] = useState<string[]>([])
+  const [selected, setSelected] = useState<string>("Can edit");
+  const [removed, setRemoved] = useState<string[]>([]);
 
   const items: PermissionMenuItem[] = [
     {
-      title: 'Full access',
-      subtitle: 'Edit, share, chat',
-      selected: selected === 'Full access',
-      onClick: () => setSelected('Full access'),
+      title: "Full access",
+      subtitle: "Edit, share, chat",
+      selected: selected === "Full access",
+      onClick: () => setSelected("Full access"),
     },
     {
-      title: 'Can edit',
-      subtitle: 'Edit, chat and tickets',
-      selected: selected === 'Can edit',
-      onClick: () => setSelected('Can edit'),
+      title: "Can edit",
+      subtitle: "Edit, chat and tickets",
+      selected: selected === "Can edit",
+      onClick: () => setSelected("Can edit"),
     },
     {
-      title: 'Can edit chat',
-      subtitle: 'Can edit chat only',
-      selected: selected === 'Can edit chat',
-      onClick: () => setSelected('Can edit chat'),
+      title: "Can edit chat",
+      subtitle: "Can edit chat only",
+      selected: selected === "Can edit chat",
+      onClick: () => setSelected("Can edit chat"),
     },
     {
-      title: 'Can view',
-      selected: selected === 'Can view',
-      onClick: () => setSelected('Can view'),
+      title: "Can view",
+      selected: selected === "Can view",
+      onClick: () => setSelected("Can view"),
     },
     {
-      title: 'Remove',
+      title: "Remove",
       destructive: true,
       dividerBefore: true,
-      onClick: () => setRemoved((prev) => [...prev, `removed at ${Date.now()}`]),
+      onClick: () =>
+        setRemoved((prev) => [...prev, `removed at ${Date.now()}`]),
     },
-  ]
+  ];
 
   return (
     <div className="flex flex-col gap-8">
       <PermissionMenu items={items} />
       <p className="text-sm text-gray-600">
-        {removed.length > 0 ? `Last action: ${removed[removed.length - 1]}` : 'No destructive action fired yet'}
+        {removed.length > 0
+          ? `Last action: ${removed[removed.length - 1]}`
+          : "No destructive action fired yet"}
       </p>
     </div>
-  )
-}
+  );
+};
 
 const PaginationDemo = () => {
-  const [page, setPage] = useState(4)
-  return <Pagination currentPage={page} totalPages={10} onPageChange={setPage} />
-}
+  const [page, setPage] = useState(4);
+  return (
+    <Pagination currentPage={page} totalPages={10} onPageChange={setPage} />
+  );
+};
