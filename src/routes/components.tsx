@@ -23,6 +23,7 @@ import PermissionMenu, {
   type PermissionMenuItem,
 } from "../components/PermissionMenu";
 import Sidebar from "../components/Sidebar";
+import type { Organization } from "../components/WorkspaceSwitcher";
 import Logo from "../components/Logo";
 import PageHeader from "../components/PageHeader";
 
@@ -36,6 +37,18 @@ const avatar = (bg: string, letter: string) =>
   `data:image/svg+xml;utf8,${encodeURIComponent(
     `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><circle cx="12" cy="12" r="12" fill="${bg}"/><text x="12" y="16.5" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle">${letter}</text></svg>`,
   )}`;
+
+const SidebarDemo = ({ organizations }: { organizations: Organization[] }) => {
+  const [activeOrgId, setActiveOrgId] = useState(organizations[0].id);
+
+  return (
+    <Sidebar
+      organizations={organizations}
+      activeOrgId={activeOrgId}
+      onSelectOrganization={setActiveOrgId}
+    />
+  );
+};
 
 const variant1: DropdownListItemProps[] = [
   { label: "Text" },
@@ -930,24 +943,43 @@ function ComponentsPage() {
                 className="rounded-lg border border-gray-200 overflow-hidden"
                 style={{ height: 600 }}
               >
-                <Sidebar workspace={{ name: "Acme", planTier: "Essential" }} />
+                <SidebarDemo
+                  organizations={[
+                    { id: "acme", name: "Acme", planTier: "Essential" },
+                  ]}
+                />
               </div>
             </div>
 
             <div>
               <h3 className="text-xl font-medium text-gray-700 mb-4">
-                Sidebar (alt route + custom logo)
+                Sidebar (org switcher)
               </h3>
               <div
                 className="rounded-lg border border-gray-200 overflow-hidden"
                 style={{ height: 900 }}
               >
-                <Sidebar
-                  workspace={{
-                    name: "Nimbus",
-                    planTier: "Pro",
-                    logoSrc: avatar("#2563EB", "N"),
-                  }}
+                <SidebarDemo
+                  organizations={[
+                    {
+                      id: "nimbus",
+                      name: "Nimbus",
+                      planTier: "Pro",
+                      logoSrc: avatar("#2563EB", "N"),
+                    },
+                    {
+                      id: "acme-corp",
+                      name: "Acme Corp",
+                      planTier: "Essential",
+                      logoSrc: avatar("#2563EB", "A"),
+                    },
+                    {
+                      id: "evil-corp",
+                      name: "Evil Corp",
+                      planTier: "Essential",
+                      logoSrc: avatar("#3f3f46", "E"),
+                    },
+                  ]}
                 />
               </div>
             </div>

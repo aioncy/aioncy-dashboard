@@ -3,11 +3,14 @@ import { Home, MessageSquare, Ticket, Bot, User, LineChart, Settings, Headphones
 import Logo from '../Logo'
 import NavMenuItem from '../NavMenuItem'
 import SidebarSubmenu, { type SidebarSubmenuItem } from '../SidebarSubmenu'
-import WorkspaceSwitcher from '../WorkspaceSwitcher'
+import WorkspaceSwitcher, { type Organization } from '../WorkspaceSwitcher'
 import styles from './Sidebar.module.scss'
 
 export interface SidebarProps {
-  workspace: { name: string; planTier: string; logoSrc?: string }
+  organizations: Organization[]
+  activeOrgId: string
+  onSelectOrganization: (orgId: string) => void
+  onAddOrganization?: () => void
   className?: string
   onNavigate?: () => void
 }
@@ -43,7 +46,14 @@ const secondaryNavItems: NavItem[] = [
   { route: 'help-support', label: 'Help & Support', icon: <Headphones /> },
 ]
 
-const Sidebar = ({ workspace, className = '', onNavigate }: SidebarProps) => {
+const Sidebar = ({
+  organizations,
+  activeOrgId,
+  onSelectOrganization,
+  onAddOrganization,
+  className = '',
+  onNavigate,
+}: SidebarProps) => {
   const [isWingmanOpen, setIsWingmanOpen] = useState(true)
 
   return (
@@ -84,9 +94,10 @@ const Sidebar = ({ workspace, className = '', onNavigate }: SidebarProps) => {
         </nav>
 
         <WorkspaceSwitcher
-          workspaceName={workspace.name}
-          planTier={workspace.planTier}
-          logoSrc={workspace.logoSrc}
+          organizations={organizations}
+          activeOrgId={activeOrgId}
+          onSelectOrganization={onSelectOrganization}
+          onAddOrganization={onAddOrganization}
         />
       </div>
     </aside>

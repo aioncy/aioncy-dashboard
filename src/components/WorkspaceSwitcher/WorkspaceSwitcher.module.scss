@@ -1,3 +1,171 @@
+.root {
+  position: relative;
+  width: 100%;
+}
+
+.panel {
+  position: absolute;
+  bottom: 0;
+  left: calc(100% + 8px);
+  width: 240px;
+  border-radius: 8px;
+  border: 1px solid #e4e4e7;
+  background: #ffffff;
+  box-shadow:
+    0px 4px 6px -2px #0a0d1208,
+    0px 12px 16px -4px #0a0d1214;
+  padding: 4px 0;
+  z-index: 20;
+}
+
+.panelHeader {
+  width: 240px;
+  height: 32px;
+  box-sizing: border-box;
+  padding: 6px 12px;
+  color: #757575;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+}
+
+.orgList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.orgItem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 44px;
+  box-sizing: border-box;
+  gap: 12px;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1c1c1c;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #f7f7f7;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a153ff;
+    outline-offset: -2px;
+  }
+}
+
+.orgAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.orgAvatarInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: #ffffff;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  svg {
+    width: var(--icon-size, 14px);
+    height: var(--icon-size, 14px);
+  }
+}
+
+.orgName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shortcut {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 16px;
+  flex-shrink: 0;
+  gap: 10px;
+  color: #757575;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+}
+
+.addOrg {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 42px;
+  box-sizing: border-box;
+  gap: 12px;
+  padding: 10px 14px;
+  border: none;
+  border-top: 1px solid #e4e4e7;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1c1c1c;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #f7f7f7;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a153ff;
+    outline-offset: -2px;
+  }
+}
+
+.addIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: #1c1c1c;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
 .card {
   display: flex;
   align-items: center;
@@ -17,28 +185,20 @@
   }
 
   &:focus-visible {
-    outline: 2px solid #A153FF;
+    outline: 2px solid #a153ff;
     outline-offset: 1px;
   }
+}
+
+.cardActive {
+  background: #f7f7f7;
 }
 
 .avatar {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  background: #3b82f6;
-  color: #ffffff;
-  overflow: hidden;
   flex-shrink: 0;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
 
   svg {
     width: 18px;
