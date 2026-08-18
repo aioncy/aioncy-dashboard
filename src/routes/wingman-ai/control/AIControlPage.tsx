@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ChevronDown,
   Hand,
@@ -98,22 +98,60 @@ interface PillSelectProps {
   ariaLabel: string;
 }
 
-const PillSelect = ({ value, onChange, options, ariaLabel }: PillSelectProps) => (
-  <div className={styles.pillSelect}>
-    <select
-      value={value}
-      aria-label={ariaLabel}
-      onChange={(e) => onChange(e.target.value)}
-    >
-      {options.map((option) => (
-        <option key={option} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
-    <ChevronDown size={14} aria-hidden="true" />
-  </div>
-);
+const PillSelect = ({ value, onChange, options, ariaLabel }: PillSelectProps) => {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, [open]);
+
+  return (
+    <div className={styles.pillSelect} ref={rootRef}>
+      <button
+        type="button"
+        className={styles.pillTrigger}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label={ariaLabel}
+        onClick={() => setOpen((prev) => !prev)}
+      >
+        <span>{value}</span>
+        <ChevronDown size={14} aria-hidden="true" />
+      </button>
+
+      {open && (
+        <ul className={styles.pillMenu} role="listbox">
+          {options.map((option) => (
+            <li key={option}>
+              <button
+                type="button"
+                role="option"
+                aria-selected={option === value}
+                className={`${styles.pillOption} ${
+                  option === value ? styles.pillOptionActive : ""
+                }`}
+                onClick={() => {
+                  onChange(option);
+                  setOpen(false);
+                }}
+              >
+                {option}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
 
 const CHANNELS: Channel[] = [
   {
@@ -279,6 +317,7 @@ export function AIControlPage() {
                   <Switch
                     checked={channelToggles[channel.id]}
                     onChange={() => toggleChannel(channel.id)}
+                    disabled={!masterToggle}
                     aria-label={`Toggle ${channel.label}`}
                   />
                 </div>

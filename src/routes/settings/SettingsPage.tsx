@@ -158,6 +158,8 @@ export function SettingsPage() {
                 onChange={(e) => setWorkspaceName(e.target.value)}
               />
 
+              <hr className={styles.divider} />
+
               <div className={styles.logoRow}>
                 <span className={styles.logoLabel}>Logo</span>
                 <div className={styles.logoContent}>

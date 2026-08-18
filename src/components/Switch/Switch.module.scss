@@ -13,7 +13,10 @@
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+
+    &:not(.checked) {
+      opacity: 0.6;
+    }
   }
 
   &:focus-visible {
@@ -37,5 +40,9 @@
 
   .thumb {
     transform: translateX(15px);
+  }
+
+  &:disabled {
+    background: #C4C4C7;
   }
 }

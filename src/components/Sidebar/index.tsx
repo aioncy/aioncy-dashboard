@@ -11,6 +11,7 @@ export interface SidebarProps {
   activeOrgId: string
   onSelectOrganization: (orgId: string) => void
   onAddOrganization?: () => void
+  onSignOut?: () => void
   className?: string
   onNavigate?: () => void
 }
@@ -51,6 +52,7 @@ const Sidebar = ({
   activeOrgId,
   onSelectOrganization,
   onAddOrganization,
+  onSignOut,
   className = '',
   onNavigate,
 }: SidebarProps) => {
@@ -98,6 +100,7 @@ const Sidebar = ({
           activeOrgId={activeOrgId}
           onSelectOrganization={onSelectOrganization}
           onAddOrganization={onAddOrganization}
+          onSignOut={onSignOut}
         />
       </div>
     </aside>
