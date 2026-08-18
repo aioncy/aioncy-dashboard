@@ -16,7 +16,6 @@ import styles from "./SettingsPage.module.scss";
 const TABS = [
   { label: "General", value: "general" },
   { label: "Security", value: "security" },
-  { label: "Integration", value: "integration" },
   { label: "Macros", value: "macros" },
   { label: "Plan and Billing", value: "billing" },
 ];
@@ -427,7 +426,7 @@ export function SettingsPage() {
           </div>
         )}
 
-        {(activeTab === "integration" || activeTab === "billing") && (
+        {activeTab === "billing" && (
           <div className={styles.content}>
             <p className="text-gray-600 text-lg">
               This section is coming soon.
