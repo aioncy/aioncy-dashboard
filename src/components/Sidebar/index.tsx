@@ -36,6 +36,7 @@ const mainNavItems: NavItem[] = [
     children: [
       { label: 'AI Control', to: '/wingman-ai/control' },
       { label: 'Train', to: '/wingman-ai/train' },
+      { label: 'Channels', to: '/wingman-ai/channels' },
     ],
   },
   { route: 'leads', label: 'Leads', icon: <User /> },
