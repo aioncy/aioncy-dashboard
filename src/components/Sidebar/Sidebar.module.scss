@@ -43,3 +43,98 @@
   flex-direction: column;
   gap: 4px;
 }
+
+.railWrapper {
+  position: relative;
+  width: 67px;
+  height: 100vh;
+  flex-shrink: 0;
+}
+
+.rail {
+  display: flex;
+  flex-direction: column;
+  width: 67px;
+  height: 100%;
+  gap: 52px;
+  padding: 0 12px;
+  border-right: 1px solid #e4e4e7;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.railHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.railLogo {
+  width: 28px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.railNav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.railBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+  padding-bottom: 12px;
+}
+
+.railOrgAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: #ffffff;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.expandedPanel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  width: 252px;
+  height: 100%;
+  padding: 0 12px;
+  border-right: 1px solid #e4e4e7;
+  background: #ffffff;
+  box-sizing: border-box;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  transform: translateX(-4px);
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.railWrapper:hover .expandedPanel,
+.railWrapper:focus-within .expandedPanel {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}

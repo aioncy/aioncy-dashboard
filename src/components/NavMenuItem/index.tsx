@@ -10,10 +10,25 @@ export interface NavMenuItemProps {
   expanded?: boolean
   href?: string
   onClick?: () => void
+  collapsed?: boolean
+  className?: string
 }
 
-const NavMenuItem = ({ icon, label, expandable = false, expanded = false, href, onClick }: NavMenuItemProps) => {
-  const content = (
+const NavMenuItem = ({
+  icon,
+  label,
+  expandable = false,
+  expanded = false,
+  href,
+  onClick,
+  collapsed = false,
+  className = '',
+}: NavMenuItemProps) => {
+  const itemClassName = `${styles.item} ${collapsed ? styles.collapsedItem : ''} ${className}`
+
+  const content = collapsed ? (
+    <span className={styles.icon}>{icon}</span>
+  ) : (
     <>
       <span className={styles.icon}>{icon}</span>
       <span className={styles.label}>{label}</span>
@@ -27,14 +42,27 @@ const NavMenuItem = ({ icon, label, expandable = false, expanded = false, href, 
 
   if (href) {
     return (
-      <Link to={href} className={styles.item} activeProps={{ className: styles.active }} onClick={onClick}>
+      <Link
+        to={href}
+        className={itemClassName}
+        activeProps={{ className: styles.active }}
+        onClick={onClick}
+        title={collapsed ? label : undefined}
+        aria-label={collapsed ? label : undefined}
+      >
         {content}
       </Link>
     )
   }
 
   return (
-    <button type="button" className={styles.item} onClick={onClick}>
+    <button
+      type="button"
+      className={itemClassName}
+      onClick={onClick}
+      title={collapsed ? label : undefined}
+      aria-label={collapsed ? label : undefined}
+    >
       {content}
     </button>
   )

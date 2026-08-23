@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Home, MessageSquare, Ticket, Bot, User, LineChart, Settings, Headphones } from 'lucide-react'
+import { Home, MessageSquare, Ticket, Bot, User, LineChart, Settings, Headphones, Briefcase } from 'lucide-react'
 import Logo from '../Logo'
+import LogoMark from '../LogoMark'
 import NavMenuItem from '../NavMenuItem'
 import SidebarSubmenu, { type SidebarSubmenuItem } from '../SidebarSubmenu'
 import WorkspaceSwitcher, { type Organization } from '../WorkspaceSwitcher'
@@ -14,6 +15,7 @@ export interface SidebarProps {
   onSignOut?: () => void
   className?: string
   onNavigate?: () => void
+  collapsible?: boolean
 }
 
 interface NavItem {
@@ -56,11 +58,14 @@ const Sidebar = ({
   onSignOut,
   className = '',
   onNavigate,
+  collapsible = false,
 }: SidebarProps) => {
   const [isWingmanOpen, setIsWingmanOpen] = useState(true)
 
-  return (
-    <aside className={`${styles.sidebar} ${className}`}>
+  const activeOrg = organizations.find((org) => org.id === activeOrgId) ?? organizations[0]
+
+  const fullBody = (
+    <>
       <div className={styles.header}>
         <Logo />
       </div>
@@ -104,7 +109,65 @@ const Sidebar = ({
           onSignOut={onSignOut}
         />
       </div>
-    </aside>
+    </>
+  )
+
+  if (!collapsible) {
+    return <aside className={`${styles.sidebar} ${className}`}>{fullBody}</aside>
+  }
+
+  return (
+    <div className={`${styles.railWrapper} ${className}`}>
+      <div className={styles.rail}>
+        <div className={styles.railHeader}>
+          <LogoMark className={styles.railLogo} />
+        </div>
+
+        <nav className={styles.railNav} aria-label="Main">
+          {mainNavItems.map((item) => (
+            <NavMenuItem
+              key={item.route}
+              icon={item.icon}
+              label={item.label}
+              href={`/${item.route}`}
+              collapsed
+            />
+          ))}
+        </nav>
+
+        <div className={styles.spacer} />
+
+        <div className={styles.railBottom}>
+          <nav className={styles.railNav} aria-label="Secondary">
+            {secondaryNavItems.map((item) => (
+              <NavMenuItem
+                key={item.route}
+                icon={item.icon}
+                label={item.label}
+                href={`/${item.route}`}
+                collapsed
+              />
+            ))}
+          </nav>
+
+          {activeOrg && (
+            <span
+              className={styles.railOrgAvatar}
+              title={activeOrg.name}
+              style={{ background: activeOrg.logoSrc ? undefined : activeOrg.color ?? '#3b82f6' }}
+            >
+              {activeOrg.logoSrc ? (
+                <img src={activeOrg.logoSrc} alt="" />
+              ) : (
+                activeOrg.icon ?? <Briefcase size={16} aria-hidden="true" />
+              )}
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className={styles.expandedPanel}>{fullBody}</div>
+    </div>
   )
 }
 

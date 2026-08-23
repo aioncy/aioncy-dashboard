@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { Menu } from 'lucide-react'
-import { Outlet } from '@tanstack/react-router'
+import { Outlet, useLocation } from '@tanstack/react-router'
 import Sidebar from '../Sidebar'
 import type { Organization } from '../WorkspaceSwitcher'
 import styles from './DashboardLayout.module.scss'
@@ -18,8 +18,10 @@ const ORGANIZATIONS: Organization[] = [
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [activeOrgId, setActiveOrgId] = useState(ORGANIZATIONS[0].id)
+  const location = useLocation()
 
   const closeSidebar = () => setSidebarOpen(false)
+  const isConversations = location.pathname.startsWith('/conversations')
 
   return (
     <div className={styles.container}>
@@ -42,6 +44,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           activeOrgId={activeOrgId}
           onSelectOrganization={setActiveOrgId}
           onNavigate={closeSidebar}
+          collapsible={isConversations}
         />
       </div>
 
