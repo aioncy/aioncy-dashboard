@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  Book,
   Bookmark,
   Check,
   ChevronDown,
@@ -10,7 +11,6 @@ import {
   Image,
   Info,
   LaptopMinimal,
-  ListChecks,
   MessageCircle,
   MessageCircleMore,
   Paperclip,
@@ -18,6 +18,7 @@ import {
   Send,
   Smile,
   User,
+  X,
 } from "lucide-react";
 import PriorityBadge, {
   type PriorityLevel,
@@ -385,8 +386,8 @@ const CHANNEL_FILTERS: {
   icon?: React.ReactNode;
   iconSrc?: string;
 }[] = [
-  { value: "all", label: "All chats", icon: <MessageCircleMore size={20} /> },
-  { value: "website", label: "Website", icon: <LaptopMinimal size={20} /> },
+  { value: "all", label: "All chats", icon: <MessageCircleMore size={16} /> },
+  { value: "website", label: "Website", icon: <LaptopMinimal size={16} /> },
   { value: "instagram", label: "Instagram", iconSrc: "/social/insta.png" },
   { value: "whatsapp", label: "WhatsApp", iconSrc: "/social/whatsapp.png" },
   { value: "messenger", label: "Messenger", iconSrc: "/social/messanger.png" },
@@ -408,9 +409,9 @@ const TOP_FILTERS: {
       />
     ),
   },
-  { value: "unassigned", label: "Unassigned", icon: <User size={24} /> },
-  { value: "bookmarked", label: "Bookmarked", icon: <Bookmark size={24} /> },
-  { value: "closed", label: "Closed", icon: <Check size={24} /> },
+  { value: "unassigned", label: "Unassigned", icon: <User size={16} /> },
+  { value: "bookmarked", label: "Bookmarked", icon: <Bookmark size={16} /> },
+  { value: "closed", label: "Closed", icon: <Check size={16} /> },
 ];
 
 const ASSIGNEES: { name: string; avatarSrc: string }[] = [
@@ -503,6 +504,8 @@ export function ConversationsPage() {
   const [search, setSearch] = useState("");
   const [activeId, setActiveId] = useState("c3");
   const [draft, setDraft] = useState("");
+  const [attachedImage, setAttachedImage] = useState<string | null>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
   const [noteDraft, setNoteDraft] = useState("");
   const [addingNote, setAddingNote] = useState(false);
   const [filter, setFilter] = useState<FilterValue>("all");
@@ -667,6 +670,13 @@ export function ConversationsPage() {
       ],
     }));
     setDraft("");
+    setAttachedImage(null);
+  };
+
+  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) setAttachedImage(URL.createObjectURL(file));
+    e.target.value = "";
   };
 
   const toggleBookmark = () => {
@@ -867,7 +877,9 @@ export function ConversationsPage() {
               aria-expanded={chatsOpen}
               onClick={() => setChatsOpen((prev) => !prev)}
             >
-              <MessageCircle size={24} />
+              <span className={styles.chatsGroupIcon}>
+                <MessageCircle size={16} />
+              </span>
               <span className={styles.chatsGroupLabel}>Chats</span>
               <ChevronDown
                 size={14}
@@ -1050,7 +1062,7 @@ export function ConversationsPage() {
                       return assignee ? (
                         <img src={assignee.avatarSrc} alt="" />
                       ) : (
-                        <User size={14} />
+                        <User size={16} />
                       );
                     })()}
                   </button>
@@ -1296,6 +1308,26 @@ export function ConversationsPage() {
               </div>
             ) : (
               <div className={styles.composer}>
+                {attachedImage && (
+                  <div className={styles.composerImagePreview}>
+                    <img src={attachedImage} alt="" />
+                    <button
+                      type="button"
+                      className={styles.composerImageRemove}
+                      aria-label="Remove image"
+                      onClick={() => setAttachedImage(null)}
+                    >
+                      <X size={8} />
+                    </button>
+                  </div>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={imageInputRef}
+                  onChange={handleImageSelect}
+                  className={styles.hiddenFileInput}
+                />
                 <input
                   type="text"
                   className={styles.composerInput}
@@ -1309,32 +1341,48 @@ export function ConversationsPage() {
                 />
                 <div className={styles.composerRow}>
                   <div className={styles.composerIcons}>
-                    <button
-                      type="button"
-                      className={styles.composerIconButton}
-                      aria-label="Insert macro"
-                      onClick={openMacros}
-                    >
-                      <ListChecks size={16} />
-                    </button>
-                    <button
-                      type="button"
-                      className={styles.composerIconButton}
-                    >
-                      <Smile size={16} />
-                    </button>
-                    <button
-                      type="button"
-                      className={styles.composerIconButton}
-                    >
-                      <Image size={16} />
-                    </button>
-                    <button
-                      type="button"
-                      className={styles.composerIconButton}
-                    >
-                      <Paperclip size={16} />
-                    </button>
+                    <span className={styles.tooltipAnchor}>
+                      <span className={styles.tooltip}>Insert macro</span>
+                      <button
+                        type="button"
+                        className={styles.composerIconButton}
+                        aria-label="Insert macro"
+                        onClick={openMacros}
+                      >
+                        <Book size={16} />
+                      </button>
+                    </span>
+                    <span className={styles.tooltipAnchor}>
+                      <span className={styles.tooltip}>Add an emoji</span>
+                      <button
+                        type="button"
+                        className={styles.composerIconButton}
+                        aria-label="Add an emoji"
+                      >
+                        <Smile size={16} />
+                      </button>
+                    </span>
+                    <span className={styles.tooltipAnchor}>
+                      <span className={styles.tooltip}>Add an image</span>
+                      <button
+                        type="button"
+                        className={styles.composerIconButton}
+                        aria-label="Add an image"
+                        onClick={() => imageInputRef.current?.click()}
+                      >
+                        <Image size={16} />
+                      </button>
+                    </span>
+                    <span className={styles.tooltipAnchor}>
+                      <span className={styles.tooltip}>Attach a file</span>
+                      <button
+                        type="button"
+                        className={styles.composerIconButton}
+                        aria-label="Attach a file"
+                      >
+                        <Paperclip size={16} />
+                      </button>
+                    </span>
                   </div>
 
                   <div className={styles.composerActions}>

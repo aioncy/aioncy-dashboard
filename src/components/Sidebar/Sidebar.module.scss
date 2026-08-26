@@ -67,13 +67,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80px;
+  padding-top: 18px;
+  margin-bottom: -19px;
+  box-sizing: border-box;
   flex-shrink: 0;
 }
 
 .railLogo {
-  width: 28px;
-  height: auto;
+  width: 43px;
+  height: 45.55px;
   flex-shrink: 0;
 }
 

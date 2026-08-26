@@ -3,10 +3,11 @@
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   z-index: 1000;
   padding: 24px;
+  padding-top: 100px;
 }
 
 .panel {
@@ -15,7 +16,7 @@
   gap: 16px;
   width: 600px;
   max-width: 100%;
-  max-height: calc(100vh - 48px);
+  max-height: calc(100vh - 124px);
   border-radius: 12px;
   padding: 16px 16px 20px 16px;
   background: #FFFFFF;

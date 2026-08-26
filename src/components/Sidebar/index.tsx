@@ -29,7 +29,6 @@ interface NavItem {
 const mainNavItems: NavItem[] = [
   { route: 'dashboard', label: 'Dashboard', icon: <Home /> },
   { route: 'conversations', label: 'Conversations', icon: <MessageSquare /> },
-  { route: 'tickets', label: 'Tickets', icon: <Ticket /> },
   {
     route: 'wingman-ai',
     label: 'Wingman AI',
@@ -41,6 +40,7 @@ const mainNavItems: NavItem[] = [
       { label: 'Channels', to: '/wingman-ai/channels' },
     ],
   },
+  { route: 'tickets', label: 'Tickets', icon: <Ticket /> },
   { route: 'leads', label: 'Leads', icon: <User /> },
   { route: 'analytics', label: 'Analytics', icon: <LineChart /> },
 ]
