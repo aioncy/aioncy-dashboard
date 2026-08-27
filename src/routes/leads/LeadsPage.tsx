@@ -7,6 +7,7 @@ import {
   Trash2,
   UserRound,
 } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
 import PageHeader from "../../components/PageHeader";
 import SearchInput from "../../components/SearchInput";
 import FilterChip from "../../components/FilterChip";
@@ -103,6 +104,7 @@ const ASSIGNEE_OPTIONS = Array.from(
 );
 
 export function LeadsPage() {
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [dateFilter, setDateFilter] = useState("all");
   const [dateMenuOpen, setDateMenuOpen] = useState(false);
@@ -342,7 +344,23 @@ export function LeadsPage() {
           </div>
 
           {paginatedLeads.map((lead) => (
-            <div key={lead.id} className={styles.row}>
+            <div
+              key={lead.id}
+              className={styles.row}
+              role="button"
+              tabIndex={0}
+              onClick={() =>
+                navigate({ to: "/leads/$leadId", params: { leadId: lead.id } })
+              }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  navigate({
+                    to: "/leads/$leadId",
+                    params: { leadId: lead.id },
+                  });
+                }
+              }}
+            >
               <span className={styles.nameCell}>{lead.name}</span>
 
               <span className={styles.contactCell}>
@@ -375,7 +393,10 @@ export function LeadsPage() {
                 <span className={styles.assignedName}>{lead.assignedTo}</span>
               </span>
 
-              <span className={styles.moreCell}>
+              <span
+                className={styles.moreCell}
+                onClick={(e) => e.stopPropagation()}
+              >
                 <button
                   type="button"
                   className={styles.moreButton}

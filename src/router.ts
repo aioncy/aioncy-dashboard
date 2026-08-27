@@ -11,6 +11,7 @@ import { wingmanAiControlRoute } from "./routes/wingman-ai/control";
 import { wingmanAiTrainRoute } from "./routes/wingman-ai/train";
 import { wingmanAiChannelsRoute } from "./routes/wingman-ai/channels";
 import { leadsRoute } from "./routes/leads";
+import { leadDetailRoute } from "./routes/leads/lead-detail";
 import { analyticsRoute } from "./routes/analytics";
 import { settingsRoute } from "./routes/settings";
 import { helpSupportRoute } from "./routes/help-support";
@@ -38,6 +39,7 @@ const routeTree = rootRoute.addChildren([
     wingmanAiTrainRoute,
     wingmanAiChannelsRoute,
     leadsRoute,
+    leadDetailRoute,
     analyticsRoute,
     settingsRoute,
     helpSupportRoute,

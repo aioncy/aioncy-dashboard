@@ -1,0 +1,743 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.page {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  border-top: 1px solid #E4E4E7;
+}
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 100%;
+  font-family: 'Geist', system-ui, sans-serif;
+  color: #757575;
+}
+
+.backLink {
+  color: #A153FF;
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Left info panel */
+
+.infoPanel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 320px;
+  height: 100%;
+  flex-shrink: 0;
+  overflow-y: auto;
+  border-right: 1px solid #E4E4E7;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.contactHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 60px;
+  flex-shrink: 0;
+  padding: 12px 20px;
+  border-bottom: 1px solid #E4E4E7;
+  box-sizing: border-box;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #F7F7F7;
+  color: #757575;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.contactHeaderText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.contactName {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contactEmail {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border-bottom: 1px solid #E4E4E7;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.infoLabel {
+  flex-shrink: 0;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+.infoValue {
+  min-width: 0;
+  text-align: left;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+}
+
+.infoLink {
+  display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #E4E4E7;
+  background: transparent;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #0075AD;
+  text-decoration: none;
+  box-sizing: border-box;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.infoSource {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+}
+
+.sourceIcon {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.scoreSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  border-bottom: 1px solid #E4E4E7;
+}
+
+.scoreLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+.scoreValue {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 120%;
+  color: #1C1C1C;
+}
+
+.scoreMeter {
+  position: relative;
+  padding-top: 10px;
+}
+
+.scoreMarker {
+  position: absolute;
+  top: 0;
+  display: flex;
+  transform: translateX(-50%);
+
+  svg {
+    display: block;
+  }
+}
+
+.scoreTrack {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.scoreTick {
+  width: 2px;
+  height: 8px;
+  border-radius: 4px;
+  background: #D9D9D9;
+  flex-shrink: 0;
+}
+
+.scoreTickActive {
+  background: #A153FF;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 20px 8px;
+}
+
+.sectionTitle {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+}
+
+.sectionLink {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #A153FF;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.noteModalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.noteModalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.noteTextarea {
+  min-height: 64px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #E4E4E7;
+  background: #FFFFFF;
+  color: #1C1C1C;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: #A153FF;
+    box-shadow: 0 0 0 2px rgba(138, 56, 245, 0.12);
+  }
+
+  &::placeholder {
+    color: #A1A1AA;
+  }
+}
+
+.noteList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 20px 20px;
+}
+
+.noteItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #F7F7F7;
+  box-sizing: border-box;
+}
+
+.noteMetaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.noteAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #E4E4E7;
+  background: #FFFFFF;
+  color: #757575;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-sizing: border-box;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.noteMeta {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+.noteText {
+  margin: 0;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+}
+
+/* Center conversation column */
+
+.conversationArea {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  border-right: 1px solid #E4E4E7;
+  border-bottom: 1px solid #E4E4E7;
+  box-sizing: border-box;
+}
+
+.conversationBody {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.conversationInner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 851px;
+  height: 100%;
+  min-height: 0;
+}
+
+.convHeaderBar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-shrink: 0;
+  border-bottom: 1px solid #E4E4E7;
+  box-sizing: border-box;
+}
+
+.convHeaderTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  max-width: 851px;
+  padding: 16px 20px;
+  box-sizing: border-box;
+}
+
+.convTitleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.convTitle {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+}
+
+.convTitleLabel {
+  text-decoration: underline;
+}
+
+.tooltipAnchor {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  .tooltip {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) scale(0.95);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  &:hover {
+    .tooltip {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+  }
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: #1C1C1C;
+  color: #FFFFFF;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+}
+
+.convTitleInputRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+}
+
+.convTitleInput {
+  min-width: 1px;
+  max-width: 100%;
+  flex-shrink: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1C1C1C;
+
+  &::placeholder {
+    color: #A1A1AA;
+  }
+}
+
+.convHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.headerIconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #757575;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: #F7F7F7;
+  }
+}
+
+.headerIconActive {
+  border-color: transparent;
+  color: #A153FF;
+  background: #F7F7F7;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 20px 32px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.dateDivider {
+  align-self: center;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #A1A1AA;
+}
+
+.messageRow {
+  display: flex;
+  align-self: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 70%;
+}
+
+.messageRowAgent {
+  align-self: flex-end;
+  align-items: flex-start;
+}
+
+.messageAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #F7F7F7;
+  color: #757575;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.messageColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.bubble {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #F4F4F5;
+  color: #1C1C1C;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  white-space: pre-wrap;
+}
+
+.bubbleAgent {
+  background: #A153FF;
+  color: #FFFFFF;
+}
+
+.messageTime {
+  align-self: flex-start;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #A1A1AA;
+}
+
+.messageTimeAgent {
+  align-self: flex-end;
+}
+
+.composerWrap {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: 0 32px 32px;
+}
+
+
+.composer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  flex-shrink: 0;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #E4E4E7;
+  box-sizing: border-box;
+}
+
+.composerInput {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #1C1C1C;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+
+  &::placeholder {
+    color: #A1A1AA;
+  }
+}
+
+.composerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.composerIcons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.composerIconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #757575;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #F7F7F7;
+  }
+}
+
+.composerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.resumeAiLink {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+
+  &:hover {
+    color: #1C1C1C;
+    text-decoration: underline;
+  }
+}
