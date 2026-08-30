@@ -7,7 +7,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 
   > :first-child {
     flex: 1;
@@ -187,15 +187,27 @@
   font-weight: 500;
 }
 
+.tableWrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .table {
   display: flex;
   flex-direction: column;
+  min-width: 860px;
 }
 
 .headerRow,
 .row {
   display: grid;
-  grid-template-columns: 1.4fr 1.3fr 140px 110px 170px 28px;
+  grid-template-columns:
+    minmax(140px, 1.1fr)
+    minmax(190px, 1.3fr)
+    minmax(150px, 0.9fr)
+    minmax(100px, 0.6fr)
+    minmax(170px, 1fr)
+    28px;
   align-items: center;
   gap: 16px;
   padding: 12px 8px;
@@ -218,16 +230,12 @@
 }
 
 .row {
-  border-bottom: 1px solid #F0F0F0;
+  border-bottom: 1px solid #E4E4E7;
   cursor: pointer;
   transition: background 0.15s ease;
 
   &:hover {
     background: #FAFAFA;
-  }
-
-  &:last-child {
-    border-bottom: none;
   }
 }
 

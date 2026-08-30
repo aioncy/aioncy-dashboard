@@ -326,11 +326,13 @@ export function SettingsPage() {
                 </Button>
               </div>
 
-              <SearchInput
-                value={macroSearch}
-                onChange={(e) => setMacroSearch(e.target.value)}
-                placeholder="Search..."
-              />
+              <div className={styles.macroSearch}>
+                <SearchInput
+                  value={macroSearch}
+                  onChange={(e) => setMacroSearch(e.target.value)}
+                  placeholder="Search..."
+                />
+              </div>
 
               <div className={styles.macroList}>
                 {visibleMacros.map((macro) => {

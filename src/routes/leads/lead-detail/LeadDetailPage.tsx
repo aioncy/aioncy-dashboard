@@ -249,7 +249,7 @@ export function LeadDetailPage() {
         <div className={styles.infoPanel}>
           <div className={styles.contactHeader}>
             <span className={styles.avatar}>
-              <User size={16} />
+              <User size={20} />
             </span>
             <span className={styles.contactHeaderText}>
               <span className={styles.contactName}>{seed.name}</span>

@@ -19,7 +19,7 @@
   width: 237px;
   height: 100%;
   flex-shrink: 0;
-  padding: 16px 12px;
+  padding: 16px 10px;
   border-right: 1px solid #E4E4E7;
   box-sizing: border-box;
   overflow-y: auto;
@@ -34,15 +34,16 @@
 .filterNav {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .filterItem {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
-  height: 44px;
-  padding: 0 10px;
+  height: 36px;
+  padding: 0 8px;
   border: none;
   border-radius: 6px;
   background: transparent;
@@ -89,6 +90,18 @@
   flex-shrink: 0;
 }
 
+.unassignedAvatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 0.57px dashed #A1A1AA;
+  color: #757575;
+}
+
 .filterLabel {
   flex: 1;
   min-width: 0;
@@ -118,7 +131,7 @@
 .chatsGroup {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .chatsGroupIcon {
@@ -135,7 +148,7 @@
   align-items: center;
   gap: 10px;
   height: 36px;
-  padding: 0 10px;
+  padding: 0 8px;
   border: none;
   border-radius: 6px;
   background: transparent;
@@ -173,12 +186,12 @@
 .channelList {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
   padding-left: 16px;
 }
 
 .channelItem {
-  height: 40px;
+  height: 36px;
 }
 
 .channelIconImg {
@@ -204,7 +217,7 @@
   align-items: center;
   height: 60px;
   flex-shrink: 0;
-  padding: 0 16px;
+  padding: 0 12px;
   box-sizing: border-box;
 }
 
@@ -280,7 +293,7 @@
   align-items: flex-start;
   gap: 10px;
   width: 100%;
-  padding: 12px 16px;
+  padding: 12px 12px 12px 9px;
   border: none;
   border-left: 3px solid transparent;
   background: transparent;
@@ -391,7 +404,7 @@
   white-space: nowrap;
   font-family: 'Geist', system-ui, sans-serif;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 140%;
   letter-spacing: 0.05px;
   color: #757575;
@@ -974,7 +987,7 @@
   gap: 10px;
   min-height: 60px;
   flex-shrink: 0;
-  padding: 12px 20px;
+  padding: 12px 16px;
   border-bottom: 1px solid #E4E4E7;
   box-sizing: border-box;
 }
@@ -1014,7 +1027,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 20px;
+  padding: 20px 16px;
   border-bottom: 1px solid #E4E4E7;
 }
 
@@ -1091,7 +1104,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin: 16px 20px;
+  margin: 16px;
   padding: 12px;
   border-radius: 8px;
   background: #F7F7F7;
@@ -1123,7 +1136,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 8px 20px;
+  margin: 8px 16px;
 }
 
 .sectionTitle {
@@ -1156,7 +1169,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0 20px 16px;
+  padding: 0 16px 16px;
 }
 
 .ticketCard {
@@ -1398,13 +1411,23 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 0 20px 20px;
+  padding: 0 16px 20px;
 }
 
 .noteItem {
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #F7F7F7;
+  box-sizing: border-box;
+}
+
+.noteMetaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .noteAvatar {
@@ -1414,25 +1437,24 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #F7F7F7;
+  border: 1px solid #E4E4E7;
+  background: #FFFFFF;
   color: #757575;
+  overflow: hidden;
   flex-shrink: 0;
-}
+  box-sizing: border-box;
 
-.noteBody {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-  padding: 8px 10px;
-  border-radius: 8px;
-  background: #F7F7F7;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .noteMeta {
   font-family: 'Geist', system-ui, sans-serif;
-  font-weight: 500;
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 14px;
   line-height: 140%;
   letter-spacing: 0.05px;
   color: #757575;
@@ -1442,7 +1464,7 @@
   margin: 0;
   font-family: 'Geist', system-ui, sans-serif;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 140%;
   letter-spacing: 0.05px;
   color: #1C1C1C;
