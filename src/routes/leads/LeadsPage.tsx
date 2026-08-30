@@ -330,105 +330,107 @@ export function LeadsPage() {
           </div>
         </div>
 
-        <div className={styles.table}>
-          <div className={styles.headerRow}>
-            <span className={styles.headerCell}>Name</span>
-            <span className={styles.headerCell}>Contact</span>
-            <span className={styles.headerCell}>
-              AI Score
-              <Info size={14} color="#A1A1AA" aria-hidden="true" />
-            </span>
-            <span className={styles.headerCell}>Source</span>
-            <span className={styles.headerCell}>Assigned To</span>
-            <span className={styles.headerCell} aria-hidden="true" />
-          </div>
-
-          {paginatedLeads.map((lead) => (
-            <div
-              key={lead.id}
-              className={styles.row}
-              role="button"
-              tabIndex={0}
-              onClick={() =>
-                navigate({ to: "/leads/$leadId", params: { leadId: lead.id } })
-              }
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  navigate({
-                    to: "/leads/$leadId",
-                    params: { leadId: lead.id },
-                  });
-                }
-              }}
-            >
-              <span className={styles.nameCell}>{lead.name}</span>
-
-              <span className={styles.contactCell}>
-                <span className={styles.contactEmail}>{lead.email}</span>
-                <span className={styles.contactPhone}>{lead.phone}</span>
+        <div className={styles.tableWrap}>
+          <div className={styles.table}>
+            <div className={styles.headerRow}>
+              <span className={styles.headerCell}>Name</span>
+              <span className={styles.headerCell}>Contact</span>
+              <span className={styles.headerCell}>
+                AI Score
+                <Info size={14} color="#A1A1AA" aria-hidden="true" />
               </span>
-
-              <span className={styles.scoreCell}>
-                <span className={styles.scoreTrack}>
-                  <span
-                    className={styles.scoreFill}
-                    style={{
-                      width: `${lead.aiScore}%`,
-                      background: lead.scoreColor,
-                    }}
-                  />
-                </span>
-                <span className={styles.scoreValue}>{lead.aiScore}</span>
-              </span>
-
-              <span className={styles.sourceCell}>{lead.source}</span>
-
-              <span className={styles.assignedCell}>
-                <span
-                  className={styles.assignedAvatar}
-                  style={{ background: avatarColor(lead.assignedTo) }}
-                >
-                  <UserRound size={16} />
-                </span>
-                <span className={styles.assignedName}>{lead.assignedTo}</span>
-              </span>
-
-              <span
-                className={styles.moreCell}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  type="button"
-                  className={styles.moreButton}
-                  aria-label="More actions"
-                  onClick={() =>
-                    setOpenActionMenuId((prev) =>
-                      prev === lead.id ? null : lead.id,
-                    )
-                  }
-                >
-                  <EllipsisVertical size={16} />
-                </button>
-
-                {openActionMenuId === lead.id && (
-                  <div className={styles.actionMenu} ref={actionMenuRef}>
-                    <button
-                      type="button"
-                      className={styles.actionMenuItem}
-                      onClick={() => removeLead(lead.id)}
-                    >
-                      <Trash2 size={14} />
-                      Delete lead
-                    </button>
-                  </div>
-                )}
-              </span>
+              <span className={styles.headerCell}>Source</span>
+              <span className={styles.headerCell}>Assigned To</span>
+              <span className={styles.headerCell} aria-hidden="true" />
             </div>
-          ))}
 
-          {visibleLeads.length === 0 && (
-            <div className={styles.emptyState}>No leads found.</div>
-          )}
+            {paginatedLeads.map((lead) => (
+              <div
+                key={lead.id}
+                className={styles.row}
+                role="button"
+                tabIndex={0}
+                onClick={() =>
+                  navigate({ to: "/leads/$leadId", params: { leadId: lead.id } })
+                }
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    navigate({
+                      to: "/leads/$leadId",
+                      params: { leadId: lead.id },
+                    });
+                  }
+                }}
+              >
+                <span className={styles.nameCell}>{lead.name}</span>
+
+                <span className={styles.contactCell}>
+                  <span className={styles.contactEmail}>{lead.email}</span>
+                  <span className={styles.contactPhone}>{lead.phone}</span>
+                </span>
+
+                <span className={styles.scoreCell}>
+                  <span className={styles.scoreTrack}>
+                    <span
+                      className={styles.scoreFill}
+                      style={{
+                        width: `${lead.aiScore}%`,
+                        background: lead.scoreColor,
+                      }}
+                    />
+                  </span>
+                  <span className={styles.scoreValue}>{lead.aiScore}</span>
+                </span>
+
+                <span className={styles.sourceCell}>{lead.source}</span>
+
+                <span className={styles.assignedCell}>
+                  <span
+                    className={styles.assignedAvatar}
+                    style={{ background: avatarColor(lead.assignedTo) }}
+                  >
+                    <UserRound size={16} />
+                  </span>
+                  <span className={styles.assignedName}>{lead.assignedTo}</span>
+                </span>
+
+                <span
+                  className={styles.moreCell}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    type="button"
+                    className={styles.moreButton}
+                    aria-label="More actions"
+                    onClick={() =>
+                      setOpenActionMenuId((prev) =>
+                        prev === lead.id ? null : lead.id,
+                      )
+                    }
+                  >
+                    <EllipsisVertical size={16} />
+                  </button>
+
+                  {openActionMenuId === lead.id && (
+                    <div className={styles.actionMenu} ref={actionMenuRef}>
+                      <button
+                        type="button"
+                        className={styles.actionMenuItem}
+                        onClick={() => removeLead(lead.id)}
+                      >
+                        <Trash2 size={14} />
+                        Delete lead
+                      </button>
+                    </div>
+                  )}
+                </span>
+              </div>
+            ))}
+
+            {visibleLeads.length === 0 && (
+              <div className={styles.emptyState}>No leads found.</div>
+            )}
+          </div>
         </div>
 
         {visibleLeads.length > PAGE_SIZE && (

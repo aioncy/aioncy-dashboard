@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '../../components/Button'
 import TextInput from '../../components/TextInput'
 import LogoMark from '../../components/LogoMark'
@@ -7,6 +7,13 @@ import styles from './ResetPasswordPage.module.scss'
 export function ResetPasswordPage() {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [countdown, setCountdown] = useState(0)
+
+  useEffect(() => {
+    if (countdown <= 0) return
+    const timer = setTimeout(() => setCountdown(countdown - 1), 1000)
+    return () => clearTimeout(timer)
+  }, [countdown])
 
   const maskEmail = (addr: string) => {
     const [local, domain] = addr.split('@')
@@ -22,7 +29,7 @@ export function ResetPasswordPage() {
 
   const handleResend = (e: React.MouseEvent) => {
     e.preventDefault()
-    setSubmitted(false)
+    setCountdown(60)
   }
 
   return (
@@ -48,8 +55,9 @@ export function ResetPasswordPage() {
                       type="button"
                       className={styles.resendLink}
                       onClick={handleResend}
+                      disabled={countdown > 0}
                     >
-                      Resend
+                      {countdown > 0 ? `Resend in ${countdown}s` : 'Resend'}
                     </button>
                   </p>
                 </div>

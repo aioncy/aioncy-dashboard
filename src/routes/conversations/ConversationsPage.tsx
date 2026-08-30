@@ -18,6 +18,7 @@ import {
   Send,
   Smile,
   User,
+  UserRound,
   X,
 } from "lucide-react";
 import PriorityBadge, {
@@ -409,7 +410,15 @@ const TOP_FILTERS: {
       />
     ),
   },
-  { value: "unassigned", label: "Unassigned", icon: <User size={16} /> },
+  {
+    value: "unassigned",
+    label: "Unassigned",
+    icon: (
+      <span className={styles.unassignedAvatar}>
+        <UserRound size={14} />
+      </span>
+    ),
+  },
   { value: "bookmarked", label: "Bookmarked", icon: <Bookmark size={16} /> },
   { value: "closed", label: "Closed", icon: <Check size={16} /> },
 ];
@@ -1414,7 +1423,7 @@ export function ConversationsPage() {
                   {activeConversation.avatarSrc ? (
                     <img src={activeConversation.avatarSrc} alt="" />
                   ) : (
-                    <User size={16} />
+                    <User size={18} />
                   )}
                 </span>
                 {activeConversation.online && (
@@ -1551,15 +1560,15 @@ export function ConversationsPage() {
             <div className={styles.noteList}>
               {activeConversation.details.notes.map((note) => (
                 <div key={note.id} className={styles.noteItem}>
-                  <span className={styles.noteAvatar}>
-                    <User size={12} />
-                  </span>
-                  <div className={styles.noteBody}>
-                    <span className={styles.noteMeta}>
-                      {note.author} · {note.timeAgo}
+                  <div className={styles.noteMetaRow}>
+                    <span className={styles.noteAvatar}>
+                      <User size={12} />
                     </span>
-                    <p className={styles.noteText}>{note.text}</p>
+                    <span className={styles.noteMeta}>
+                      {note.author} - {note.timeAgo}
+                    </span>
                   </div>
+                  <p className={styles.noteText}>{note.text}</p>
                 </div>
               ))}
             </div>
