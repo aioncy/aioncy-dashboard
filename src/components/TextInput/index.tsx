@@ -3,6 +3,8 @@ import styles from './TextInput.module.scss'
 
 export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string
+  /** Keep the label for screen readers only. */
+  hideLabel?: boolean
   helperText?: string
   errorMessage?: string
   className?: string
@@ -11,20 +13,22 @@ export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputEleme
 
 const TextInput = ({
   label,
+  hideLabel,
   helperText,
   errorMessage,
   className = '',
   trailingIcon,
   ...props
 }: TextInputProps) => {
-  const id = useId()
+  const generatedId = useId()
+  const id = props.id ?? generatedId
   const messageId = `${id}-message`
   const hasError = Boolean(errorMessage)
   const showMessage = hasError || Boolean(helperText)
 
   return (
     <div className={`flex w-full  flex-col gap-1 text-left ${className}`}>
-      <label htmlFor={id} className={label ? styles.label : styles.srOnly}>
+      <label htmlFor={id} className={label && !hideLabel ? styles.label : styles.srOnly}>
         {label ?? props.placeholder ?? 'Text input'}
       </label>
       <div className={`${styles.inputBox} ${trailingIcon ? styles.withTrailingIcon : ''}`}>

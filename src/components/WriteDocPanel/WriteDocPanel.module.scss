@@ -1,0 +1,281 @@
+/* Same right-anchored, full-height shell as the document viewer. */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  background: #00000029;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.panel {
+  display: flex;
+  width: 1059px;
+  max-width: 100%;
+  height: 100vh;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-left: 1px solid #e4e4e7;
+  box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+}
+
+/* ---------- Editor pane ---------- */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.mainHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 66px;
+  padding: 16px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border-bottom: 1px solid #e4e4e7;
+}
+
+.mainHeaderTitle {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1c1c1c;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.cancelButton {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1c1c1c;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #f4f4f5;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a153ff;
+    outline-offset: 2px;
+  }
+}
+
+.editorScroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 40px 84px 32px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #e5e5e5;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: #e5e5e5 transparent;
+}
+
+.titleInput {
+  display: block;
+  width: 100%;
+  margin: 0 0 12px;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 130%;
+  letter-spacing: -0.2px;
+  color: #1c1c1c;
+
+  &::placeholder {
+    color: #a1a1aa;
+  }
+}
+
+.body {
+  outline: none;
+  min-height: 240px;
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 160%;
+  letter-spacing: 0.05px;
+  color: #1c1c1c;
+
+  h1,
+  h2,
+  h3 {
+    margin: 20px 0 12px;
+    font-weight: 500;
+    line-height: 130%;
+    letter-spacing: -0.2px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  p {
+    margin: 0 0 18px;
+  }
+
+  /* Older engines still wrap new lines in a div rather than a p. */
+  > div {
+    margin-bottom: 18px;
+  }
+
+  ul,
+  ol {
+    margin: 0 0 18px;
+    padding-left: 28px;
+  }
+
+  > div > ul,
+  > div > ol {
+    margin-bottom: 0;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  a {
+    color: #a153ff;
+    text-decoration: underline;
+  }
+
+  code {
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #f4f4f5;
+    font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 15px;
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+}
+
+.bodyEmpty::before {
+  content: attr(data-placeholder);
+  color: #a1a1aa;
+  pointer-events: none;
+}
+
+/* ---------- Formatting toolbar ---------- */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 16px 20px;
+  flex-shrink: 0;
+}
+
+.toolGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.toolButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #1c1c1c;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #f4f4f5;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a153ff;
+    outline-offset: 2px;
+  }
+}
+
+.toolButtonWide {
+  width: 44px;
+}
+
+.toolButtonActive {
+  background: #f4f4f5;
+  color: #a153ff;
+}
+
+.formatMenu {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  z-index: 10;
+}

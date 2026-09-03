@@ -6,6 +6,8 @@ export interface URLInputProps {
   prefix?: string
   suffix?: string
   label?: string
+  /** Keep the label for screen readers only. */
+  hideLabel?: boolean
   placeholder?: string
   value?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -19,6 +21,7 @@ const URLInput = ({
   prefix = 'https://',
   suffix = '.com',
   label,
+  hideLabel,
   placeholder,
   value,
   onChange,
@@ -36,7 +39,10 @@ const URLInput = ({
 
   return (
     <div className={`flex w-full  flex-col gap-1 text-left ${className}`}>
-      <label htmlFor={id} className={label ? textInputStyles.label : textInputStyles.srOnly}>
+      <label
+        htmlFor={id}
+        className={label && !hideLabel ? textInputStyles.label : textInputStyles.srOnly}
+      >
         {label ?? placeholder ?? 'URL'}
       </label>
       <div

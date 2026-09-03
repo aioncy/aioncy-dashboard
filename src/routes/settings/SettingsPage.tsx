@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
-import { ChevronDown, ChevronUp, Image, RefreshCw, X } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
+import { ChevronDown, ChevronUp, Image } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import Tabs from "../../components/Tabs";
 import TextInput from "../../components/TextInput";
@@ -73,6 +74,7 @@ const TIMEZONE_OPTIONS = [
 ];
 
 export function SettingsPage() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("general");
   const [workspaceName, setWorkspaceName] = useState("Acme");
   const [language, setLanguage] = useState("en-GB");
@@ -91,6 +93,8 @@ export function SettingsPage() {
     "open-conversation",
   ]);
   const [isCreateMacroOpen, setIsCreateMacroOpen] = useState(false);
+
+  const workspaceSlug = workspaceName.trim() || "yourname";
 
   const toggleMacro = (id: string) => {
     setExpandedMacros((prev) =>
@@ -126,6 +130,10 @@ export function SettingsPage() {
     if (logoInputRef.current) logoInputRef.current.value = "";
   };
 
+  const handleLogout = () => {
+    navigate({ to: "/login" });
+  };
+
   return (
     <div>
       <PageHeader
@@ -138,7 +146,10 @@ export function SettingsPage() {
         <Tabs tabs={TABS} value={activeTab} onChange={setActiveTab} />
 
         {activeTab === "general" && (
-          <div className={styles.content}>
+          <form
+            className={styles.content}
+            onSubmit={(event) => event.preventDefault()}
+          >
             <section className={styles.section}>
               <div className={styles.sectionHeader}>
                 <div className={styles.headingGroup}>
@@ -147,122 +158,183 @@ export function SettingsPage() {
                     This identifies your workspace within Aioncy.
                   </p>
                 </div>
-                <Button variant="primary">Save changes</Button>
+                <Button type="submit" variant="primary" className={styles.nowrap}>
+                  Save changes
+                </Button>
               </div>
 
-              <hr className={styles.divider} />
+              <div className={styles.row}>
+                <div className={styles.rowInfo}>
+                  <span className={styles.rowLabel}>Workspace name</span>
+                </div>
+                <div className={styles.rowField}>
+                  <TextInput
+                    label="Workspace name"
+                    hideLabel
+                    value={workspaceName}
+                    onChange={(e) => setWorkspaceName(e.target.value)}
+                  />
+                </div>
+              </div>
 
-              <TextInput
-                label="Workspace name"
-                value={workspaceName}
-                onChange={(e) => setWorkspaceName(e.target.value)}
-              />
-
-              <hr className={styles.divider} />
-
-              <div className={styles.logoRow}>
-                <span className={styles.logoLabel}>Logo</span>
-                <div className={styles.logoContent}>
-                  <span className={styles.avatar}>
+              <div className={styles.row}>
+                <div className={styles.rowInfo}>
+                  <span className={styles.rowLabel}>Logo</span>
+                </div>
+                <div className={`${styles.rowField} ${styles.logoField}`}>
+                  <input
+                    ref={logoInputRef}
+                    type="file"
+                    accept="image/*"
+                    className={styles.hiddenInput}
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) handleLogoSelect(file);
+                    }}
+                  />
+                  <button
+                    type="button"
+                    className={styles.logoThumb}
+                    title="Change logo"
+                    aria-label="Change workspace logo"
+                    onClick={() => logoInputRef.current?.click()}
+                  >
                     {logoSrc ? (
                       <img src={logoSrc} alt="Workspace logo" />
                     ) : (
                       <Image size={20} aria-hidden="true" />
                     )}
-                  </span>
-                  <div className={styles.logoActions}>
-                    <input
-                      ref={logoInputRef}
-                      type="file"
-                      accept="image/*"
-                      className={styles.hiddenInput}
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) handleLogoSelect(file);
-                      }}
-                    />
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      icon={<RefreshCw size={16} />}
-                      onClick={() => logoInputRef.current?.click()}
-                    >
-                      Change
-                    </Button>
-                    <button
-                      type="button"
-                      className={styles.removeButton}
-                      onClick={handleLogoRemove}
-                    >
-                      <X size={16} />
-                      Remove
-                    </button>
-                  </div>
+                  </button>
+                  <Button
+                    type="button"
+                    variant="outlineDanger"
+                    size="sm"
+                    onClick={handleLogoRemove}
+                  >
+                    Remove
+                  </Button>
                 </div>
               </div>
 
-              <TextInput
-                label="Workspace ID (Slug)"
-                helperText="Your unique Aioncy URL: aioncy.com/w/acme"
-                placeholder="aioncy.com/w/acme"
-                disabled
-              />
+              <div className={styles.row}>
+                <div className={styles.rowInfo}>
+                  <span className={styles.rowLabel}>Workspace ID (Slug)</span>
+                  <span
+                    className={`${styles.rowHelper} ${styles.rowHelperNoWrap}`}
+                  >
+                    Your unique Aioncy URL: aioncy.com/w/yourname
+                  </span>
+                </div>
+                <div className={styles.rowField}>
+                  <TextInput
+                    label="Workspace ID (Slug)"
+                    hideLabel
+                    placeholder={`aioncy.com/w/${workspaceSlug}`}
+                    disabled
+                  />
+                </div>
+              </div>
             </section>
 
             <section className={styles.section}>
-              <div className={styles.headingGroup}>
-                <h2 className={styles.title}>Timezone and Language</h2>
-                <p className={styles.subtitle}>
-                  Configure your interface language and operational time zone.
-                </p>
-              </div>
-
-              <hr className={styles.divider} />
-
-              <div className={styles.fieldGroup}>
-                <Select
-                  label="Dashboard language"
-                  options={LANGUAGE_OPTIONS}
-                  value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
-                />
-                <Select
-                  label="Timezone"
-                  helperText="Used to schedule your AI working hours correctly"
-                  options={TIMEZONE_OPTIONS}
-                  value={timezone}
-                  onChange={(e) => setTimezone(e.target.value)}
-                />
-              </div>
-            </section>
-
-            <section className={styles.dangerZone}>
-              <span className={styles.dangerLabel}>Danger zone</span>
-              <div className={styles.dangerCard}>
+              <div className={styles.sectionHeader}>
                 <div className={styles.headingGroup}>
-                  <h2 className={styles.dangerTitle}>Delete workspace</h2>
+                  <h2 className={styles.title}>Timezone and Language</h2>
                   <p className={styles.subtitle}>
-                    Permanently delete this workspace and all its data. This
-                    cannot be undone.
+                    This data helps customize your AI workflows.
                   </p>
                 </div>
-                <Button variant="danger">Delete workspace</Button>
+              </div>
+
+              <div className={styles.row}>
+                <div className={styles.rowInfo}>
+                  <span className={styles.rowLabel}>Dashboard language</span>
+                </div>
+                <div className={styles.rowField}>
+                  <Select
+                    label="Dashboard language"
+                    hideLabel
+                    options={LANGUAGE_OPTIONS}
+                    value={language}
+                    onChange={(e) => setLanguage(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className={`${styles.row} ${styles.rowNoBorder}`}>
+                <div className={styles.rowInfo}>
+                  <span className={styles.rowLabel}>Timezone</span>
+                  <span className={styles.rowHelper}>
+                    Used to schedule your AI working hours correctly
+                  </span>
+                </div>
+                <div className={styles.rowField}>
+                  <Select
+                    label="Timezone"
+                    hideLabel
+                    options={TIMEZONE_OPTIONS}
+                    value={timezone}
+                    onChange={(e) => setTimezone(e.target.value)}
+                  />
+                </div>
               </div>
             </section>
-          </div>
+
+            <hr className={styles.blockDivider} />
+
+            <div className={styles.accountBlocks}>
+              <div className={styles.infoCard}>
+                <div className={styles.headingGroup}>
+                  <h3 className={styles.cardTitle}>Log out</h3>
+                  <p className={styles.subtitle}>
+                    Sign out of your Aioncy account on this device
+                  </p>
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className={styles.nowrap}
+                  onClick={handleLogout}
+                >
+                  Log out
+                </Button>
+              </div>
+
+              <div className={styles.dangerZone}>
+                <span className={styles.dangerLabel}>Danger zone</span>
+                <div className={styles.dangerCard}>
+                  <div className={styles.headingGroup}>
+                    <h3 className={styles.cardTitle}>Delete workspace</h3>
+                    <p className={styles.subtitle}>
+                      Permanently delete this workspace and all its data. This
+                      cannot be undone.
+                    </p>
+                  </div>
+                  <Button
+                    type="button"
+                    variant="danger"
+                    className={styles.nowrap}
+                  >
+                    Delete workspace
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </form>
         )}
 
         {activeTab === "security" && (
           <div className={styles.content}>
             <section className={styles.section}>
-              <div className={styles.headingGroup}>
-                <h2 className={styles.title}>Account Security</h2>
-                <p className={styles.subtitle}>
-                  Manage your password and account security settings.
-                </p>
+              <div className={styles.sectionHeader}>
+                <div className={styles.headingGroup}>
+                  <h2 className={styles.title}>Account Security</h2>
+                  <p className={styles.subtitle}>
+                    Manage your password and account security settings.
+                  </p>
+                </div>
               </div>
-
-              <hr className={styles.divider} />
 
               <div className={styles.securityRow}>
                 <div className={styles.headingGroup}>
@@ -310,7 +382,9 @@ export function SettingsPage() {
         {activeTab === "macros" && (
           <div className={styles.content}>
             <section className={styles.section}>
-              <div className={styles.sectionHeader}>
+              <div
+                className={`${styles.sectionHeader} ${styles.sectionHeaderPlain}`}
+              >
                 <div className={styles.headingGroup}>
                   <h2 className={styles.title}>Create a Macro</h2>
                   <p className={styles.subtitle}>
@@ -320,6 +394,7 @@ export function SettingsPage() {
                 <Button
                   variant="primary"
                   size="sm"
+                  className={styles.nowrap}
                   onClick={() => setIsCreateMacroOpen(true)}
                 >
                   Add new
@@ -383,7 +458,7 @@ export function SettingsPage() {
                           </p>
                           {macro.body.split("\n").map((line, i) => (
                             <p key={i} className={styles.macroBodyText}>
-                              {line || " "}
+                              {line || " "}
                             </p>
                           ))}
                         </div>

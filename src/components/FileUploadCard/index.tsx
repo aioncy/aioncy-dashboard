@@ -8,6 +8,7 @@ export interface FileUploadCardProps {
   progress?: number
   onRemove: () => void
   onRetry?: () => void
+  className?: string
 }
 
 const FileUploadCard = ({
@@ -17,9 +18,10 @@ const FileUploadCard = ({
   progress,
   onRemove,
   onRetry,
+  className = '',
 }: FileUploadCardProps) => {
   return (
-    <div className={`${styles.card} ${styles[status]}`}>
+    <div className={`${styles.card} ${styles[status]} ${className}`}>
       <div className={`${styles.iconBox} ${styles[status]}`}>
         {status === 'default' && <File size={16} />}
         {status === 'uploading' && <LoaderCircle size={16} className={styles.spinner} />}

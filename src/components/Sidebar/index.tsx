@@ -36,7 +36,7 @@ const mainNavItems: NavItem[] = [
     expandable: true,
     children: [
       { label: 'AI Control', to: '/wingman-ai/control' },
-      { label: 'Train', to: '/wingman-ai/train' },
+      { label: 'Knowledge Base', to: '/wingman-ai/knowledge-base' },
       { label: 'Channels', to: '/wingman-ai/channels' },
     ],
   },

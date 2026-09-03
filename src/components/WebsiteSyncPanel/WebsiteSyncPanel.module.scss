@@ -1,0 +1,186 @@
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 20px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.headingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1c1c1c;
+}
+
+.sectionSubtitle {
+  margin: 0;
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+.footerStart {
+  margin-right: auto;
+}
+
+/* ---------- Connect step illustration ---------- */
+
+.heroImage {
+  display: block;
+  width: 100%;
+  height: 220px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* ---------- Pages step ---------- */
+
+.tree {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.treeRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 20px;
+}
+
+.treeCaret {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: #757575;
+}
+
+.treeIndent {
+  width: 16px;
+  flex-shrink: 0;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin: 0;
+  accent-color: #a153ff;
+  cursor: pointer;
+}
+
+.treeLabel {
+  min-width: 0;
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1c1c1c;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Review step ---------- */
+
+.summaryCard {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.summaryGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  + .summaryGroup {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e4e4e7;
+  }
+}
+
+.summaryRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+}
+
+.summaryLabel {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #484848;
+}
+
+/* "Link" reads as a sub-row of Source, so it stays lighter than the group labels. */
+.summaryLabelMuted {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+.summaryValue {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1c1c1c;
+}
+
+.summaryLink {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #a153ff;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

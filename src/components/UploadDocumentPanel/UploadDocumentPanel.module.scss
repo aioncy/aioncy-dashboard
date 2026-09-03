@@ -1,0 +1,61 @@
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 20px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.headingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1c1c1c;
+}
+
+.sectionSubtitle {
+  margin: 0;
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+.dropzone {
+  max-width: none;
+}
+
+.uploadedLabel {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #1c1c1c;
+}
+
+.uploadedList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.uploadCard {
+  max-width: none;
+}

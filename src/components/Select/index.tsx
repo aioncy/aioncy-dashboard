@@ -10,18 +10,24 @@ export interface SelectOption {
 
 export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'children'> {
   label?: string
+  /** Keep the label for screen readers only. */
+  hideLabel?: boolean
   helperText?: string
   options: SelectOption[]
   className?: string
 }
 
-const Select = ({ label, helperText, options, className = '', ...props }: SelectProps) => {
-  const id = useId()
+const Select = ({ label, hideLabel, helperText, options, className = '', ...props }: SelectProps) => {
+  const generatedId = useId()
+  const id = props.id ?? generatedId
   const messageId = `${id}-message`
 
   return (
     <div className={`flex w-full flex-col gap-1 text-left ${className}`}>
-      <label htmlFor={id} className={label ? textInputStyles.label : textInputStyles.srOnly}>
+      <label
+        htmlFor={id}
+        className={label && !hideLabel ? textInputStyles.label : textInputStyles.srOnly}
+      >
         {label ?? 'Select'}
       </label>
       <div className={styles.field}>
