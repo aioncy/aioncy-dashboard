@@ -46,14 +46,23 @@ const BLOCK_FORMATS: { label: string; tag: string }[] = [
   { label: 'Paragraph', tag: 'p' },
 ]
 
-const escapeHtml = (value: string) =>
-  value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
+/** Parks the caret just outside a <code> chip; stripped again on save. */
+const ZERO_WIDTH = '​'
 
 /** Keeps focus (and the selection) inside the editor when a control is pressed. */
 const keepSelection = (e: React.MouseEvent) => e.preventDefault()
+
+/** Nearest <code> ancestor within the editor, so the code button can toggle off. */
+const closestCode = (node: Node | null, boundary: HTMLElement): HTMLElement | null => {
+  let current: Node | null = node
+  while (current && current !== boundary) {
+    if (current.nodeType === Node.ELEMENT_NODE && (current as HTMLElement).tagName === 'CODE') {
+      return current as HTMLElement
+    }
+    current = current.parentNode
+  }
+  return null
+}
 
 interface ToolButtonProps {
   label: string
@@ -93,6 +102,9 @@ const WriteDocPanel = ({
 }: WriteDocPanelProps) => {
   const bodyRef = useRef<HTMLDivElement>(null)
   const formatMenuRef = useRef<HTMLDivElement>(null)
+  const imageInputRef = useRef<HTMLInputElement>(null)
+  // The file dialog drops the caret, so the range is parked here across it.
+  const savedRangeRef = useRef<Range | null>(null)
   const [title, setTitle] = useState(initialTitle)
   const [isBodyEmpty, setIsBodyEmpty] = useState(true)
   const [isFormatOpen, setIsFormatOpen] = useState(false)
@@ -180,20 +192,104 @@ const WriteDocPanel = ({
     if (url) runCommand('createLink', url)
   }
 
-  const handleInsertImage = () => {
-    const url = window.prompt('Image URL')
-    if (url) runCommand('insertImage', url)
+  const restoreSelection = () => {
+    const range = savedRangeRef.current
+    if (!range) return
+    const selection = window.getSelection()
+    selection?.removeAllRanges()
+    selection?.addRange(range)
   }
 
-  const handleInsertCode = () => {
+  const handleInsertImage = () => {
+    const body = bodyRef.current
+    if (!body) return
+    if (!body.contains(document.getSelection()?.anchorNode ?? null)) body.focus()
     const selection = window.getSelection()
+    savedRangeRef.current = selection?.rangeCount ? selection.getRangeAt(0).cloneRange() : null
+    imageInputRef.current?.click()
+  }
+
+  const handleImageFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    e.target.value = ''
+    if (!file) return
+
+    // No upload endpoint yet, so the picked file is inlined as a data URL.
+    const reader = new FileReader()
+    reader.onload = () => {
+      const body = bodyRef.current
+      if (!body) return
+      body.focus()
+      restoreSelection()
+      document.execCommand('insertImage', false, String(reader.result))
+      handleBodyInput()
+    }
+    reader.readAsDataURL(file)
+  }
+
+  const placeCaret = (node: Node, offset: number) => {
+    const range = document.createRange()
+    range.setStart(node, offset)
+    range.collapse(true)
+    const selection = window.getSelection()
+    selection?.removeAllRanges()
+    selection?.addRange(range)
+  }
+
+  /** Wraps the selection in <code>, or steps in and out of a chip when the caret is collapsed. */
+  const handleInsertCode = () => {
+    const body = bodyRef.current
+    if (!body) return
+    if (!body.contains(document.getSelection()?.anchorNode ?? null)) body.focus()
+
+    const selection = window.getSelection()
+    const existing = closestCode(selection?.anchorNode ?? null, body)
     const selected = selection?.toString() ?? ''
-    runCommand('insertHTML', `<code>${escapeHtml(selected || 'code')}</code>`)
+
+    if (existing) {
+      if (selected) {
+        // Unwrapping only makes sense when something is actually selected.
+        existing.replaceWith(...Array.from(existing.childNodes))
+      } else {
+        // Otherwise step past the chip so typing carries on in plain text.
+        const anchor = document.createTextNode(ZERO_WIDTH)
+        existing.after(anchor)
+        placeCaret(anchor, 1)
+      }
+      handleBodyInput()
+      return
+    }
+
+    // Built by hand rather than via insertHTML, which rewrites <code> into a
+    // styled <span> and drops it altogether when it is empty.
+    const range = selection?.rangeCount ? selection.getRangeAt(0) : null
+    if (!range) return
+
+    const code = document.createElement('code')
+
+    if (selected) {
+      try {
+        range.surroundContents(code)
+      } catch {
+        // The range straddled element boundaries, so move its contents instead.
+        code.appendChild(range.extractContents())
+        range.insertNode(code)
+      }
+      placeCaret(code, code.childNodes.length)
+    } else {
+      // Seeded with a zero-width character so the empty chip has somewhere to put
+      // the caret; stripped again on save.
+      code.textContent = ZERO_WIDTH
+      range.insertNode(code)
+      if (code.firstChild) placeCaret(code.firstChild, 1)
+    }
+
+    handleBodyInput()
   }
 
   const payload = (): WriteDocPayload => ({
     title: title.trim() || 'Untitled doc',
-    content: bodyRef.current?.innerHTML ?? '',
+    content: (bodyRef.current?.innerHTML ?? '').split(ZERO_WIDTH).join(''),
   })
 
   const hasContent = title.trim() !== '' || !isBodyEmpty
@@ -326,6 +422,13 @@ const WriteDocPanel = ({
               <ToolButton label="Insert link" onClick={handleInsertLink}>
                 <Link2 size={16} />
               </ToolButton>
+              <input
+                ref={imageInputRef}
+                type="file"
+                accept="image/*"
+                className={styles.hiddenInput}
+                onChange={handleImageFile}
+              />
               <ToolButton label="Insert image" onClick={handleInsertImage}>
                 <Image size={16} />
               </ToolButton>
