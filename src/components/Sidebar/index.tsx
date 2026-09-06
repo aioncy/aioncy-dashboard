@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Home, MessageSquare, Ticket, Bot, User, LineChart, Settings, Headphones, Briefcase } from 'lucide-react'
+import { Circle, MessageSquare, Ticket, Bot, User, LineChart, Settings, Headphones, Briefcase } from 'lucide-react'
 import Logo from '../Logo'
 import LogoMark from '../LogoMark'
 import NavMenuItem from '../NavMenuItem'
@@ -27,7 +27,6 @@ interface NavItem {
 }
 
 const mainNavItems: NavItem[] = [
-  { route: 'dashboard', label: 'Dashboard', icon: <Home /> },
   { route: 'conversations', label: 'Conversations', icon: <MessageSquare /> },
   {
     route: 'wingman-ai',
@@ -46,6 +45,7 @@ const mainNavItems: NavItem[] = [
 ]
 
 const secondaryNavItems: NavItem[] = [
+  { route: 'setup', label: 'Get set up', icon: <Circle /> },
   { route: 'settings', label: 'Settings', icon: <Settings /> },
   { route: 'help-support', label: 'Help & Support', icon: <Headphones /> },
 ]

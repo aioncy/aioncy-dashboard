@@ -1,0 +1,187 @@
+.page {
+  max-width: 744px;
+  margin: 0 auto;
+  padding: 80px 0 40px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #0e0e0e;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #d4d4d8;
+}
+
+.progress {
+  color: #757575;
+}
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  height: 332px;
+  padding: 20px 16px;
+  box-sizing: border-box;
+  border: 1px solid #e4e4e7;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 458px;
+  flex-shrink: 0;
+}
+
+.step {
+  width: 100%;
+  border-bottom: 1px solid #e4e4e7;
+}
+
+.stepLast {
+  border-bottom: none;
+}
+
+.stepExpanded {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding-bottom: 20px;
+}
+
+.stepCollapsed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 46px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.stepHeader,
+.stepHeaderButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.stepHeaderButton {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+
+  &:hover .stepTitle {
+    color: #1c1c1c;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a153ff;
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+}
+
+.stepIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: #757575;
+}
+
+.stepTitle {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #0e0e0e;
+}
+
+.stepIconDone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #a153ff;
+  color: #ffffff;
+
+  svg {
+    width: 10px;
+    height: 10px;
+    stroke-width: 3;
+  }
+}
+
+.stepChevron {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: #0e0e0e;
+}
+
+.stepBody {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.stepDescription {
+  margin: 0;
+  padding-left: 28px;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+.stepActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 28px;
+}
+
+.illustration {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border-radius: 8px;
+  background: #eaeaea;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

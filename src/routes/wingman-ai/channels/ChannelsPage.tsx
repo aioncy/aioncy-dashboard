@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import PageHeader from "../../../components/PageHeader";
 import Button from "../../../components/Button";
 import { COLLABORATORS, handleShare } from "../../../lib/dashboard";
@@ -76,9 +77,11 @@ export function ChannelsPage() {
                 </p>
               </div>
               <div className={styles.cardActions}>
-                <Button variant="outline" size="sm">
-                  Manage
-                </Button>
+                <Link to="/wingman-ai/channels/chat-widget">
+                  <Button variant="outline" size="sm">
+                    Manage
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

@@ -1,8 +1,10 @@
 export interface LogoMarkProps {
   className?: string
+  /** Color of the non-accent marks — override on dark surfaces. */
+  markColor?: string
 }
 
-const LogoMark = ({ className = '' }: LogoMarkProps) => (
+const LogoMark = ({ className = '', markColor = 'black' }: LogoMarkProps) => (
   <svg
     width="52"
     height="56"
@@ -13,7 +15,7 @@ const LogoMark = ({ className = '' }: LogoMarkProps) => (
     className={className}
   >
     <g clip-path="url(#clip0_4140_6610)">
-      <rect x="28.5023" y="9.53516" width="11.5453" height="11.5453" rx="5.77266" fill="black" />
+      <rect x="28.5023" y="9.53516" width="11.5453" height="11.5453" rx="5.77266" fill={markColor} />
       <rect
         x="26.1654"
         y="9.53516"
@@ -21,9 +23,9 @@ const LogoMark = ({ className = '' }: LogoMarkProps) => (
         height="16.6308"
         rx="5.77266"
         transform="rotate(89.4575 26.1654 9.53516)"
-        fill="black"
+        fill={markColor}
       />
-      <rect x="28.5023" y="23.2799" width="11.5453" height="22.266" rx="5.77266" fill="black" />
+      <rect x="28.5023" y="23.2799" width="11.5453" height="22.266" rx="5.77266" fill={markColor} />
       <rect
         x="20.3437"
         y="20.3933"

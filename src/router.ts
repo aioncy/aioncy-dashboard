@@ -4,6 +4,7 @@ import { indexRoute } from "./routes/index";
 import { componentsRoute } from "./routes/components";
 import { dashboardLayoutRoute } from "./routes/dashboard-layout";
 import { dashboardRoute } from "./routes/dashboard";
+import { setupRoute } from "./routes/setup";
 import { conversationsRoute } from "./routes/conversations";
 import { ticketsRoute } from "./routes/tickets";
 import { wingmanAiRoute } from "./routes/wingman-ai";
@@ -11,6 +12,7 @@ import { wingmanAiControlRoute } from "./routes/wingman-ai/control";
 import { wingmanAiTrainRoute } from "./routes/wingman-ai/train";
 import { wingmanAiKnowledgeBaseRoute } from "./routes/wingman-ai/knowledge-base";
 import { wingmanAiChannelsRoute } from "./routes/wingman-ai/channels";
+import { wingmanAiChatWidgetRoute } from "./routes/wingman-ai/channels/chat-widget";
 import { leadsRoute } from "./routes/leads";
 import { leadDetailRoute } from "./routes/leads/lead-detail";
 import { analyticsRoute } from "./routes/analytics";
@@ -33,6 +35,7 @@ const routeTree = rootRoute.addChildren([
   componentsRoute,
   dashboardLayoutRoute.addChildren([
     dashboardRoute,
+    setupRoute,
     conversationsRoute,
     ticketsRoute,
     wingmanAiRoute,
@@ -40,6 +43,7 @@ const routeTree = rootRoute.addChildren([
     wingmanAiTrainRoute,
     wingmanAiKnowledgeBaseRoute,
     wingmanAiChannelsRoute,
+    wingmanAiChatWidgetRoute,
     leadsRoute,
     leadDetailRoute,
     analyticsRoute,

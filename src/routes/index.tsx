@@ -5,6 +5,6 @@ export const indexRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/",
   beforeLoad: () => {
-    throw redirect({ to: "/dashboard" });
+    throw redirect({ to: "/setup" });
   },
 });

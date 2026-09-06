@@ -21,6 +21,7 @@ import DocumentViewerModal from "../../../components/DocumentViewerModal";
 import WriteDocPanel, {
   type WriteDocPayload,
 } from "../../../components/WriteDocPanel";
+import TestAIPanel from "../../../components/TestAIPanel";
 import { COLLABORATORS, handleShare } from "../../../lib/dashboard";
 import { avatarColor } from "../../../lib/avatarColor";
 import styles from "./KnowledgeBasePage.module.scss";
@@ -164,6 +165,7 @@ const STATUS_CLASSES: Partial<Record<KnowledgeStatus, string>> = {
 
 export function KnowledgeBasePage() {
   const [search, setSearch] = useState("");
+  const [isTestChatOpen, setIsTestChatOpen] = useState(false);
   const [sources, setSources] = useState<KnowledgeSource[]>(MOCK_SOURCES);
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const [syncPanel, setSyncPanel] = useState<{
@@ -359,7 +361,11 @@ export function KnowledgeBasePage() {
             resultsCount={search.trim() ? visibleSources.length : undefined}
           />
           <div className={styles.toolbarEnd}>
-            <Button variant="outline" size="sm">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsTestChatOpen((open) => !open)}
+            >
               Test AI
             </Button>
           </div>
@@ -595,6 +601,11 @@ export function KnowledgeBasePage() {
           onSubmit={handleSyncSubmit}
         />
       )}
+
+      <TestAIPanel
+        open={isTestChatOpen}
+        onClose={() => setIsTestChatOpen(false)}
+      />
     </div>
   );
 }
