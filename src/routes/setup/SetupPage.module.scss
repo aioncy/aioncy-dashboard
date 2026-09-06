@@ -120,22 +120,8 @@
   color: #0e0e0e;
 }
 
-.stepIconDone {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: #a153ff;
-  color: #ffffff;
-
-  svg {
-    width: 10px;
-    height: 10px;
-    stroke-width: 3;
-  }
+.stepTitleDone {
+  text-decoration: line-through;
 }
 
 .stepChevron {

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Check, ChevronRight, Circle } from 'lucide-react'
+import { ChevronRight, Circle } from 'lucide-react'
 import PageHeader from '../../components/PageHeader'
 import Button from '../../components/Button'
 import { COLLABORATORS, handleShare } from '../../lib/dashboard'
@@ -49,15 +49,6 @@ const STEPS: SetupStep[] = [
   },
 ]
 
-const StepMarker = ({ done }: { done: boolean }) =>
-  done ? (
-    <span className={styles.stepIconDone}>
-      <Check aria-hidden="true" />
-    </span>
-  ) : (
-    <Circle className={styles.stepIcon} aria-hidden="true" />
-  )
-
 export function SetupPage() {
   const [completed, setCompleted] = useState<string[]>([])
   const [expandedId, setExpandedId] = useState(STEPS[0].id)
@@ -99,8 +90,10 @@ export function SetupPage() {
                   {isExpanded ? (
                     <>
                       <div className={styles.stepHeader}>
-                        <StepMarker done={isDone} />
-                        <p className={styles.stepTitle}>{step.title}</p>
+                        <Circle className={styles.stepIcon} aria-hidden="true" />
+                        <p className={`${styles.stepTitle} ${isDone ? styles.stepTitleDone : ''}`}>
+                          {step.title}
+                        </p>
                       </div>
 
                       <div className={styles.stepBody}>
@@ -135,8 +128,10 @@ export function SetupPage() {
                       onClick={() => setExpandedId(step.id)}
                       aria-expanded={false}
                     >
-                      <StepMarker done={isDone} />
-                      <span className={styles.stepTitle}>{step.title}</span>
+                      <Circle className={styles.stepIcon} aria-hidden="true" />
+                      <span className={`${styles.stepTitle} ${isDone ? styles.stepTitleDone : ''}`}>
+                        {step.title}
+                      </span>
                       <ChevronRight className={styles.stepChevron} aria-hidden="true" />
                     </button>
                   )}
