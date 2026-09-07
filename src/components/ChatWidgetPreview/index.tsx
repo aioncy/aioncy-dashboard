@@ -17,6 +17,7 @@ export interface ChatWidgetPreviewProps {
   placeholder?: string
   theme?: 'light' | 'dark'
   accentHeader?: boolean
+  suggestedMessages?: string[]
   className?: string
 }
 
@@ -29,16 +30,24 @@ const ChatWidgetPreview = ({
   placeholder = 'Type a message...',
   theme = 'light',
   accentHeader = false,
+  suggestedMessages = [],
   className = '',
 }: ChatWidgetPreviewProps) => {
   const [sent, setSent] = useState<SentMessage[]>([])
   const [draft, setDraft] = useState('')
+  const [suggestionsUsed, setSuggestionsUsed] = useState(false)
+
+  const sendText = (text: string) => {
+    if (!text) return
+    setSent((prev) => [...prev, { id: `${Date.now()}`, text }])
+    setSuggestionsUsed(true)
+  }
 
   const send = (event: FormEvent) => {
     event.preventDefault()
     const text = draft.trim()
     if (!text) return
-    setSent((prev) => [...prev, { id: `${Date.now()}`, text }])
+    sendText(text)
     setDraft('')
   }
 
@@ -79,6 +88,21 @@ const ChatWidgetPreview = ({
           </div>
         ))}
       </div>
+
+      {suggestedMessages.length > 0 && !suggestionsUsed && (
+        <div className={styles.suggestions}>
+          {suggestedMessages.map((message) => (
+            <button
+              key={message}
+              type="button"
+              className={styles.suggestionPill}
+              onClick={() => sendText(message)}
+            >
+              {message}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className={styles.footer}>
         <div className={styles.poweredBy}>

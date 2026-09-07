@@ -3,10 +3,11 @@ import { ChevronRight, Circle } from 'lucide-react'
 import PageHeader from '../../components/PageHeader'
 import Button from '../../components/Button'
 import { COLLABORATORS, handleShare } from '../../lib/dashboard'
+import { useSetupProgress, type SetupStepId } from '../../lib/setupProgress'
 import styles from './SetupPage.module.scss'
 
 interface SetupStep {
-  id: string
+  id: SetupStepId
   title: string
   description: string
   /** Shown once the step is done — the step keeps its place in the list. */
@@ -50,12 +51,12 @@ const STEPS: SetupStep[] = [
 ]
 
 export function SetupPage() {
-  const [completed, setCompleted] = useState<string[]>([])
+  const { completed, total, completeStep: markStepComplete } = useSetupProgress()
   const [expandedId, setExpandedId] = useState(STEPS[0].id)
 
-  const completeStep = (id: string) => {
+  const completeStep = (id: SetupStepId) => {
     const done = completed.includes(id) ? completed : [...completed, id]
-    setCompleted(done)
+    markStepComplete(id)
     const next = STEPS.find((step) => !done.includes(step.id))
     if (next) setExpandedId(next.id)
   }
@@ -70,7 +71,7 @@ export function SetupPage() {
         <div className={styles.heading}>
           Get set up
           <span className={styles.dot} aria-hidden="true" />
-          <span className={styles.progress}>{completed.length} / 3 steps</span>
+          <span className={styles.progress}>{completed.length} / {total} steps</span>
         </div>
 
         <div className={styles.card}>

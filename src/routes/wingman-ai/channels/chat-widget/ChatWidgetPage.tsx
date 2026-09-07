@@ -19,10 +19,13 @@ const TABS = [
 
 const EMBED_SNIPPET = `<script src="https://cdn.aioncy.ai/widget.js" data-widget-id="acme" defer></script>`
 
+const SUGGESTED_MESSAGES = ['How can i checkout?', 'Show collections', 'Can i cancel my order?']
+
 interface WidgetConfig {
   displayName: string
   initialMessage: string
   useMobileMessage: boolean
+  mobileMessage: string
   showSuggestedMessages: boolean
   messagePlaceholder: string
   theme: 'light' | 'dark'
@@ -35,6 +38,7 @@ const DEFAULT_CONFIG: WidgetConfig = {
   displayName: '',
   initialMessage: 'Hi! What can I help you with?',
   useMobileMessage: false,
+  mobileMessage: '',
   showSuggestedMessages: false,
   messagePlaceholder: '',
   theme: 'light',
@@ -124,6 +128,18 @@ export function ChatWidgetPage() {
                       aria-label="Use different initial message on mobile"
                     />
                   </div>
+
+                  {config.useMobileMessage && (
+                    <div className={styles.field}>
+                      <Textarea
+                        placeholder="Hello there!"
+                        value={config.mobileMessage}
+                        onChange={(event) => update('mobileMessage', event.target.value)}
+                        aria-label="Initial message on mobile"
+                      />
+                      <p className={styles.helperText}>Show on phones/tablets.</p>
+                    </div>
+                  )}
                 </div>
 
                 <div className={styles.section}>
@@ -321,6 +337,7 @@ export function ChatWidgetPage() {
             accentColor={config.primaryColor}
             theme={config.theme}
             accentHeader={config.accentHeader}
+            suggestedMessages={config.showSuggestedMessages ? SUGGESTED_MESSAGES : []}
           />
         </section>
       </div>

@@ -127,6 +127,39 @@
   color: #ffffff;
 }
 
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 0 15px 16px;
+}
+
+.suggestionPill {
+  padding: 8px 14px;
+  border: 1px solid #e4e4e7;
+  border-radius: 20px;
+  background: #ffffff;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #0e0e0e;
+  white-space: nowrap;
+
+  &:hover {
+    background: #f7f7f7;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a153ff;
+    outline-offset: 2px;
+  }
+}
+
 .footer {
   flex-shrink: 0;
   padding: 0 11px 15px;
@@ -247,6 +280,16 @@
 
   .poweredBy {
     color: #8c8c8c;
+  }
+
+  .suggestionPill {
+    border-color: #3a3a3a;
+    background: #1c1c1c;
+    color: #fafafa;
+
+    &:hover {
+      background: #2a2a2a;
+    }
   }
 
   .composer {

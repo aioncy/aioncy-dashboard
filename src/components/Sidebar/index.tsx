@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Circle, MessageSquare, Ticket, Bot, User, LineChart, Settings, Headphones, Briefcase } from 'lucide-react'
+import { MessageSquare, Ticket, Bot, User, LineChart, Settings, Headphones, Briefcase } from 'lucide-react'
 import Logo from '../Logo'
 import LogoMark from '../LogoMark'
 import NavMenuItem from '../NavMenuItem'
+import SetupProgressRing from '../SetupProgressRing'
 import SidebarSubmenu, { type SidebarSubmenuItem } from '../SidebarSubmenu'
 import WorkspaceSwitcher, { type Organization } from '../WorkspaceSwitcher'
+import { useSetupProgress } from '../../lib/setupProgress'
 import styles from './Sidebar.module.scss'
 
 export interface SidebarProps {
@@ -45,7 +47,7 @@ const mainNavItems: NavItem[] = [
 ]
 
 const secondaryNavItems: NavItem[] = [
-  { route: 'setup', label: 'Get set up', icon: <Circle /> },
+  { route: 'setup', label: 'Get set up', icon: null },
   { route: 'settings', label: 'Settings', icon: <Settings /> },
   { route: 'help-support', label: 'Help & Support', icon: <Headphones /> },
 ]
@@ -61,8 +63,12 @@ const Sidebar = ({
   collapsible = false,
 }: SidebarProps) => {
   const [isWingmanOpen, setIsWingmanOpen] = useState(true)
+  const { value: setupProgress } = useSetupProgress()
 
   const activeOrg = organizations.find((org) => org.id === activeOrgId) ?? organizations[0]
+
+  const resolveIcon = (item: NavItem) =>
+    item.route === 'setup' ? <SetupProgressRing value={setupProgress} /> : item.icon
 
   const fullBody = (
     <>
@@ -93,7 +99,7 @@ const Sidebar = ({
           {secondaryNavItems.map((item) => (
             <NavMenuItem
               key={item.route}
-              icon={item.icon}
+              icon={resolveIcon(item)}
               label={item.label}
               href={`/${item.route}`}
               onClick={onNavigate}
@@ -142,7 +148,7 @@ const Sidebar = ({
             {secondaryNavItems.map((item) => (
               <NavMenuItem
                 key={item.route}
-                icon={item.icon}
+                icon={resolveIcon(item)}
                 label={item.label}
                 href={`/${item.route}`}
                 collapsed
