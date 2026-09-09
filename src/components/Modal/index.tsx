@@ -8,11 +8,12 @@ export interface ModalProps {
   title?: string
   width?: number
   height?: number
+  radius?: number
   children: React.ReactNode
   className?: string
 }
 
-const Modal = ({ isOpen, onClose, title, width, height, children, className = '' }: ModalProps) => {
+const Modal = ({ isOpen, onClose, title, width, height, radius, children, className = '' }: ModalProps) => {
   useEffect(() => {
     if (!isOpen) return
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -31,6 +32,7 @@ const Modal = ({ isOpen, onClose, title, width, height, children, className = ''
         style={{
           ...(width ? { width } : {}),
           ...(height ? { height, overflow: 'hidden' } : {}),
+          ...(radius ? { borderRadius: radius } : {}),
         }}
         role="dialog"
         aria-modal="true"

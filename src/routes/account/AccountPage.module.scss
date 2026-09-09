@@ -1,0 +1,296 @@
+.page {
+  max-width: 744px;
+  margin: 0 auto;
+  padding: 12px 0px 40px;
+}
+
+.content {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 24px;
+}
+
+.headingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #0e0e0e;
+}
+
+.subtitle {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+/* ---------- Two column setting rows: label left, control right ---------- */
+
+.rowGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 160px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e4e4e7;
+}
+
+.rowInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.rowLabel {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #0e0e0e;
+}
+
+.rowHelper {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+.rowField {
+  display: flex;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* ---------- Profile picture ---------- */
+
+.pictureField {
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.avatarThumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #155dfc;
+  color: #ffffff;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a153ff;
+    outline-offset: 2px;
+  }
+}
+
+/* ---------- Two-factor authentication ---------- */
+
+.twoFactorList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.twoFactorCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #f7f7f7;
+  box-sizing: border-box;
+}
+
+.twoFactorIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #e4e4e7;
+  background: #ffffff;
+  color: #757575;
+  flex-shrink: 0;
+}
+
+.twoFactorText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.twoFactorTitle {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #0e0e0e;
+}
+
+/* ---------- Security ---------- */
+
+.passwordRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 160px;
+  margin-top: 16px;
+}
+
+.passwordFields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.confirmRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ---------- Danger zone ---------- */
+
+.cardTitle {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #0e0e0e;
+}
+
+.dangerZone {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dangerDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1 1 0;
+    height: 1px;
+    background: #e4e4e7;
+  }
+}
+
+.dangerLabel {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #dc2626;
+  white-space: nowrap;
+}
+
+.dangerCard {
+  display: flex;
+  align-items: center;
+  gap: 160px;
+  padding: 24px 20px 20px;
+  border: 1px solid #dc2626;
+  border-radius: 9px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.comingSoon {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+  color: #757575;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 720px) {
+  .row,
+  .passwordRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .rowField {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .dangerCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

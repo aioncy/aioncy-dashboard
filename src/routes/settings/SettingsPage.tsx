@@ -1,10 +1,8 @@
 import { useRef, useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
-import { ChevronDown, ChevronUp, Image } from "lucide-react";
+import { ChevronDown, ChevronUp, Image, RefreshCw } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import Tabs from "../../components/Tabs";
 import TextInput from "../../components/TextInput";
-import PasswordInput from "../../components/PasswordInput";
 import Select from "../../components/Select";
 import Button from "../../components/Button";
 import SearchInput from "../../components/SearchInput";
@@ -16,9 +14,8 @@ import styles from "./SettingsPage.module.scss";
 
 const TABS = [
   { label: "General", value: "general" },
-  { label: "Security", value: "security" },
   { label: "Macros", value: "macros" },
-  { label: "Plan and Billing", value: "billing" },
+  { label: "Billing & Plans", value: "billing" },
 ];
 
 interface Macro {
@@ -74,19 +71,12 @@ const TIMEZONE_OPTIONS = [
 ];
 
 export function SettingsPage() {
-  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("general");
   const [workspaceName, setWorkspaceName] = useState("Acme");
   const [language, setLanguage] = useState("en-GB");
   const [timezone, setTimezone] = useState("Asia/Kathmandu");
   const [logoSrc, setLogoSrc] = useState<string | null>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const canConfirmPassword = Boolean(
-    currentPassword && newPassword && confirmPassword,
-  );
   const [macros, setMacros] = useState<Macro[]>(MACROS);
   const [macroSearch, setMacroSearch] = useState("");
   const [expandedMacros, setExpandedMacros] = useState<string[]>([
@@ -94,7 +84,8 @@ export function SettingsPage() {
   ]);
   const [isCreateMacroOpen, setIsCreateMacroOpen] = useState(false);
 
-  const workspaceSlug = workspaceName.trim() || "yourname";
+  const workspaceSlug =
+    workspaceName.trim().toLowerCase().replace(/\s+/g, "-") || "yourname";
 
   const toggleMacro = (id: string) => {
     setExpandedMacros((prev) =>
@@ -130,10 +121,6 @@ export function SettingsPage() {
     if (logoInputRef.current) logoInputRef.current.value = "";
   };
 
-  const handleLogout = () => {
-    navigate({ to: "/login" });
-  };
-
   return (
     <div>
       <PageHeader
@@ -158,30 +145,35 @@ export function SettingsPage() {
                     This identifies your workspace within Aioncy.
                   </p>
                 </div>
-                <Button type="submit" variant="primary" className={styles.nowrap}>
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="sm"
+                  className={styles.nowrap}
+                >
                   Save changes
                 </Button>
               </div>
 
-              <div className={styles.row}>
-                <div className={styles.rowInfo}>
-                  <span className={styles.rowLabel}>Workspace name</span>
+              <div className={styles.rowGroup}>
+                <div className={styles.row}>
+                  <div className={styles.rowInfo}>
+                    <span className={styles.rowLabel}>Workspace name</span>
+                  </div>
+                  <div className={styles.rowField}>
+                    <TextInput
+                      label="Workspace name"
+                      hideLabel
+                      value={workspaceName}
+                      onChange={(e) => setWorkspaceName(e.target.value)}
+                    />
+                  </div>
                 </div>
-                <div className={styles.rowField}>
-                  <TextInput
-                    label="Workspace name"
-                    hideLabel
-                    value={workspaceName}
-                    onChange={(e) => setWorkspaceName(e.target.value)}
-                  />
-                </div>
-              </div>
 
-              <div className={styles.row}>
-                <div className={styles.rowInfo}>
-                  <span className={styles.rowLabel}>Logo</span>
-                </div>
-                <div className={`${styles.rowField} ${styles.logoField}`}>
+                <div className={styles.row}>
+                  <div className={styles.rowInfo}>
+                    <span className={styles.rowLabel}>Logo</span>
+                  </div>
                   <input
                     ref={logoInputRef}
                     type="file"
@@ -205,33 +197,42 @@ export function SettingsPage() {
                       <Image size={20} aria-hidden="true" />
                     )}
                   </button>
-                  <Button
-                    type="button"
-                    variant="outlineDanger"
-                    size="sm"
-                    onClick={handleLogoRemove}
-                  >
-                    Remove
-                  </Button>
+                  <div className={styles.logoActions}>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      icon={<RefreshCw size={16} />}
+                      onClick={() => logoInputRef.current?.click()}
+                    >
+                      Change
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outlineDanger"
+                      size="sm"
+                      onClick={handleLogoRemove}
+                    >
+                      Remove
+                    </Button>
+                  </div>
                 </div>
-              </div>
 
-              <div className={styles.row}>
-                <div className={styles.rowInfo}>
-                  <span className={styles.rowLabel}>Workspace ID (Slug)</span>
-                  <span
-                    className={`${styles.rowHelper} ${styles.rowHelperNoWrap}`}
-                  >
-                    Your unique Aioncy URL: aioncy.com/w/yourname
-                  </span>
-                </div>
-                <div className={styles.rowField}>
-                  <TextInput
-                    label="Workspace ID (Slug)"
-                    hideLabel
-                    placeholder={`aioncy.com/w/${workspaceSlug}`}
-                    disabled
-                  />
+                <div className={styles.row}>
+                  <div className={styles.rowInfo}>
+                    <span className={styles.rowLabel}>Workspace ID (Slug)</span>
+                    <span className={styles.rowHelper}>
+                      Your unique Aioncy URL: aioncy.com/w/{workspaceSlug}
+                    </span>
+                  </div>
+                  <div className={styles.rowField}>
+                    <TextInput
+                      label="Workspace ID (Slug)"
+                      hideLabel
+                      placeholder={`aioncy.com/w/${workspaceSlug}`}
+                      disabled
+                    />
+                  </div>
                 </div>
               </div>
             </section>
@@ -241,150 +242,76 @@ export function SettingsPage() {
                 <div className={styles.headingGroup}>
                   <h2 className={styles.title}>Timezone and Language</h2>
                   <p className={styles.subtitle}>
-                    This data helps customize your AI workflows.
+                    Configure your interface language and operational time zone.
                   </p>
                 </div>
               </div>
 
-              <div className={styles.row}>
-                <div className={styles.rowInfo}>
-                  <span className={styles.rowLabel}>Dashboard language</span>
+              <div className={styles.rowGroup}>
+                <div className={styles.row}>
+                  <div className={styles.rowInfo}>
+                    <span className={styles.rowLabel}>Dashboard language</span>
+                  </div>
+                  <div className={styles.rowField}>
+                    <Select
+                      label="Dashboard language"
+                      hideLabel
+                      options={LANGUAGE_OPTIONS}
+                      value={language}
+                      onChange={(e) => setLanguage(e.target.value)}
+                    />
+                  </div>
                 </div>
-                <div className={styles.rowField}>
-                  <Select
-                    label="Dashboard language"
-                    hideLabel
-                    options={LANGUAGE_OPTIONS}
-                    value={language}
-                    onChange={(e) => setLanguage(e.target.value)}
-                  />
-                </div>
-              </div>
 
-              <div className={`${styles.row} ${styles.rowNoBorder}`}>
-                <div className={styles.rowInfo}>
-                  <span className={styles.rowLabel}>Timezone</span>
-                  <span className={styles.rowHelper}>
-                    Used to schedule your AI working hours correctly
-                  </span>
-                </div>
-                <div className={styles.rowField}>
-                  <Select
-                    label="Timezone"
-                    hideLabel
-                    options={TIMEZONE_OPTIONS}
-                    value={timezone}
-                    onChange={(e) => setTimezone(e.target.value)}
-                  />
+                <div className={styles.row}>
+                  <div className={styles.rowInfo}>
+                    <span className={styles.rowLabel}>Timezone</span>
+                    <span className={styles.rowHelper}>
+                      Used to schedule your AI working hours correctly
+                    </span>
+                  </div>
+                  <div className={styles.rowField}>
+                    <Select
+                      label="Timezone"
+                      hideLabel
+                      options={TIMEZONE_OPTIONS}
+                      value={timezone}
+                      onChange={(e) => setTimezone(e.target.value)}
+                    />
+                  </div>
                 </div>
               </div>
             </section>
 
-            <hr className={styles.blockDivider} />
-
-            <div className={styles.accountBlocks}>
-              <div className={styles.infoCard}>
+            <div className={styles.dangerZone}>
+              <div className={styles.dangerDivider}>
+                <span className={styles.dangerLabel}>Danger zone</span>
+              </div>
+              <div className={styles.dangerCard}>
                 <div className={styles.headingGroup}>
-                  <h3 className={styles.cardTitle}>Log out</h3>
+                  <h3 className={styles.cardTitle}>Delete workspace</h3>
                   <p className={styles.subtitle}>
-                    Sign out of your Aioncy account on this device
+                    Permanently delete this workspace and all its data. This
+                    cannot be undone.
                   </p>
                 </div>
                 <Button
                   type="button"
-                  variant="outline"
+                  variant="outlineDanger"
                   size="sm"
                   className={styles.nowrap}
-                  onClick={handleLogout}
                 >
-                  Log out
+                  Delete workspace
                 </Button>
-              </div>
-
-              <div className={styles.dangerZone}>
-                <span className={styles.dangerLabel}>Danger zone</span>
-                <div className={styles.dangerCard}>
-                  <div className={styles.headingGroup}>
-                    <h3 className={styles.cardTitle}>Delete workspace</h3>
-                    <p className={styles.subtitle}>
-                      Permanently delete this workspace and all its data. This
-                      cannot be undone.
-                    </p>
-                  </div>
-                  <Button
-                    type="button"
-                    variant="danger"
-                    className={styles.nowrap}
-                  >
-                    Delete workspace
-                  </Button>
-                </div>
               </div>
             </div>
           </form>
         )}
 
-        {activeTab === "security" && (
-          <div className={styles.content}>
-            <section className={styles.section}>
-              <div className={styles.sectionHeader}>
-                <div className={styles.headingGroup}>
-                  <h2 className={styles.title}>Account Security</h2>
-                  <p className={styles.subtitle}>
-                    Manage your password and account security settings.
-                  </p>
-                </div>
-              </div>
-
-              <div className={styles.securityRow}>
-                <div className={styles.headingGroup}>
-                  <h3 className={styles.dangerTitle}>Change password</h3>
-                  <p className={styles.subtitle}>
-                    Must be at least 8 characters, include one uppercase letter
-                    and one number.
-                  </p>
-                </div>
-
-                <div className={styles.securityFields}>
-                  <PasswordInput
-                    hideLabel
-                    placeholder="Current password"
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                  />
-                  <PasswordInput
-                    hideLabel
-                    placeholder="New password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                  />
-                  <PasswordInput
-                    hideLabel
-                    placeholder="Confirm new password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                  />
-                  <div className={styles.confirmRow}>
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      disabled={!canConfirmPassword}
-                    >
-                      Confirm
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-        )}
-
         {activeTab === "macros" && (
           <div className={styles.content}>
             <section className={styles.section}>
-              <div
-                className={`${styles.sectionHeader} ${styles.sectionHeaderPlain}`}
-              >
+              <div className={styles.sectionHeader}>
                 <div className={styles.headingGroup}>
                   <h2 className={styles.title}>Create a Macro</h2>
                   <p className={styles.subtitle}>

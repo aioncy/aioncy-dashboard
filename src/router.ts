@@ -17,6 +17,7 @@ import { leadsRoute } from "./routes/leads";
 import { leadDetailRoute } from "./routes/leads/lead-detail";
 import { analyticsRoute } from "./routes/analytics";
 import { settingsRoute } from "./routes/settings";
+import { accountRoute } from "./routes/account";
 import { helpSupportRoute } from "./routes/help-support";
 import { loginRoute } from "./routes/login";
 import { signupRoute } from "./routes/signup";
@@ -48,6 +49,7 @@ const routeTree = rootRoute.addChildren([
     leadDetailRoute,
     analyticsRoute,
     settingsRoute,
+    accountRoute,
     helpSupportRoute,
   ]),
 ]);

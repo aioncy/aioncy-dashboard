@@ -1,13 +1,14 @@
 .page {
-  max-width: 792px;
+  max-width: 744px;
   margin: 0 auto;
-  padding: 16px 0px 40px;
+  padding: 12px 0px 40px;
 }
 
 .content {
-  margin-top: 24px;
+  margin-top: 32px;
   display: flex;
   flex-direction: column;
+  gap: 80px;
 }
 
 .section {
@@ -15,23 +16,18 @@
   flex-direction: column;
 }
 
-.section + .section {
-  margin-top: 40px;
-}
-
 .sectionHeader {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e4e4e7;
+  padding-bottom: 24px;
 }
 
 .headingGroup {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .title {
@@ -40,7 +36,7 @@
   font-size: 18px;
   line-height: 140%;
   letter-spacing: 0.05px;
-  color: #1c1c1c;
+  color: #0e0e0e;
 }
 
 .subtitle {
@@ -52,41 +48,38 @@
   color: #757575;
 }
 
-.sectionHeaderPlain {
-  border-bottom: none;
-}
-
 /* ---------- Two column setting rows: label left, control right ---------- */
+
+.rowGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 16px;
+}
 
 .row {
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding: 16px 0;
+  gap: 160px;
+  padding-bottom: 20px;
   border-bottom: 1px solid #e4e4e7;
-}
-
-.rowNoBorder {
-  border-bottom: none;
-  padding-bottom: 0;
 }
 
 .rowInfo {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  flex: 1 1 auto;
+  flex: 1 1 0;
   min-width: 0;
-  max-width: 300px;
 }
 
 .rowLabel {
   font-family: "Geist", system-ui, sans-serif;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 140%;
   letter-spacing: 0.05px;
-  color: #18181b;
+  color: #0e0e0e;
 }
 
 .rowHelper {
@@ -98,24 +91,14 @@
   color: #757575;
 }
 
-.rowHelperNoWrap {
-  white-space: nowrap;
-}
-
 .rowField {
   display: flex;
   align-items: center;
-  flex: 0 0 320px;
-  width: 320px;
-  margin-left: auto;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 /* ---------- Logo ---------- */
-
-.logoField {
-  justify-content: space-between;
-  gap: 16px;
-}
 
 .hiddenInput {
   display: none;
@@ -125,26 +108,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   padding: 0;
-  border: 1px solid #e4e4e7;
+  border: none;
   border-radius: 8px;
   overflow: hidden;
   flex-shrink: 0;
-  background: #f4f4f5;
-  color: #a1a1aa;
+  background: #d9d9d9;
+  color: #757575;
   cursor: pointer;
-  transition: border-color 0.15s ease;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-
-  &:hover {
-    border-color: #a153ff;
   }
 
   &:focus-visible {
@@ -153,33 +131,15 @@
   }
 }
 
-/* ---------- Log out and danger blocks ---------- */
-
-.blockDivider {
-  height: 1px;
-  background: #e4e4e7;
-  border: none;
-  margin: 24px 0 0;
-}
-
-.accountBlocks {
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.infoCard {
+.logoActions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px 20px;
-  border: 1px solid #e4e4e7;
-  border-radius: 8px;
-  background: #ffffff;
-  box-sizing: border-box;
+  gap: 12px;
+  height: 34px;
+  flex-shrink: 0;
 }
+
+/* ---------- Danger zone ---------- */
 
 .cardTitle {
   font-family: "Geist", system-ui, sans-serif;
@@ -187,33 +147,47 @@
   font-size: 16px;
   line-height: 140%;
   letter-spacing: 0.05px;
-  color: #1c1c1c;
+  color: #0e0e0e;
 }
 
 .dangerZone {
   display: flex;
   flex-direction: column;
+  gap: 20px;
+}
+
+.dangerDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 8px;
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1 1 0;
+    height: 1px;
+    background: #e4e4e7;
+  }
 }
 
 .dangerLabel {
-  align-self: center;
   font-family: "Geist", system-ui, sans-serif;
   font-weight: 500;
   font-size: 12px;
   line-height: 140%;
   letter-spacing: 0.05px;
-  color: #d43a20;
+  color: #dc2626;
+  white-space: nowrap;
 }
 
 .dangerCard {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px 20px;
+  gap: 160px;
+  padding: 24px 20px 20px;
   border: 1px solid #dc2626;
-  border-radius: 8px;
+  border-radius: 9px;
   background: #ffffff;
   box-sizing: border-box;
 }
@@ -373,7 +347,7 @@
 
 .macroFooter {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
 }
@@ -435,38 +409,6 @@
   }
 }
 
-/* ---------- Security ---------- */
-
-.securityRow {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 40px;
-  padding-top: 20px;
-}
-
-.securityFields {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 280px;
-  flex-shrink: 0;
-}
-
-.confirmRow {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.dangerTitle {
-  font-family: "Geist", system-ui, sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 140%;
-  letter-spacing: 0.05px;
-  color: #1c1c1c;
-}
-
 /* ---------- Responsive ---------- */
 
 @media (max-width: 720px) {
@@ -476,28 +418,14 @@
     gap: 8px;
   }
 
-  .rowInfo {
-    max-width: none;
-  }
-
   .rowField {
     flex: 1 1 auto;
     width: 100%;
-    margin-left: 0;
   }
 
-  .infoCard,
   .dangerCard {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .securityRow {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .securityFields {
-    width: 100%;
+    gap: 16px;
   }
 }
