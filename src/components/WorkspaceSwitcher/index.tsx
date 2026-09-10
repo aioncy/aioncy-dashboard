@@ -5,7 +5,7 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
-import { Briefcase, ChevronsUpDown, LogOut, Plus, UserCog } from "lucide-react";
+import { Briefcase, ChevronsUpDown, LogOut, Plus } from "lucide-react";
 import styles from "./WorkspaceSwitcher.module.scss";
 
 export interface Organization {
@@ -22,7 +22,6 @@ export interface WorkspaceSwitcherProps {
   activeOrgId: string;
   onSelectOrganization: (orgId: string) => void;
   onAddOrganization?: () => void;
-  onOpenAccount?: () => void;
   onSignOut?: () => void;
 }
 
@@ -62,7 +61,6 @@ const WorkspaceSwitcher = ({
   activeOrgId,
   onSelectOrganization,
   onAddOrganization,
-  onOpenAccount,
   onSignOut,
 }: WorkspaceSwitcherProps) => {
   const [open, setOpen] = useState(false);
@@ -155,20 +153,6 @@ const WorkspaceSwitcher = ({
               <Plus />
             </span>
             Add organization
-          </button>
-
-          <button
-            type="button"
-            className={styles.addOrg}
-            onClick={() => {
-              onOpenAccount?.();
-              setOpen(false);
-            }}
-          >
-            <span className={styles.addIcon} aria-hidden="true">
-              <UserCog />
-            </span>
-            Account settings
           </button>
 
           <button
