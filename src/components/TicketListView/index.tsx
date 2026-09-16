@@ -37,16 +37,18 @@ const TicketListView = ({ tickets, search = '', onOpenTicket }: TicketListViewPr
 
         return (
           <div key={column.id} className={styles.section}>
-            <button
-              type="button"
-              className={styles.sectionHeader}
-              onClick={() => toggleSection(column.id)}
-              aria-expanded={!isCollapsed}
-            >
-              <StatusIcon size={14} className={styles.statusIcon} />
-              <span className={styles.sectionTitle}>{column.title}</span>
-              <span className={styles.sectionCount}>{visibleTickets.length}</span>
-            </button>
+            <div className={styles.sectionHeaderRow}>
+              <button
+                type="button"
+                className={styles.sectionHeader}
+                onClick={() => toggleSection(column.id)}
+                aria-expanded={!isCollapsed}
+              >
+                <StatusIcon size={14} className={styles.statusIcon} />
+                <span className={styles.sectionTitle}>{column.title}</span>
+                <span className={styles.sectionCount}>{visibleTickets.length}</span>
+              </button>
+            </div>
 
             {!isCollapsed && (
               <div className={styles.rows}>

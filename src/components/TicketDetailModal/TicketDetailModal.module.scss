@@ -40,7 +40,7 @@
 .fields {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 24px;
   padding-top: 4px;
 }
 
@@ -66,14 +66,17 @@
 }
 
 .statusControl {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: stretch;
 }
 
 .statusLabel {
   display: inline-flex;
   align-items: center;
-  width: 95px;
+  width: auto;
+  min-width: 95px;
+  max-width: 220px;
   height: 34px;
   box-sizing: border-box;
   gap: 4px;
@@ -110,6 +113,7 @@
   background: #FFFFFF;
   color: #757575;
   cursor: pointer;
+  flex-shrink: 0;
   transition: background 0.15s ease, border-color 0.15s ease;
 
   &:hover {
@@ -149,6 +153,14 @@
     border-color: #A153FF;
     box-shadow: 0px 0px 0px 2px rgba(138, 56, 245, 0.12);
   }
+}
+
+.statusChevron {
+  transition: transform 0.15s ease;
+}
+
+.statusChevronOpen {
+  transform: rotate(90deg);
 }
 
 .pillChevron {

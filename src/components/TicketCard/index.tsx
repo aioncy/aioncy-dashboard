@@ -24,7 +24,7 @@ const TicketCard = ({ ticket, dragging = false }: TicketCardProps) => {
           </span>
         ) : (
           <span className={`${styles.avatar} ${styles.unassigned}`} title="Unassigned">
-            <UserRound size={12} />
+            <UserRound size={11} />
           </span>
         )}
       </div>

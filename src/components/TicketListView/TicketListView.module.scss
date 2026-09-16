@@ -1,13 +1,25 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 0;
 }
 
 .section {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0;
+  padding-top: 28px;
+
+  &:first-child {
+    padding-top: 0;
+  }
+}
+
+.sectionHeaderRow {
+  display: flex;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E4E4E7;
 }
 
 .sectionHeader {
@@ -16,7 +28,7 @@
   gap: 6px;
   padding: 4px 10px;
   border: none;
-  border-radius: 999px;
+  border-radius: 6px;
   background: #F4F4F5;
   cursor: pointer;
   width: fit-content;
@@ -59,8 +71,12 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 14px 8px;
-  border-radius: 6px;
+  height: 48px;
+  box-sizing: border-box;
+  padding: 0 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: 1px solid #E4E4E7;
   cursor: pointer;
   transition: background 0.15s ease;
 

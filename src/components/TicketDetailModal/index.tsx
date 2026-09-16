@@ -27,7 +27,7 @@ export interface TicketDetailModalProps {
   onAddComment: (columnId: string, ticketId: string, text: string) => void
 }
 
-type OpenField = 'assigned' | 'priority' | null
+type OpenField = 'status' | 'assigned' | 'priority' | null
 
 const TicketDetailModal = ({
   isOpen,
@@ -85,15 +85,32 @@ const TicketDetailModal = ({
                 <button
                   type="button"
                   className={styles.statusNext}
-                  aria-label="Move to next status"
-                  onClick={() => {
-                    const currentIndex = TICKET_COLUMNS.findIndex((c) => c.id === columnId)
-                    const nextColumn = TICKET_COLUMNS[(currentIndex + 1) % TICKET_COLUMNS.length]
-                    onMoveStatus(columnId, ticket.id, nextColumn.id)
-                  }}
+                  aria-label="Change status"
+                  aria-expanded={openField === 'status'}
+                  onClick={() => setOpenField((prev) => (prev === 'status' ? null : 'status'))}
                 >
-                  <ChevronRight size={16} />
+                  <ChevronRight
+                    size={16}
+                    className={`${styles.statusChevron} ${openField === 'status' ? styles.statusChevronOpen : ''}`}
+                  />
                 </button>
+                {openField === 'status' && (
+                  <div className={styles.menu}>
+                    {TICKET_COLUMNS.map((column) => (
+                      <div
+                        key={column.id}
+                        className={styles.menuItem}
+                        onClick={() => {
+                          onMoveStatus(columnId, ticket.id, column.id)
+                          setOpenField(null)
+                        }}
+                      >
+                        <span className={styles.menuLabel}>{column.title}</span>
+                        {column.id === columnId && <CheckIcon size={18} />}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 

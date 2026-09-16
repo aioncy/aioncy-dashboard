@@ -50,7 +50,7 @@ const Column = ({ id, title, tickets, onOpenTicket }: ColumnProps) => {
   const { setNodeRef } = useDroppable({ id })
 
   return (
-    <div className={styles.column}>
+    <div ref={setNodeRef} className={`${styles.column} ${tickets.length === 0 ? styles.empty : ''}`}>
       <div className={styles.columnHeader}>
         <span className={styles.columnTitle}>
           {title} ({tickets.length})
@@ -60,7 +60,7 @@ const Column = ({ id, title, tickets, onOpenTicket }: ColumnProps) => {
         </button>
       </div>
       <SortableContext id={id} items={tickets.map((t) => t.id)} strategy={verticalListSortingStrategy}>
-        <div ref={setNodeRef} className={styles.columnBody}>
+        <div className={styles.columnBody}>
           {tickets.map((ticket) => (
             <SortableCard key={ticket.id} ticket={ticket} onOpen={(t) => onOpenTicket?.(id, t)} />
           ))}
