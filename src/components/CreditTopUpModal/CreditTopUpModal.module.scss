@@ -1,0 +1,196 @@
+@mixin text($size: 14px, $weight: 400) {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+}
+
+.overlay.overlay {
+  background: rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.panel.panel {
+  width: 600px;
+  gap: 16px;
+  padding: 16px 16px 20px;
+  border-radius: 12px;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.title {
+  @include text(16px, 500);
+  color: #0e0e0e;
+  margin: 0;
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #0e0e0e;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #fafafa;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a153ff;
+    outline-offset: 2px;
+  }
+}
+
+.alert.alert {
+  height: 38px;
+  min-height: 38px;
+  padding-block: 0;
+  background: #e6f4ff;
+}
+
+.alertText {
+  @include text(14px, 400);
+  color: #6155f5;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.packages {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.label {
+  @include text(14px, 500);
+  color: #484848;
+  padding: 0;
+  margin-bottom: 12px;
+}
+
+.grid {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  background: #ffffff;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    border-color: #d4d4d8;
+  }
+
+  &:has(.radioInput:focus-visible) {
+    outline: 2px solid #a153ff;
+    outline-offset: 2px;
+  }
+}
+
+.cardSelected,
+.cardSelected:hover {
+  border: 1.5px solid #a153ff;
+}
+
+.radioInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #e4e4e7;
+  border-radius: 99px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+
+  img {
+    display: block;
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.radioSelected {
+  border: none;
+  border-radius: 100px;
+  background: rgba(161, 83, 255, 0.2);
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.credits {
+  @include text(14px, 600);
+  color: #0e0e0e;
+}
+
+.price {
+  @include text(14px, 400);
+  color: #484848;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.outlineButton.outlineButton {
+  color: #0e0e0e;
+}
+
+@media (max-width: 560px) {
+  .grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

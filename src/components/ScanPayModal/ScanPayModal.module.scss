@@ -1,0 +1,169 @@
+@mixin text($size: 14px, $weight: 400) {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+}
+
+.overlay.overlay {
+  background: rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.panel.panel {
+  width: 838px;
+  gap: 0;
+  padding: 0;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 12px 16px;
+  background: #a153ff;
+  color: #ffffff;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.title {
+  @include text(18px, 500);
+  margin: 0;
+}
+
+.subtitle {
+  @include text(14px, 400);
+  margin: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  height: 482px;
+  padding: 24px 40px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.content {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 100px 40px 80px;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.itemName,
+.itemQuantity {
+  @include text(14px, 500);
+  color: #0e0e0e;
+}
+
+.itemQuantity {
+  white-space: nowrap;
+}
+
+.itemDetail {
+  @include text(14px, 400);
+  color: #757575;
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.totalLabel {
+  @include text(14px, 400);
+  color: #757575;
+}
+
+.totalAmount {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 120%;
+  letter-spacing: -0.05px;
+  color: #0e0e0e;
+}
+
+.qrColumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.qr {
+  display: block;
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.expiry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  @include text(14px, 400);
+  color: #757575;
+  flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+  .body {
+    height: auto;
+    padding: 24px;
+  }
+
+  .content {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .summary {
+    padding: 0;
+    gap: 24px;
+  }
+}

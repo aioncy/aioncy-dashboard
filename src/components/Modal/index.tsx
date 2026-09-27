@@ -11,9 +11,13 @@ export interface ModalProps {
   radius?: number
   children: React.ReactNode
   className?: string
+  /** Extra class for the backdrop — e.g. a lighter, blurred overlay. */
+  overlayClassName?: string
+  /** Accessible name for dialogs that render their own header instead of `title`. */
+  ariaLabel?: string
 }
 
-const Modal = ({ isOpen, onClose, title, width, height, radius, children, className = '' }: ModalProps) => {
+const Modal = ({ isOpen, onClose, title, width, height, radius, children, className = '', overlayClassName = '', ariaLabel }: ModalProps) => {
   useEffect(() => {
     if (!isOpen) return
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -26,7 +30,7 @@ const Modal = ({ isOpen, onClose, title, width, height, radius, children, classN
   if (!isOpen) return null
 
   return (
-    <div className={styles.overlay} onMouseDown={onClose}>
+    <div className={`${styles.overlay} ${overlayClassName}`} onMouseDown={onClose}>
       <div
         className={`${styles.panel} ${className}`}
         style={{
@@ -36,7 +40,7 @@ const Modal = ({ isOpen, onClose, title, width, height, radius, children, classN
         }}
         role="dialog"
         aria-modal="true"
-        aria-label={title}
+        aria-label={ariaLabel ?? title}
         onMouseDown={(e) => e.stopPropagation()}
       >
         {title && (

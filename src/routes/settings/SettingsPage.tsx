@@ -10,12 +10,13 @@ import CreateMacroModal, {
   type CreateMacroPayload,
 } from "../../components/CreateMacroModal";
 import { COLLABORATORS, handleShare } from "../../lib/dashboard";
+import PlanBillingTab from "./PlanBillingTab";
 import styles from "./SettingsPage.module.scss";
 
 const TABS = [
   { label: "General", value: "general" },
   { label: "Macros", value: "macros" },
-  { label: "Billing & Plans", value: "billing" },
+  { label: "Plan and Billing", value: "billing" },
 ];
 
 interface Macro {
@@ -432,13 +433,7 @@ export function SettingsPage() {
           </div>
         )}
 
-        {activeTab === "billing" && (
-          <div className={styles.content}>
-            <p className="text-gray-600 text-lg">
-              This section is coming soon.
-            </p>
-          </div>
-        )}
+        {activeTab === "billing" && <PlanBillingTab />}
       </div>
 
       <CreateMacroModal

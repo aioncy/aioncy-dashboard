@@ -1,0 +1,388 @@
+@mixin text($size: 14px, $weight: 400) {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+}
+
+@mixin heading($size) {
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: $size;
+  line-height: 120%;
+  letter-spacing: -0.05px;
+}
+
+.billing {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ---------- Subscription ---------- */
+
+.subscription {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sectionTitle {
+  @include text(16px, 500);
+  color: #0e0e0e;
+  margin: 0;
+}
+
+.changeLink {
+  @include text(14px, 500);
+  color: #a153ff;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a153ff;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 16px 16px;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.planBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.planRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.planName {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.planLabel {
+  @include text(14px, 500);
+  color: #0e0e0e;
+  white-space: nowrap;
+}
+
+.cyclePill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: #a153ff;
+  @include text(12px, 600);
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.reset {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.resetLabel {
+  @include text(14px, 500);
+  color: #757575;
+  white-space: nowrap;
+}
+
+.resetBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 6px;
+  background: rgba(161, 83, 255, 0.04);
+  @include text(14px, 400);
+  color: #a153ff;
+  white-space: nowrap;
+}
+
+.usageRow {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e4e4e7;
+}
+
+.usage {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.ring {
+  display: block;
+  flex-shrink: 0;
+}
+
+.usageText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.creditsRemaining {
+  @include heading(24px);
+  color: #0e0e0e;
+}
+
+.creditsUsed {
+  @include text(14px, 500);
+  color: #757575;
+}
+
+.planPrice {
+  @include heading(20px);
+  color: #0e0e0e;
+  white-space: nowrap;
+}
+
+/* ---------- Top ups ---------- */
+
+.topUps {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.topUpsTitle {
+  @include text(14px, 500);
+  color: #0e0e0e;
+  margin: 0;
+}
+
+.topUpList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topUp {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e4e4e7;
+}
+
+.topUpUsage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.topUpMeta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  @include text(14px, 400);
+  color: #757575;
+  white-space: nowrap;
+}
+
+.topUpCredits {
+  font-weight: 500;
+  color: #0e0e0e;
+}
+
+.progressTrack {
+  position: relative;
+  height: 6px;
+  border-radius: 9px;
+  background: #f7f7f7;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 9px;
+  background: #a153ff;
+}
+
+.topUpRemaining {
+  @include text(16px, 500);
+  color: #0e0e0e;
+}
+
+/* ---------- Card footer ---------- */
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.hint {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  @include text(14px, 400);
+  color: #757575;
+}
+
+.hintIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  cursor: help;
+}
+
+.outlineButton.outlineButton {
+  color: #0e0e0e;
+  white-space: nowrap;
+}
+
+/* ---------- Invoice ---------- */
+
+.invoices {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px 8px 0 0;
+  background: #ffffff;
+
+  th,
+  td {
+    padding: 0 16px;
+    border-bottom: 1px solid #e4e4e7;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  th {
+    height: 36px;
+    @include text(14px, 500);
+    color: #8c8c8c;
+  }
+
+  td {
+    height: 59px;
+    @include text(14px, 400);
+    color: #1c1c1c;
+  }
+}
+
+.colDate {
+  width: 145px;
+}
+
+.colAmount {
+  width: 116px;
+}
+
+.colStatus {
+  width: 99px;
+}
+
+.colAction {
+  width: 132px;
+}
+
+.table .cellLead {
+  padding-left: 8px;
+}
+
+.table .cellAction {
+  text-align: right;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 6px;
+  background: #dff8ea;
+  @include text(14px, 400);
+  color: #0f4527;
+  white-space: nowrap;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 720px) {
+  .planRow,
+  .cardFooter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .invoices {
+    overflow-x: auto;
+  }
+
+  .table {
+    min-width: 640px;
+  }
+}
