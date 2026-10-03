@@ -1,0 +1,465 @@
+@mixin text($size: 14px, $weight: 500) {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: 140%;
+  letter-spacing: 0.05px;
+}
+
+// Registered so the conic gradient can rotate around the Popular outline.
+@property --popular-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 24px 121px;
+  box-sizing: border-box;
+  background: #fafafa;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  width: 100%;
+  max-width: 1080px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.headline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// The logo asset is 121x46; the design draws the mark 34.59px tall (1.1616x),
+// which also lands its built-in padding on the design's 9.16px inset.
+.logo svg {
+  width: 140.55px;
+  height: 53.43px;
+}
+
+.title {
+  margin: 0;
+  @include text(28px, 500);
+  line-height: 120%;
+  letter-spacing: -0.05px;
+  color: #0e0e0e;
+}
+
+.billing {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.switch.switch {
+  width: 33px;
+  height: 18px;
+  border-radius: 9px;
+  background: #e5e5e5;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+  > span {
+    width: 16px;
+    height: 16px;
+    margin-left: 1px;
+    box-shadow: none;
+  }
+
+  &[aria-checked='true'] {
+    background: #a153ff;
+
+    > span {
+      transform: translateX(15px);
+    }
+  }
+}
+
+.billingLabel {
+  @include text(16px, 500);
+  color: #0e0e0e;
+  white-space: nowrap;
+}
+
+.cards {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  flex-direction: column;
+  gap: 32px;
+  padding: 20px 20px 40px;
+  box-sizing: border-box;
+  border: 1px solid #e4e4e7;
+  background: #ffffff;
+}
+
+.free {
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+}
+
+.growth {
+  border-left: none;
+}
+
+.enterprise {
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+}
+
+.popular {
+  z-index: 1;
+  // Transparent border keeps the 1.5px box; the animated outline is drawn by ::before.
+  border: 1.5px solid transparent;
+  // The Popular badge caps the card, so it replaces the top border; the
+  // extra 1.5px of padding keeps the content level with the other cards.
+  border-top: none;
+  border-radius: 0;
+  padding-top: 21.5px;
+
+  // One outline wrapping the badge and the card, with a highlight travelling round it.
+  &::before {
+    content: '';
+    position: absolute;
+    top: -28px;
+    right: -1.5px;
+    bottom: -1.5px;
+    left: -1.5px;
+    z-index: 2;
+    padding: 1.5px;
+    border-radius: 8px 8px 0 0;
+    background: conic-gradient(
+      from var(--popular-angle),
+      #bf90f7 0deg,
+      #7a23e3 50deg,
+      #a153ff 90deg,
+      #bf90f7 140deg,
+      #e9d8ff 200deg,
+      #bf90f7 260deg,
+      #af7ceb 310deg,
+      #bf90f7 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+    pointer-events: none;
+    animation: popularBorderSpin 3s linear infinite;
+  }
+}
+
+.badge {
+  position: absolute;
+  top: -28px;
+  right: -1.5px;
+  left: -1.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 2px 10px;
+  box-sizing: border-box;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(90deg, #bf90f7 7.778%, #7a23e3 100%);
+  color: #ffffff;
+  @include text(14px, 500);
+}
+
+.cardTop {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.accent {
+  display: block;
+  width: 100%;
+  height: 3px;
+  border-radius: 7px;
+}
+
+.cardHead {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e4e4e7;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.planName {
+  margin: 0;
+  @include text(16px, 500);
+  color: #757575;
+}
+
+.price,
+.priceLabel {
+  height: 24px;
+  margin: 0;
+  color: #0e0e0e;
+}
+
+.price {
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.priceLabel {
+  @include text(20px, 500);
+  line-height: 120%;
+  letter-spacing: -0.05px;
+}
+
+.amount {
+  @include text(20px, 500);
+  line-height: inherit;
+  letter-spacing: -0.05px;
+}
+
+.period {
+  @include text(14px, 500);
+  line-height: inherit;
+  color: #8c8c8c;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 34px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  background: transparent;
+  color: #0e0e0e;
+  @include text(14px, 500);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    background: #fafafa;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a153ff;
+    outline-offset: 2px;
+  }
+}
+
+.ctaPrimary {
+  border-color: transparent;
+  background: #a153ff;
+  color: #ffffff;
+
+  &:hover {
+    background: #9334f2;
+  }
+}
+
+.comingSoon {
+  display: flex;
+  align-items: center;
+  height: 34px;
+  margin: 0;
+  @include text(14px, 500);
+  color: #0e0e0e;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.featureLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.featureIcon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: #8c8c8c;
+}
+
+.maxIcon {
+  display: block;
+  width: 14.4px;
+  height: 14.4px;
+}
+
+.featureText {
+  position: relative;
+  @include text(14px, 500);
+  color: #757575;
+}
+
+.underline {
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: auto;
+}
+
+.strong {
+  color: #0e0e0e;
+}
+
+.platforms {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+}
+
+.platform {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin-right: -4px;
+  object-fit: cover;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  // Sits over the end of the label, arrow resting on the text, as in the design.
+  bottom: calc(100% + 3px);
+  left: 113px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #000000;
+  color: #ffffff;
+  @include text(12px, 500);
+  text-decoration: none;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border: 5.75px solid transparent;
+    border-top-color: #000000;
+    border-bottom: 0;
+    transform: translateX(-50%);
+  }
+}
+
+.hasTooltip {
+  outline: none;
+
+  &:hover .tooltip,
+  &:focus-visible .tooltip {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1023px) {
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    padding-top: 29.5px;
+  }
+
+  .card,
+  .free,
+  .growth,
+  .enterprise {
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+  }
+
+  .popular {
+    border: 1.5px solid transparent;
+    border-top: none;
+    border-radius: 0;
+  }
+
+  .badge {
+    border-radius: 8px 8px 0 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@keyframes popularBorderSpin {
+  to {
+    --popular-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popular::before {
+    animation: none;
+  }
+}

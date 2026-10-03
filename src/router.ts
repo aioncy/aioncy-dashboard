@@ -24,6 +24,7 @@ import { signupRoute } from "./routes/signup";
 import { resetPasswordRoute } from "./routes/reset-password";
 import { changePasswordRoute } from "./routes/change-password";
 import { onboardingRoute } from "./routes/onboarding";
+import { plansRoute } from "./routes/plans";
 
 // Create the route tree
 const routeTree = rootRoute.addChildren([
@@ -33,6 +34,7 @@ const routeTree = rootRoute.addChildren([
   resetPasswordRoute,
   changePasswordRoute,
   onboardingRoute,
+  plansRoute,
   componentsRoute,
   dashboardLayoutRoute.addChildren([
     dashboardRoute,

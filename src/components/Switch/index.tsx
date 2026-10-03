@@ -5,9 +5,10 @@ export interface SwitchProps {
   onChange?: (checked: boolean) => void
   disabled?: boolean
   'aria-label'?: string
+  className?: string
 }
 
-const Switch = ({ checked, onChange, disabled, 'aria-label': ariaLabel }: SwitchProps) => {
+const Switch = ({ checked, onChange, disabled, 'aria-label': ariaLabel, className = '' }: SwitchProps) => {
   return (
     <button
       type="button"
@@ -15,7 +16,7 @@ const Switch = ({ checked, onChange, disabled, 'aria-label': ariaLabel }: Switch
       aria-checked={checked}
       aria-label={ariaLabel}
       disabled={disabled}
-      className={`${styles.switch} ${checked ? styles.checked : ''}`}
+      className={`${styles.switch} ${checked ? styles.checked : ''} ${className}`}
       onClick={() => onChange?.(!checked)}
     >
       <span className={styles.thumb} />

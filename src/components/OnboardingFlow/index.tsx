@@ -69,7 +69,7 @@ const OnboardingFlow = () => {
     setIsSubmitting(true)
     try {
       await saveOnboarding({ companyName, companySize, website, referralSource, otherSource })
-      navigate({ to: '/dashboard' })
+      navigate({ to: '/plans' })
     } finally {
       setIsSubmitting(false)
     }

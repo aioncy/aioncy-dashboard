@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { MessageSquare, Ticket, Bot, User, LineChart, Settings, Headphones, Briefcase } from 'lucide-react'
+import { MessageSquare, Ticket, User, LineChart, Settings, Headphones, Briefcase } from 'lucide-react'
 import Logo from '../Logo'
 import LogoMark from '../LogoMark'
 import NavMenuItem from '../NavMenuItem'
 import SetupProgressRing from '../SetupProgressRing'
+import WingmanIcon from '../WingmanIcon'
 import SidebarSubmenu, { type SidebarSubmenuItem } from '../SidebarSubmenu'
 import WorkspaceSwitcher, { type Organization } from '../WorkspaceSwitcher'
 import { useSetupProgress } from '../../lib/setupProgress'
@@ -33,7 +34,7 @@ const mainNavItems: NavItem[] = [
   {
     route: 'wingman-ai',
     label: 'Wingman AI',
-    icon: <Bot />,
+    icon: <WingmanIcon />,
     expandable: true,
     children: [
       { label: 'AI Control', to: '/wingman-ai/control' },

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Info } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
 import Button from "../../components/Button";
 import CreditTopUpModal from "../../components/CreditTopUpModal";
 import ScanPayModal from "../../components/ScanPayModal";
@@ -75,6 +76,7 @@ const downloadInvoice = (invoice: Invoice) => {
 };
 
 const PlanBillingTab = () => {
+  const navigate = useNavigate();
   const [isTopUpOpen, setIsTopUpOpen] = useState(false);
   const [paymentPackage, setPaymentPackage] = useState<CreditPackage | null>(
     null,
@@ -95,7 +97,11 @@ const PlanBillingTab = () => {
       <section className={styles.subscription}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>Subscription</h2>
-          <button type="button" className={styles.changeLink}>
+          <button
+            type="button"
+            className={styles.changeLink}
+            onClick={() => navigate({ to: "/plans" })}
+          >
             Change
           </button>
         </div>
