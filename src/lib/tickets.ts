@@ -31,8 +31,8 @@ export interface TicketColumn {
 
 export const TICKET_COLUMNS: TicketColumn[] = [
   { id: "todo", title: "To-do" },
-  { id: "in-progress", title: "In-progress" },
-  { id: "waiting", title: "Waiting on customer" },
+  { id: "in_progress", title: "In-progress" },
+  { id: "waiting_on_customer", title: "Waiting on customer" },
   { id: "resolved", title: "Resolved" },
 ];
 
@@ -82,7 +82,7 @@ export const INITIAL_TICKETS: Record<string, Ticket[]> = {
       comments: [],
     },
   ],
-  "in-progress": [
+  "in_progress": [
     {
       id: "ticket-4",
       ticketNumber: "112zx4",
@@ -105,7 +105,7 @@ export const INITIAL_TICKETS: Record<string, Ticket[]> = {
       comments: [],
     },
   ],
-  waiting: [
+  waiting_on_customer: [
     {
       id: "ticket-6",
       ticketNumber: "121cm8",

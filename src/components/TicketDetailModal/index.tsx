@@ -63,6 +63,9 @@ const TicketDetailModal = ({
 
   const columnTitle = TICKET_COLUMNS.find((c) => c.id === columnId)?.title ?? columnId
 
+  const columnIndex = TICKET_COLUMNS.findIndex((c) => c.id === columnId)
+  const nextColumn = TICKET_COLUMNS[columnIndex + 1]
+
   const handleSubmitComment = () => {
     const trimmed = commentText.trim()
     if (!trimmed) return
@@ -81,18 +84,27 @@ const TicketDetailModal = ({
             <div className={styles.fieldRow}>
               <span className={styles.fieldLabel}>Status</span>
               <div className={styles.statusControl}>
-                <span className={styles.statusLabel}>{columnTitle}</span>
                 <button
                   type="button"
-                  className={styles.statusNext}
-                  aria-label="Change status"
+                  className={styles.statusLabel}
+                  aria-haspopup="listbox"
                   aria-expanded={openField === 'status'}
                   onClick={() => setOpenField((prev) => (prev === 'status' ? null : 'status'))}
                 >
-                  <ChevronRight
-                    size={16}
-                    className={`${styles.statusChevron} ${openField === 'status' ? styles.statusChevronOpen : ''}`}
-                  />
+                  {columnTitle}
+                </button>
+                <button
+                  type="button"
+                  className={styles.statusNext}
+                  aria-label={nextColumn ? `Move to ${nextColumn.title}` : 'No next status'}
+                  disabled={!nextColumn}
+                  onClick={() => {
+                    if (!nextColumn) return
+                    onMoveStatus(columnId, ticket.id, nextColumn.id)
+                    setOpenField(null)
+                  }}
+                >
+                  <ChevronRight size={16} />
                 </button>
                 {openField === 'status' && (
                   <div className={styles.menu}>

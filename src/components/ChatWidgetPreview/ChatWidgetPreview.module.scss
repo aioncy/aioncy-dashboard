@@ -76,7 +76,7 @@
   border-radius: 8px;
   background: transparent;
   color: #1c1c1c;
-  cursor: pointer;
+  cursor: default;
 
   svg {
     width: 16px;
@@ -141,7 +141,7 @@
   border: 1px solid #e4e4e7;
   border-radius: 20px;
   background: #ffffff;
-  cursor: pointer;
+  cursor: default;
   font-family: inherit;
   font-weight: 400;
   font-size: 13px;
@@ -180,7 +180,7 @@
 
 .poweredByMark {
   width: 11px;
-  height: 12px;
+  height: 13px;
   flex-shrink: 0;
 }
 
@@ -226,7 +226,7 @@
   border-radius: 25px;
   background: #e8e8e8;
   color: #ffffff;
-  cursor: pointer;
+  cursor: default;
 
   svg {
     width: 12px;

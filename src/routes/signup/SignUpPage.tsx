@@ -31,6 +31,10 @@ export function SignUpPage() {
   const [password, setPassword] = useState('')
   const [rePassword, setRePassword] = useState('')
 
+  // Mirrors the API contract: POST /auth/signup requires 8–128 chars and the
+  // re-entry check is frontend-only (the API takes a single `password`).
+  const passwordsMismatch = rePassword.length > 0 && password !== rePassword
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
   }
@@ -77,6 +81,7 @@ export function SignUpPage() {
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  helperText="At least 8 characters"
                 />
               </div>
 
@@ -91,6 +96,7 @@ export function SignUpPage() {
                   placeholder="Re-enter your password"
                   value={rePassword}
                   onChange={(e) => setRePassword(e.target.value)}
+                  errorMessage={passwordsMismatch ? 'Passwords do not match' : undefined}
                 />
               </div>
 

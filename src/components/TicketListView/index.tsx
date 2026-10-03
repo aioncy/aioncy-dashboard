@@ -7,8 +7,8 @@ import styles from './TicketListView.module.scss'
 
 const STATUS_ICONS: Record<string, typeof CircleDashed> = {
   todo: CircleDashed,
-  'in-progress': LoaderCircle,
-  waiting: Ban,
+  in_progress: LoaderCircle,
+  waiting_on_customer: Ban,
   resolved: CircleDot,
 }
 

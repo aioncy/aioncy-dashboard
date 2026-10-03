@@ -430,7 +430,16 @@ const ASSIGNEES: { name: string; avatarSrc: string }[] = [
   { name: "Prakash Shrestha", avatarSrc: "/avatars/avatar-4.svg" },
 ];
 
-const STATUS_OPTIONS = ["Open", "In-progress", "Resolved", "Closed"];
+const STATUS_OPTIONS: { value: string; label: string }[] = [
+  { value: "todo", label: "To-do" },
+  { value: "in_progress", label: "In-progress" },
+  { value: "waiting_on_customer", label: "Waiting on customer" },
+  { value: "resolved", label: "Resolved" },
+];
+
+const STATUS_LABELS: Record<string, string> = Object.fromEntries(
+  STATUS_OPTIONS.map((option) => [option.value, option.label]),
+);
 
 const PRIORITY_OPTIONS: { value: PriorityLevel; label: string }[] = [
   { value: "low", label: "Low" },
@@ -557,7 +566,7 @@ export function ConversationsPage() {
   const [isCreateTicketOpen, setIsCreateTicketOpen] = useState(false);
   const [ticketTitle, setTicketTitle] = useState("");
   const [ticketDescription, setTicketDescription] = useState("");
-  const [ticketStatus, setTicketStatus] = useState(STATUS_OPTIONS[1]);
+  const [ticketStatus, setTicketStatus] = useState(STATUS_OPTIONS[1].value);
   const [ticketAssignee, setTicketAssignee] = useState<string | null>(
     ASSIGNEES[0].name,
   );
@@ -794,7 +803,7 @@ export function ConversationsPage() {
     if (!activeConversation) return;
     setTicketTitle("");
     setTicketDescription("");
-    setTicketStatus(STATUS_OPTIONS[1]);
+    setTicketStatus(STATUS_OPTIONS[1].value);
     setTicketAssignee(activeConversation.assignedAgent ?? ASSIGNEES[0].name);
     setTicketPriority(null);
     setOpenTicketDropdown(null);
@@ -1543,20 +1552,6 @@ export function ConversationsPage() {
               </button>
             </div>
 
-            {addingNote && (
-              <div className={styles.noteComposer}>
-                <textarea
-                  className={styles.noteTextarea}
-                  placeholder="Write a note..."
-                  value={noteDraft}
-                  onChange={(e) => setNoteDraft(e.target.value)}
-                />
-                <Button variant="primary" size="sm" onClick={submitNote}>
-                  Save note
-                </Button>
-              </div>
-            )}
-
             <div className={styles.noteList}>
               {activeConversation.details.notes.map((note) => (
                 <div key={note.id} className={styles.noteItem}>
@@ -1747,7 +1742,7 @@ export function ConversationsPage() {
                 }
               >
                 <span className={styles.ticketDropdownLabel}>
-                  {ticketStatus}
+                  {STATUS_LABELS[ticketStatus] ?? ticketStatus}
                 </span>
                 <ChevronDown size={14} />
               </button>
@@ -1756,15 +1751,15 @@ export function ConversationsPage() {
                 <div className={styles.ticketDropdownMenu} role="menu">
                   {STATUS_OPTIONS.map((option) => (
                     <button
-                      key={option}
+                      key={option.value}
                       type="button"
                       className={styles.ticketDropdownItem}
                       onClick={() => {
-                        setTicketStatus(option);
+                        setTicketStatus(option.value);
                         setOpenTicketDropdown(null);
                       }}
                     >
-                      {option}
+                      {option.label}
                     </button>
                   ))}
                 </div>
@@ -1886,6 +1881,40 @@ export function ConversationsPage() {
               disabled={!ticketTitle.trim()}
             >
               Save Ticket
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={addingNote}
+        onClose={() => setAddingNote(false)}
+        title="Add note"
+        width={480}
+      >
+        <div className={styles.noteModalBody}>
+          <textarea
+            className={styles.noteTextarea}
+            placeholder="Write a note..."
+            value={noteDraft}
+            onChange={(e) => setNoteDraft(e.target.value)}
+            autoFocus
+          />
+          <div className={styles.noteModalFooter}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setAddingNote(false)}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={submitNote}
+              disabled={!noteDraft.trim()}
+            >
+              Save note
             </Button>
           </div>
         </div>

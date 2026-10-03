@@ -1,12 +1,5 @@
-import { useState, type FormEvent } from 'react'
 import { Briefcase, Send, X } from 'lucide-react'
-import LogoMark from '../LogoMark'
 import styles from './ChatWidgetPreview.module.scss'
-
-interface SentMessage {
-  id: string
-  text: string
-}
 
 export interface ChatWidgetPreviewProps {
   businessName?: string
@@ -33,23 +26,7 @@ const ChatWidgetPreview = ({
   suggestedMessages = [],
   className = '',
 }: ChatWidgetPreviewProps) => {
-  const [sent, setSent] = useState<SentMessage[]>([])
-  const [draft, setDraft] = useState('')
-  const [suggestionsUsed, setSuggestionsUsed] = useState(false)
-
-  const sendText = (text: string) => {
-    if (!text) return
-    setSent((prev) => [...prev, { id: `${Date.now()}`, text }])
-    setSuggestionsUsed(true)
-  }
-
-  const send = (event: FormEvent) => {
-    event.preventDefault()
-    const text = draft.trim()
-    if (!text) return
-    sendText(text)
-    setDraft('')
-  }
+  const markColor = theme === 'dark' ? '#ffffff' : '#1A1A1A'
 
   return (
     <div
@@ -78,25 +55,16 @@ const ChatWidgetPreview = ({
         >
           {sampleReply}
         </div>
-        {sent.map((message) => (
-          <div
-            key={message.id}
-            className={`${styles.bubble} ${styles.visitor}`}
-            style={{ background: accentColor }}
-          >
-            {message.text}
-          </div>
-        ))}
       </div>
 
-      {suggestedMessages.length > 0 && !suggestionsUsed && (
+      {suggestedMessages.length > 0 && (
         <div className={styles.suggestions}>
           {suggestedMessages.map((message) => (
             <button
               key={message}
               type="button"
               className={styles.suggestionPill}
-              onClick={() => sendText(message)}
+              tabIndex={-1}
             >
               {message}
             </button>
@@ -106,31 +74,42 @@ const ChatWidgetPreview = ({
 
       <div className={styles.footer}>
         <div className={styles.poweredBy}>
-          <LogoMark
+          <svg
             className={styles.poweredByMark}
-            markColor={theme === 'dark' ? '#ffffff' : 'black'}
-          />
+            width="11"
+            height="13"
+            viewBox="0 0 11 13"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <rect x="6.35938" width="3.87081" height="3.87081" rx="1.93541" fill={markColor} />
+            <rect x="5.57617" width="3.87081" height="5.57581" rx="1.93541" transform="rotate(89.4575 5.57617 0)" fill={markColor} />
+            <rect x="6.35938" y="4.60742" width="3.87081" height="7.46514" rx="1.93541" fill={markColor} />
+            <rect x="3.62305" y="3.64062" width="3.87081" height="5.12647" rx="1.93541" transform="rotate(40.5353 3.62305 3.64062)" fill="#A153FF" />
+          </svg>
           Powered by aioncy
         </div>
 
-        <form className={styles.composer} onSubmit={send}>
+        <div className={styles.composer}>
           <input
             type="text"
             className={styles.input}
             placeholder={placeholder}
-            value={draft}
-            onChange={(event) => setDraft(event.target.value)}
+            readOnly
+            tabIndex={-1}
             aria-label="Type a message"
           />
           <button
-            type="submit"
+            type="button"
             className={styles.send}
             aria-label="Send message"
-            style={draft.trim() ? { background: accentColor, color: '#ffffff' } : undefined}
+            tabIndex={-1}
+            style={{ background: accentColor, color: '#ffffff' }}
           >
             <Send aria-hidden="true" />
           </button>
-        </form>
+        </div>
       </div>
     </div>
   )
