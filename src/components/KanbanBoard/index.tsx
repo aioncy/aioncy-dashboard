@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Plus } from 'lucide-react'
+import { Ellipsis } from 'lucide-react'
 import {
   DndContext,
   DragOverlay,
@@ -55,8 +55,8 @@ const Column = ({ id, title, tickets, onOpenTicket }: ColumnProps) => {
         <span className={styles.columnTitle}>
           {title} ({tickets.length})
         </span>
-        <button type="button" className={styles.addButton} aria-label={`Add ticket to ${title}`}>
-          <Plus size={16} />
+        <button type="button" className={styles.addButton} aria-label={`More options for ${title}`}>
+          <Ellipsis size={16} />
         </button>
       </div>
       <SortableContext id={id} items={tickets.map((t) => t.id)} strategy={verticalListSortingStrategy}>

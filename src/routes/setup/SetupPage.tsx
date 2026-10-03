@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ChevronRight, Circle } from 'lucide-react'
 import PageHeader from '../../components/PageHeader'
 import Button from '../../components/Button'
+import SetupProgressRing from '../../components/SetupProgressRing'
 import { COLLABORATORS, handleShare } from '../../lib/dashboard'
 import { useSetupProgress, type SetupStepId } from '../../lib/setupProgress'
 import styles from './SetupPage.module.scss'
@@ -91,7 +92,11 @@ export function SetupPage() {
                   {isExpanded ? (
                     <>
                       <div className={styles.stepHeader}>
-                        <Circle className={styles.stepIcon} aria-hidden="true" />
+                        {isDone ? (
+                          <SetupProgressRing value={1} size={16} className={styles.stepIcon} />
+                        ) : (
+                          <Circle className={styles.stepIcon} aria-hidden="true" />
+                        )}
                         <p className={`${styles.stepTitle} ${isDone ? styles.stepTitleDone : ''}`}>
                           {step.title}
                         </p>
@@ -129,7 +134,11 @@ export function SetupPage() {
                       onClick={() => setExpandedId(step.id)}
                       aria-expanded={false}
                     >
-                      <Circle className={styles.stepIcon} aria-hidden="true" />
+                      {isDone ? (
+                          <SetupProgressRing value={1} size={16} className={styles.stepIcon} />
+                        ) : (
+                          <Circle className={styles.stepIcon} aria-hidden="true" />
+                        )}
                       <span className={`${styles.stepTitle} ${isDone ? styles.stepTitleDone : ''}`}>
                         {step.title}
                       </span>
@@ -142,7 +151,7 @@ export function SetupPage() {
           </div>
 
           <div className={styles.illustration}>
-            <img src={expandedStep.image} alt="" />
+            <img key={expandedStep.id} src={expandedStep.image} alt="" />
           </div>
         </div>
       </div>

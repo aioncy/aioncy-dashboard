@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Kanban, List, SlidersHorizontal } from "lucide-react";
+import { Kanban, List } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import SearchInput from "../../components/SearchInput";
 import KanbanBoard from "../../components/KanbanBoard";
@@ -100,13 +100,6 @@ export function TicketsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button
-            type="button"
-            className={styles.iconButton}
-            aria-label="Filters"
-          >
-            <SlidersHorizontal size={16} />
-          </button>
           <button
             type="button"
             className={`${styles.iconButton} ${styles.viewToggle}`}

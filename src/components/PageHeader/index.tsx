@@ -3,6 +3,7 @@ import { ChevronDown } from 'lucide-react'
 import { useNavigate } from '@tanstack/react-router'
 import Breadcrumb, { type BreadcrumbItem } from '../Breadcrumb'
 import Button from '../Button'
+import ShareModal from '../ShareModal'
 import { avatarColor } from '../../lib/avatarColor'
 import { CURRENT_USER } from '../../lib/dashboard'
 import styles from './PageHeader.module.scss'
@@ -30,6 +31,7 @@ export interface PageHeaderProps {
 const PageHeader = ({ title, breadcrumbItems, collaborators, user = CURRENT_USER, onShare, className = '' }: PageHeaderProps) => {
   const showBreadcrumb = !!breadcrumbItems && breadcrumbItems.length > 0
   const [menuOpen, setMenuOpen] = useState(false)
+  const [shareOpen, setShareOpen] = useState(false)
   const accountRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
 
@@ -121,10 +123,17 @@ const PageHeader = ({ title, breadcrumbItems, collaborators, user = CURRENT_USER
           )}
         </div>
 
-        <Button variant="primary" onClick={onShare}>
+        <Button
+          variant="primary"
+          onClick={() => {
+            onShare?.()
+            setShareOpen(true)
+          }}
+        >
           Share
         </Button>
       </div>
+      <ShareModal isOpen={shareOpen} onClose={() => setShareOpen(false)} />
     </header>
   )
 }
