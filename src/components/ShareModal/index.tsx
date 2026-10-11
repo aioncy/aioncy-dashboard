@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { ChevronDown, Link as LinkIcon, Search, X } from 'lucide-react'
+import { ChevronDown, Link as LinkIcon, X } from 'lucide-react'
 import Modal from '../Modal'
 import Button from '../Button'
 import PermissionMenu from '../PermissionMenu'
+import LogoGlyph from '../LogoGlyph'
 import { avatarColor } from '../../lib/avatarColor'
 import styles from './ShareModal.module.scss'
 
@@ -17,6 +18,7 @@ interface Member {
 }
 
 const SHARE_LINK = 'aioncy.com/projects/wrokshop'
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const INITIAL_MEMBERS: Member[] = [
   { id: 'owner', name: 'Sanjay Shrestha', email: 'Sanjay07@gmail.com', avatarSrc: '/share/sanjay.png', role: 'Owner' },
@@ -27,15 +29,6 @@ export interface ShareModalProps {
   isOpen: boolean
   onClose: () => void
 }
-
-const LogoGlyph = () => (
-  <svg width="23.471" height="27.7" viewBox="0 0 23.471 27.7" fill="none" aria-hidden="true">
-    <rect x="14.59" width="8.881" height="8.881" rx="5.286" fill="#000" />
-    <rect x="1.9975" y="-1.8955" width="8.881" height="12.793" rx="5.286" transform="rotate(89.46 6.438 4.501)" fill="#000" />
-    <rect x="14.59" y="10.57" width="8.881" height="17.128" rx="5.286" fill="#000" />
-    <rect x="3.4265" y="9.8245" width="8.881" height="11.762" rx="5.286" transform="rotate(40.54 7.867 15.7055)" fill="#A153FF" />
-  </svg>
-)
 
 const ShareModal = ({ isOpen, onClose }: ShareModalProps) => {
   const [members, setMembers] = useState<Member[]>(INITIAL_MEMBERS)
@@ -78,17 +71,27 @@ const ShareModal = ({ isOpen, onClose }: ShareModalProps) => {
 
   const invite = (event: FormEvent) => {
     event.preventDefault()
-    const email = query.trim()
-    if (!email) return
-    if (members.some((member) => member.email.toLowerCase() === email.toLowerCase())) {
-      setQuery('')
-      return
-    }
-    setMembers((prev) => [
-      ...prev,
-      { id: `${Date.now()}`, name: email.split('@')[0], email, role: 'Can view' },
-    ])
-    setQuery('')
+    const entries = query
+      .split(',')
+      .map((entry) => entry.trim())
+      .filter(Boolean)
+    if (!entries.length) return
+
+    const known = new Set(members.map((member) => member.email.toLowerCase()))
+    const added: Member[] = []
+    const invalid: string[] = []
+    entries.forEach((email, index) => {
+      if (!EMAIL_PATTERN.test(email)) {
+        invalid.push(email)
+        return
+      }
+      if (known.has(email.toLowerCase())) return
+      known.add(email.toLowerCase())
+      added.push({ id: `${Date.now()}-${index}`, name: email.split('@')[0], email, role: 'Can view' })
+    })
+
+    if (added.length) setMembers((prev) => [...prev, ...added])
+    setQuery(invalid.join(', '))
   }
 
   const setRole = (id: string, role: Access) => {
@@ -137,17 +140,16 @@ const ShareModal = ({ isOpen, onClose }: ShareModalProps) => {
         </div>
 
         <form className={styles.inviteRow} onSubmit={invite}>
-          <label className={styles.search}>
-            <Search size={16} aria-hidden="true" />
-            <input
-              type="text"
-              className={styles.searchInput}
-              placeholder="Search..."
-              aria-label="Search people"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-            />
-          </label>
+          <input
+            type="text"
+            inputMode="email"
+            autoComplete="off"
+            className={styles.emailInput}
+            placeholder="Add comma separated emails to invite"
+            aria-label="Emails to invite"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
           <Button type="submit" variant="primary" size="md">
             Send
           </Button>

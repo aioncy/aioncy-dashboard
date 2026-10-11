@@ -29,6 +29,8 @@ import SearchInput from "../../components/SearchInput";
 import PageHeader from "../../components/PageHeader";
 import Modal from "../../components/Modal";
 import { COLLABORATORS, handleShare } from "../../lib/dashboard";
+import { useSearch } from "@tanstack/react-router";
+import type { ConversationsSearch } from "./index";
 import styles from "./ConversationsPage.module.scss";
 
 type PreviewKind = "text" | "unread";
@@ -147,8 +149,8 @@ const INITIAL_CONVERSATIONS: Conversation[] = [
   },
   {
     id: "c2",
-    name: "Prakash Shrestha",
-    headerEmail: "Prakash09@gmail.com",
+    name: "Apsan Rana Magar",
+    headerEmail: "apsan.magar@gmail.com",
     avatarSrc: "/avatars/avatar-2.svg",
     time: "10:00",
     preview: "+4 new messages",
@@ -163,8 +165,8 @@ const INITIAL_CONVERSATIONS: Conversation[] = [
       },
     ],
     details: makeDetails(
-      "Prakash Shrestha",
-      "Prakash09@gmail.com",
+      "Apsan Rana Magar",
+      "apsan.magar@gmail.com",
       "Instagram",
       "/social/insta.png",
     ),
@@ -520,7 +522,21 @@ export function ConversationsPage() {
   );
   const [tab, setTab] = useState<"all" | "snoozed">("all");
   const [search, setSearch] = useState("");
-  const [activeId, setActiveId] = useState("c3");
+  const routeSearch: ConversationsSearch = useSearch({ strict: false });
+  const [activeId, setActiveId] = useState(() =>
+    INITIAL_CONVERSATIONS.some((c) => c.id === routeSearch.conversation)
+      ? routeSearch.conversation!
+      : "c3",
+  );
+  const fromNotifications = routeSearch.from === "notifications";
+
+  // Opening a different notification while already on this page swaps the thread.
+  const [syncedConversation, setSyncedConversation] = useState(routeSearch.conversation);
+  if (routeSearch.conversation !== syncedConversation) {
+    setSyncedConversation(routeSearch.conversation);
+    const target = routeSearch.conversation;
+    if (target && INITIAL_CONVERSATIONS.some((c) => c.id === target)) setActiveId(target);
+  }
   const [draft, setDraft] = useState("");
   const [attachedImage, setAttachedImage] = useState<string | null>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
@@ -859,6 +875,14 @@ export function ConversationsPage() {
     <div className={styles.root}>
       <PageHeader
         title="Conversations"
+        breadcrumbItems={
+          fromNotifications && activeConversation
+            ? [
+                { label: "Notification", href: "/notifications" },
+                { label: activeConversation.name },
+              ]
+            : undefined
+        }
         collaborators={COLLABORATORS}
         onShare={handleShare}
       />

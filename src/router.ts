@@ -19,6 +19,7 @@ import { analyticsRoute } from "./routes/analytics";
 import { settingsRoute } from "./routes/settings";
 import { accountRoute } from "./routes/account";
 import { helpSupportRoute } from "./routes/help-support";
+import { notificationsRoute } from "./routes/notifications";
 import { loginRoute } from "./routes/login";
 import { signupRoute } from "./routes/signup";
 import { resetPasswordRoute } from "./routes/reset-password";
@@ -53,6 +54,7 @@ const routeTree = rootRoute.addChildren([
     settingsRoute,
     accountRoute,
     helpSupportRoute,
+    notificationsRoute,
   ]),
 ]);
 

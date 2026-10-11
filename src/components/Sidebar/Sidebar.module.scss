@@ -140,3 +140,21 @@
   transform: translateX(0);
   pointer-events: auto;
 }
+
+/* Bell with an unread marker in its top-right, matching the Figma lucide/bell variant. */
+.bell {
+  position: relative;
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+}
+
+.bellDot {
+  position: absolute;
+  top: 0;
+  left: 13px;
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background: #a153ff;
+}

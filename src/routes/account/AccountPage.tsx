@@ -8,6 +8,16 @@ import Button from "../../components/Button";
 import Switch from "../../components/Switch";
 import TwoFactorModal from "../../components/TwoFactorModal";
 import { COLLABORATORS, CURRENT_USER, handleShare } from "../../lib/dashboard";
+import { useSearch } from "@tanstack/react-router";
+import type { AccountSearch } from "./index";
+import {
+  NOTIFICATION_CATEGORIES,
+  savePreferences,
+  useNotifications,
+  type NotificationCategory,
+  type NotificationChannel,
+  type NotificationPreferences,
+} from "../../lib/notifications";
 import styles from "./AccountPage.module.scss";
 
 const TABS = [
@@ -17,6 +27,11 @@ const TABS = [
 ];
 
 const ACCOUNT_EMAIL = CURRENT_USER.email;
+
+const CHANNELS: { id: NotificationChannel; label: string }[] = [
+  { id: "web", label: "Web" },
+  { id: "email", label: "Email" },
+];
 
 type TwoFactorMethod = "email";
 
@@ -38,7 +53,37 @@ const TWO_FACTOR_METHODS: {
 ];
 
 export function AccountPage() {
-  const [activeTab, setActiveTab] = useState("profile");
+  const routeSearch: AccountSearch = useSearch({ strict: false });
+  const [activeTab, setActiveTab] = useState<string>(routeSearch.tab ?? "profile");
+  const { preferences } = useNotifications();
+  const [prefsDraft, setPrefsDraft] = useState<NotificationPreferences>(preferences);
+  const [prefsMsg, setPrefsMsg] = useState<string | null>(null);
+
+  // Follow ?tab= when it changes (e.g. the inbox's "Account settings" link).
+  const [syncedTab, setSyncedTab] = useState(routeSearch.tab);
+  if (routeSearch.tab !== syncedTab) {
+    setSyncedTab(routeSearch.tab);
+    if (routeSearch.tab) setActiveTab(routeSearch.tab);
+  }
+
+  const togglePreference = (
+    category: NotificationCategory,
+    channel: NotificationChannel,
+    enabled: boolean,
+  ) => {
+    setPrefsMsg(null);
+    setPrefsDraft((prev) => ({
+      ...prev,
+      [category]: { ...prev[category], [channel]: enabled },
+    }));
+  };
+
+  const prefsDirty = JSON.stringify(prefsDraft) !== JSON.stringify(preferences);
+
+  const handleSavePreferences = () => {
+    savePreferences(prefsDraft);
+    setPrefsMsg("Notification settings saved.");
+  };
   const [name, setName] = useState("Aryan");
   const [avatarSrc, setAvatarSrc] = useState<string | null>(null);
   const avatarInputRef = useRef<HTMLInputElement>(null);
@@ -315,7 +360,57 @@ export function AccountPage() {
 
         {activeTab === "notifications" && (
           <div className={styles.content}>
-            <p className={styles.comingSoon}>This section is coming soon.</p>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <div className={styles.headingGroup}>
+                  <h2 className={styles.title}>Notification settings</h2>
+                  <p className={styles.subtitle}>
+                    Choose what you get notified about and where.
+                  </p>
+                </div>
+                <Button
+                  type="button"
+                  variant="primary"
+                  size="sm"
+                  className={styles.nowrap}
+                  disabled={!prefsDirty}
+                  onClick={handleSavePreferences}
+                >
+                  Save changes
+                </Button>
+              </div>
+
+              {prefsMsg && (
+                <p role="status" style={{ color: "#15803D", fontSize: 13 }}>
+                  {prefsMsg}
+                </p>
+              )}
+
+              <div className={styles.notificationRows}>
+                {NOTIFICATION_CATEGORIES.map((category) => (
+                  <div key={category.id} className={styles.notificationRow}>
+                    <div className={styles.notificationInfo}>
+                      <span className={styles.rowLabel}>{category.title}</span>
+                      <span className={styles.rowHelper}>{category.description}</span>
+                    </div>
+                    <div className={styles.channelList}>
+                      {CHANNELS.map((channel) => (
+                        <label key={channel.id} className={styles.channel}>
+                          <Switch
+                            checked={prefsDraft[category.id][channel.id]}
+                            aria-label={`${category.title} — ${channel.label}`}
+                            onChange={(enabled) =>
+                              togglePreference(category.id, channel.id, enabled)
+                            }
+                          />
+                          <span className={styles.channelLabel}>{channel.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
           </div>
         )}
       </div>

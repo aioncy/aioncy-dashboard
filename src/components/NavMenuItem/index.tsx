@@ -7,6 +7,8 @@ export interface NavMenuItemProps {
   icon: React.ReactNode
   label: string
   expandable?: boolean
+  /** Trailing count or tag, e.g. unread notifications. Hidden when collapsed. */
+  badge?: React.ReactNode
   expanded?: boolean
   href?: string
   onClick?: () => void
@@ -18,6 +20,7 @@ const NavMenuItem = ({
   icon,
   label,
   expandable = false,
+  badge,
   expanded = false,
   href,
   onClick,
@@ -32,6 +35,7 @@ const NavMenuItem = ({
     <>
       <span className={styles.icon}>{icon}</span>
       <span className={styles.label}>{label}</span>
+      {badge != null && <span className={styles.badge}>{badge}</span>}
       {expandable && (
         <span className={`${styles.chevron} ${expanded ? styles.chevronOpen : ''}`} aria-hidden="true">
           <ChevronDown />

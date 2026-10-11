@@ -52,6 +52,13 @@
   white-space: nowrap;
 }
 
+.badge {
+  flex-shrink: 0;
+  font-weight: 400;
+  font-size: 12px;
+  color: #a153ff;
+}
+
 .chevron {
   display: flex;
   align-items: center;

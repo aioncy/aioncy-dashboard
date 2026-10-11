@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import { ChevronRight } from 'lucide-react'
 import styles from './Breadcrumb.module.scss'
 
@@ -23,6 +24,10 @@ const Breadcrumb = ({ items, className = '' }: BreadcrumbProps) => (
               <span className={styles.current} aria-current="page">
                 {item.label}
               </span>
+            ) : item.href?.startsWith('/') ? (
+              <Link to={item.href} className={styles.link}>
+                {item.label}
+              </Link>
             ) : (
               <a href={item.href} className={styles.link}>
                 {item.label}

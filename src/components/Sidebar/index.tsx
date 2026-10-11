@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { MessageSquare, Ticket, User, LineChart, Settings, Headphones, Briefcase } from 'lucide-react'
+import { MessageSquare, Ticket, User, LineChart, Settings, Headphones, Briefcase, Bell } from 'lucide-react'
 import Logo from '../Logo'
 import LogoMark from '../LogoMark'
 import NavMenuItem from '../NavMenuItem'
@@ -8,6 +8,7 @@ import WingmanIcon from '../WingmanIcon'
 import SidebarSubmenu, { type SidebarSubmenuItem } from '../SidebarSubmenu'
 import WorkspaceSwitcher, { type Organization } from '../WorkspaceSwitcher'
 import { useSetupProgress } from '../../lib/setupProgress'
+import { useNotifications } from '../../lib/notifications'
 import styles from './Sidebar.module.scss'
 
 export interface SidebarProps {
@@ -49,6 +50,7 @@ const mainNavItems: NavItem[] = [
 
 const secondaryNavItems: NavItem[] = [
   { route: 'setup', label: 'Get set up', icon: null },
+  { route: 'notifications', label: 'Notification', icon: <Bell /> },
   { route: 'settings', label: 'Settings', icon: <Settings /> },
   { route: 'help-support', label: 'Help & Support', icon: <Headphones /> },
 ]
@@ -68,8 +70,23 @@ const Sidebar = ({
 
   const activeOrg = organizations.find((org) => org.id === activeOrgId) ?? organizations[0]
 
-  const resolveIcon = (item: NavItem) =>
-    item.route === 'setup' ? <SetupProgressRing value={setupProgress} /> : item.icon
+  const { unreadCount } = useNotifications()
+
+  const resolveIcon = (item: NavItem) => {
+    if (item.route === 'setup') return <SetupProgressRing value={setupProgress} />
+    if (item.route === 'notifications') {
+      return (
+        <span className={styles.bell}>
+          <Bell />
+          {unreadCount > 0 && <span className={styles.bellDot} aria-hidden="true" />}
+        </span>
+      )
+    }
+    return item.icon
+  }
+
+  const resolveBadge = (item: NavItem) =>
+    item.route === 'notifications' && unreadCount > 0 ? unreadCount : undefined
 
   const fullBody = (
     <>
@@ -102,6 +119,7 @@ const Sidebar = ({
               key={item.route}
               icon={resolveIcon(item)}
               label={item.label}
+              badge={resolveBadge(item)}
               href={`/${item.route}`}
               onClick={onNavigate}
             />
@@ -150,7 +168,7 @@ const Sidebar = ({
               <NavMenuItem
                 key={item.route}
                 icon={resolveIcon(item)}
-                label={item.label}
+                label={unreadCount > 0 && item.route === 'notifications' ? `${item.label} (${unreadCount} unread)` : item.label}
                 href={`/${item.route}`}
                 collapsed
               />
